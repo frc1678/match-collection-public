@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">match-collection</string>
+
+    <string name="btn_qr_generate">Generate QR</string>
 </resources>
