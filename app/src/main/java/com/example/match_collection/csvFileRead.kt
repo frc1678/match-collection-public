@@ -9,7 +9,6 @@
 package com.example.match_collection
 
 import android.content.Context
-import android.os.Environment
 import android.util.Log
 import com.opencsv.*
 import java.io.File
@@ -20,7 +19,7 @@ import java.io.FileReader
  */
 fun csvFileRead(file: String, context: Context, skipHeader: Boolean): MutableList<String> {
     val csvFile = File(context.getExternalFilesDir(null)!!.absolutePath + "/$file")
-    Log.e("file_path",(context.getExternalFilesDir(null)!!.absolutePath).toString())
+    Log.i("file_path",(context.getExternalFilesDir(null)!!.absolutePath).toString())
     val csvFileContents: MutableList<String> = ArrayList()
     val csvReader = CSVReader(FileReader(csvFile))
 
@@ -47,9 +46,11 @@ fun csvFileRead(file: String, context: Context, skipHeader: Boolean): MutableLis
         csvFileContents.add(currentMutableLine)
         currentLine = csvReader.readNext()
     }
+
     for (x in csvFileContents) {
-        Log.e("..", x)
+        Log.i("MATCHSCHEDULE", x)
     }
+
     csvReader.close()
     return csvFileContents
 }
