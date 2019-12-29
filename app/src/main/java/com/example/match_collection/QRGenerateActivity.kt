@@ -13,7 +13,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import org.json.JSONObject
 
 // Class to display QR code.
 class QRGenerateActivity: AppCompatActivity() {
@@ -21,7 +20,7 @@ class QRGenerateActivity: AppCompatActivity() {
 
     lateinit var ivDisplayQR: ImageView
 
-    var qrContent: JSONObject = JSONObject()
+    lateinit var qrContent: String
 
     fun initXML() {
         btnGenerateQR = findViewById(R.id.btn_qr_generate)
@@ -34,10 +33,11 @@ class QRGenerateActivity: AppCompatActivity() {
         initXML()
 
         // Populate QR code content.
-        qrContent.put("text", "text")
+        qrContent = "text"
 
         btnGenerateQR.setOnClickListener(View.OnClickListener {
             displayQR(qrContent, ivDisplayQR, this)
+            fileWrite("test.txt", qrContent)
         })
     }
 }
