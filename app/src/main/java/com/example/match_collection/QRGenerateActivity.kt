@@ -8,17 +8,24 @@
 
 package com.example.match_collection
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
+import android.os.Build.getSerial
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 
 // Class to display QR code.
 class QRGenerateActivity: AppCompatActivity() {
     lateinit var btnGenerateQR: Button
 
     lateinit var ivDisplayQR: ImageView
+    lateinit var serial_number: String
 
     lateinit var qrContent: String
 
@@ -27,13 +34,22 @@ class QRGenerateActivity: AppCompatActivity() {
         ivDisplayQR = findViewById(R.id.iv_display_qr)
     }
 
+    fun getSerialNum() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED){
+            return
+        }
+        serial_number = getSerial()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.qr_generate)
         initXML()
 
+        getSerialNum()
+
         // Populate QR code content.
-        qrContent = "text"
+        qrContent = serial_number
 
         btnGenerateQR.setOnClickListener(View.OnClickListener {
             displayQR(qrContent, ivDisplayQR, this)
