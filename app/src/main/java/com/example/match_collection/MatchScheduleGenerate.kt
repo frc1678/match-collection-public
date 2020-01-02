@@ -18,9 +18,6 @@ import java.io.File
 class MatchScheduleGenerate: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (File(this.getExternalFilesDir(null)!!.absolutePath + "/match_schedule.csv").exists()) {
-            csvFileRead("match_schedule.csv",this, false)
-        }
         startActivity(Intent(this, QRGenerateActivity::class.java))
     }
 }
