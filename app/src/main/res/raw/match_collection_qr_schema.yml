@@ -1,0 +1,67 @@
+# Used for Match Collection QR compression by Match Collection App and
+# QR decompression by Server
+
+# Version of schema file, should match end of file name
+# Incremented every merged schema change
+schema_version: 0 
+
+# Each decompressed variable name corresponds to a length 2 or 3 list
+# First item is the compressed variable name
+# Second item is server-side data type
+# Third item (if it exists) is the type within the list
+# Names starting with "_" do not correspond to a compressed variable, they are used to aid in (de)compression
+
+# Data that is shared between the objective and subjective QRs. 
+generic_data:
+  _separator: ^ # Separates key:value pairs
+  _section_separator: "@" # Separates generic from objective/subjective data
+  schema_version: [A, int] # Must remain constant between versions
+  serial_number: [a, str]
+  scout_name: [b, str]
+  match_number: [c, int]
+  alliance_color: [d, Enum]
+
+# Data specific to objective match collection QR
+objective_tim:
+  _separator: ^ # Separates key:value pairs
+  team_number: [Z, str] # Mostly used as a str, not needed as int
+  starting_location: [Y, Enum]
+  is_no_show: [W, bool]
+  timeline: [V, list, dict] # List of dictionaries
+
+# Timeline is part of objective match collection QR
+# Data for an action in the timeline
+timeline:
+  _separator: "%" # Separates timeline actions
+  _separator_internal: ~ # Separates key:value pairs within one timeline action
+  # Present for all actions:
+  time: [a, float]
+  action_type: [b, Enum]
+  stage: [c, Enum]
+  # Present for specific actions:
+  is_successful: [d, bool]
+  is_defended: [e, bool]
+
+# Data specific to subjective match collection QR
+subjective:
+  _separator: ^ # Separates each key:value pair
+  _separator_internal: "%" # Separates each ranking list item
+  speed_rankings: [a, list, str] # List of team numbers (strings)
+  agility_rankings: [b, list, str] # List of team numbers (strings)
+
+# Contains all the enums and their values
+enums:
+  alliance_color:
+    red: 0
+    blue: 1
+  starting_location:
+    left: 0
+    right: 1
+    center: 2
+  action_type:
+    intake: 0
+    outtake: 1
+    incap: 2
+  stage:
+    auto: 0
+    tele: 1
