@@ -3,7 +3,7 @@
 
 # Version of schema file, should match end of file name
 # Incremented every merged schema change
-schema_version: 0 
+schema_version: 1
 
 # Each decompressed variable name corresponds to a length 2 or 3 list
 # First item is the compressed variable name
@@ -33,7 +33,7 @@ objective_tim:
 # Data for an action in the timeline
 timeline:
   _separator: "%" # Separates timeline actions
-  _separator_internal: ~ # Separates key:value pairs within one timeline action
+  _separator_internal: "~" # Separates key:value pairs within one timeline action
   # Present for all actions:
   time: [a, float]
   action_type: [b, Enum]
