@@ -8,13 +8,19 @@
 
 package com.example.match_collection
 
+import android.Manifest
+import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.transition.Fade
+import android.util.Log
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import java.io.File
 import kotlinx.android.synthetic.main.mode_collection_select_activity.*
+import java.lang.Exception
 
 /*Class that allows the user to select which match-collection
 * implementation to use (objective or subjective)
@@ -23,19 +29,52 @@ class ModeCollectionSelectActivity : AppCompatActivity() {
 
     //Create the onClickListeners for the mode selection buttons (2)
     private fun initButtonOnClicks() {
+        val intent = Intent(this, MatchInformationInputActivity::class.java)
         btn_subjective_collection_select.setOnClickListener { view ->
-            startActivity(Intent(this, SubjectiveMatchInformationInputActivity::class.java))
+            intent.putExtra("collection_mode", Constants.MODE_SELECTION.SUBJECTIVE.mode)
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this,
+                btn_subjective_collection_select, "proceed_button").toBundle())
         }
 
         btn_objective_collection_select.setOnClickListener { view ->
-            startActivity(Intent(this, ObjectiveMatchInformationInputActivity::class.java))
+            intent.putExtra("collection_mode", Constants.MODE_SELECTION.OBJECTIVE.mode)
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this,
+                btn_objective_collection_select, "proceed_button").toBundle())
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        with(window) {
+            requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
+        }
+
         setContentView(R.layout.mode_collection_select_activity)
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED) {
+            try {
+                ActivityCompat.requestPermissions(
+                    this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    100)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
+            != PackageManager.PERMISSION_GRANTED){
+            try {
+                ActivityCompat.requestPermissions(
+                    Activity(), arrayOf(Manifest.permission.READ_PHONE_STATE),
+                    99)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
         if (File(this.getExternalFilesDir(null)!!.absolutePath + "/match_schedule.csv").exists()) {
-            csvFileRead("match_schedule.csv",context = this, skipHeader = false)
+            csvFileRead(file = "match_schedule.csv", skipHeader = false)
         }
 
         initButtonOnClicks()

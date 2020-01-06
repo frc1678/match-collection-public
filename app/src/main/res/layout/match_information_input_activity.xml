@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:padding="@dimen/small">
+
+    <include
+        layout="@layout/match_information_input_activity_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText style="@style/et_standard_linear_layout"
+            android:id="@+id/et_match_number"
+            android:hint="Match Number"
+            />
+        <EditText style="@style/et_standard_linear_layout"
+            android:id="@+id/et_team_number"
+            android:hint="Team Number"
+            />
+        <EditText style="@style/et_standard_linear_layout"
+            android:id="@+id/et_alliance_color"
+            android:hint="Alliance"
+            />
+        <EditText style="@style/et_standard_linear_layout"
+            android:id="@+id/et_scout_name"
+            android:hint="Scout Name"
+            />
+
+        <Button style="@style/btn_white"
+            android:id="@+id/btn_proceed_match_start"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="PROCEED"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

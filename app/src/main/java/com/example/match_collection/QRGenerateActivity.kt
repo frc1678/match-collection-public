@@ -34,26 +34,19 @@ class QRGenerateActivity: AppCompatActivity() {
         ivDisplayQR = findViewById(R.id.iv_display_qr)
     }
 
-    fun getSerialNum() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED){
-            return
-        }
-        serial_number = getSerial()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.qr_generate)
         initXML()
 
-        getSerialNum()
+        getSerialNum(this)
 
         // Populate QR code content.
         qrContent = serial_number
 
         btnGenerateQR.setOnClickListener(View.OnClickListener {
             displayQR(qrContent, ivDisplayQR, this)
-            fileWrite("test.txt", qrContent)
+            //fileWrite("test.txt", qrContent)
         })
     }
 }

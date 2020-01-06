@@ -8,7 +8,7 @@
 
 package com.example.match_collection
 
-import android.content.Context
+import android.os.Environment
 import android.util.Log
 import com.opencsv.*
 import java.io.File
@@ -16,10 +16,11 @@ import java.io.FileReader
 
 /* Function to read a CSV file. Returns a list of strings
  where each individual list element is a single line of the csv file.
+
+ absolute path: context.getExternalFilesDir(null)!!.absolutePath
  */
-fun csvFileRead(file: String, context: Context, skipHeader: Boolean): MutableList<String> {
-    val csvFile = File(context.getExternalFilesDir(null)!!.absolutePath + "/$file")
-    Log.i("file_path",(context.getExternalFilesDir(null)!!.absolutePath).toString())
+fun csvFileRead(file: String, skipHeader: Boolean): MutableList<String> {
+    val csvFile = File( "/storage/emulated/0/${Environment.DIRECTORY_DOWNLOADS}/$file")
     val csvFileContents: MutableList<String> = ArrayList()
     val csvReader = CSVReader(FileReader(csvFile))
 
