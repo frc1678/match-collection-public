@@ -3,7 +3,7 @@
 
 # Version of schema file, should match end of file name
 # Incremented every merged schema change
-schema_version: 1
+schema_version: 2
 
 # Each decompressed variable name corresponds to a length 2 or 3 list
 # First item is the compressed variable name
@@ -23,6 +23,7 @@ generic_data:
 
 # Data specific to objective match collection QR
 objective_tim:
+  _start_character: "?" # First character in QR used to identify QR type
   _separator: ^ # Separates key:value pairs
   team_number: [Z, str] # Mostly used as a str, not needed as int
   starting_location: [Y, Enum]
@@ -44,6 +45,7 @@ timeline:
 
 # Data specific to subjective match collection QR
 subjective:
+  _start_character: "*" # First character in QR used to identify QR type
   _separator: ^ # Separates each key:value pair
   _separator_internal: "%" # Separates each ranking list item
   speed_rankings: [a, list, str] # List of team numbers (strings)
