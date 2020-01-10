@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:padding="@dimen/small">
@@ -26,13 +28,31 @@
             android:hint="Team Number"
             />
         <EditText style="@style/et_standard_linear_layout"
-            android:id="@+id/et_alliance_color"
-            android:hint="Alliance"
-            />
-        <EditText style="@style/et_standard_linear_layout"
             android:id="@+id/et_scout_name"
             android:hint="Scout Name"
             />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <Button style="?android:attr/borderlessButtonStyle"
+                android:id="@+id/leftToggleButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/small"/>
+
+            <Button style="?android:attr/borderlessButtonStyle"
+                android:id="@+id/rightToggleButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/small"/>
+
+        </LinearLayout>
 
         <Button style="@style/btn_white"
             android:id="@+id/btn_proceed_match_start"

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="small">25dp</dimen>
+    <dimen name="medium">50dp</dimen>
+    <dimen name="corner_radius_small">20dp</dimen>
 </resources>

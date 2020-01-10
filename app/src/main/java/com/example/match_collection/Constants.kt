@@ -14,4 +14,9 @@ class Constants {
         SUBJECTIVE("subjective"),
         OBJECTIVE("objective")
     }
+    enum class ALLIANCE_COLOR(val color: String) {
+        RED("red"),
+        BLUE("blue"),
+        NONE("none")
+    }
 }
