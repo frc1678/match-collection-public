@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="fill_parent"
+    android:layout_height="fill_parent" android:layout_weight="2">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="0dp"
+        android:layout_height="match_parent" android:layout_weight="2">
+
+        <Button style="@style/btn_placement"
+            android:id="@+id/btn_placement_1"
+            android:text="Placement 1">
+        </Button>
+
+        <Button style="@style/btn_placement"
+            android:id="@+id/btn_placement_2"
+            android:text="Placement 2">
+        </Button>
+
+        <Button style="@style/btn_placement"
+            android:id="@+id/btn_placement_3"
+            android:text="Placement 3">
+        </Button>
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="0dp"
+        android:layout_height="match_parent" android:layout_weight="2">
+
+        <ToggleButton
+            android:id="@+id/tb_incap"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:textOn="Incap"
+            android:textOff="Incap"
+            android:layout_margin="20dp">
+        </ToggleButton>
+
+        <ToggleButton
+            android:id="@+id/tb_defense"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:textOn="Defense"
+            android:textOff="Defense"
+            android:layout_margin="20dp">
+        </ToggleButton>
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Next"
+            android:layout_margin="20dp">
+        </Button>
+    </LinearLayout>
+
+</LinearLayout>
