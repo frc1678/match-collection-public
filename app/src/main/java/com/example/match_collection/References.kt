@@ -2,26 +2,26 @@
 * References.kt
 * match-collection
 *
-* Created on 1/8/2020
+* Created on 1/11/2020
 * Copyright 2020 Citrus Circuits. All rights reserved.
 */
 
 package com.example.match_collection
 
-// Class to store information to be used to create the final match information map.
-class References {
-    // Data that is shared between the objective and subjective QRs.
-    lateinit var scout_name: String
-    var match_number: Int = 0
-    // TODO ALLIANCE COLOR
+// File to store information to be used to create the final match information map.
 
-    // Data specific to objective match collection QR.
-    var teamNumber: Int = 0
-    // TODO STARTING LOCATION
-    var is_no_show: Boolean = false
-    lateinit var timeline: ArrayList<HashMap<String, Any>>
+// Data that is shared between the objective and subjective QRs.
+var scout_name: String = ""
+var match_number: Int = 0
+var alliance_color: Constants.ALLIANCE_COLOR = Constants.ALLIANCE_COLOR.NONE
+var timestamp: Int = 0
 
-    // Subjective relative data collection variables.
-    lateinit var speed_rankings: List<Int>
-    lateinit var agility_rankings: List<Int>
-}
+// Data specific to objective match collection QR.
+var team_number: Int = 0
+var starting_location: Constants.STARTING_LOCATION = Constants.STARTING_LOCATION.NONE
+var is_no_show: Boolean = false
+var timeline: ArrayList<HashMap<String, String>> = arrayListOf(hashMapOf())
+
+// Subjective relative data collection variables.
+var speed_rankings: List<Int> = listOf()
+var agility_rankings: List<Int> = listOf()

@@ -14,11 +14,25 @@ class Constants {
         SUBJECTIVE,
         OBJECTIVE,
         NONE
-
     }
     enum class ALLIANCE_COLOR {
         RED,
         BLUE,
         NONE
+    }
+    enum class STARTING_LOCATION {
+        LEFT,
+        RIGHT,
+        CENTER,
+        NONE
+    }
+    enum class ACTION_TYPE {
+        INTAKE,
+        OUTAKE,
+        INCAP
+    }
+    enum class STAGE {
+        AUTO,
+        TELE
     }
 }
