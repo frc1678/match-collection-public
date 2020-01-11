@@ -10,13 +10,15 @@ package com.example.match_collection
 
 //Class that contains a collection of Constant values, or final values that never change
 class Constants {
-    enum class MODE_SELECTION(val mode: String) {
-        SUBJECTIVE("subjective"),
-        OBJECTIVE("objective")
+    enum class MODE_SELECTION {
+        SUBJECTIVE,
+        OBJECTIVE,
+        NONE
+
     }
-    enum class ALLIANCE_COLOR(val color: String) {
-        RED("red"),
-        BLUE("blue"),
-        NONE("none")
+    enum class ALLIANCE_COLOR {
+        RED,
+        BLUE,
+        NONE
     }
 }

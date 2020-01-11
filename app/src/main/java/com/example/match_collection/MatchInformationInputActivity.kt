@@ -9,6 +9,7 @@
 package com.example.match_collection
 
 import android.os.Bundle
+import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -19,29 +20,18 @@ import kotlinx.android.synthetic.main.match_information_input_activity.*
  */
 class MatchInformationInputActivity : AppCompatActivity() {
 
-    var collectionMode: String? = ""
+    var collectionMode: Constants.MODE_SELECTION = Constants.MODE_SELECTION.NONE
     private lateinit var allianceColorToggle: ColoredToggleButtonElement
 
     //Create the onclick listener for the proceed button.
     private fun initProceedButton() {
         btn_proceed_match_start.setOnClickListener { view ->
             if (getSerialNum(this) != null) {
-                val fileName = "${et_team_number.text}Q${et_match_number.text}-${getSerialNum(this)}.txt"
-                appendToFile(file_name = fileName, message = "collection_mode $collectionMode")
-                appendToFile(file_name = fileName, message = "team_number ${et_team_number.text}")
-                appendToFile(file_name = fileName, message = "match_number ${et_match_number.text}")
-                appendToFile(file_name = fileName, message = "alliance_color ${allianceColorToggle.allianceColor}")
-                appendToFile(file_name = fileName, message = "scout_name ${et_scout_name.text}")
+                //todo Update to fit super scout file name format
+                //todo HAVE ACCESS TO TEAM ONE THROUGH THREE BY REFERENCING "et_team_one.text.toString()" and etc
                 startMatchActivity()
             }
         }
-    }
-
-    //Add given animation to all buttons.
-    private fun initButtonAnimation(animation: Int) {
-        leftToggleButton.startAnimation(AnimationUtils.loadAnimation(this, animation))
-        rightToggleButton.startAnimation(AnimationUtils.loadAnimation(this, animation))
-        btn_proceed_match_start.startAnimation(AnimationUtils.loadAnimation(this, animation))
     }
 
     //Create the ColoredToggleButtonElement given its parameters.
@@ -61,13 +51,47 @@ class MatchInformationInputActivity : AppCompatActivity() {
         //todo Intent to start new activity
     }
 
+    //Checks if collection mode is subjective and if true, makes other team inputs visible
+    private fun checkCollectionMode() {
+        if (collectionMode == Constants.MODE_SELECTION.SUBJECTIVE) {
+            makeViewVisible(et_team_two, et_team_three, view_team_view_separator_one, view_team_view_separator_two)
+        }
+    }
+
+    //Allows for inputs to become visible
+    private fun makeViewVisible(vararg views: View) {
+        for (view in views) {
+            view.visibility = View.VISIBLE
+        }
+    }
+
+    //Makes inputs and buttons have animations
+    private fun makeViewAnimation(vararg views: View, animation: Int) {
+        for (view in views) {
+            view.startAnimation(AnimationUtils.loadAnimation(this, animation))
+        }
+    }
+
+    //Calls for the animations, and adds animations for the subjective specific objects.
+    private fun initViewAnimations() {
+        makeViewAnimation(et_team_one, et_match_number, et_scout_name, leftToggleButton, rightToggleButton, btn_proceed_match_start,
+            view_alliance_color_separator, view_proceed_button_separator, view_scout_name_match_number_separator,
+            view_team_view_separator_three, animation = R.anim.fade_in)
+        if (collectionMode == Constants.MODE_SELECTION.SUBJECTIVE)
+            makeViewAnimation(et_team_two, et_team_three, view_team_view_separator_one, view_team_view_separator_two,
+                animation = R.anim.fade_in)
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.match_information_input_activity)
-        collectionMode = intent!!.extras!!.getString("collection_mode")
+        collectionMode = intent!!.extras!!.getSerializable("collection_mode") as Constants.MODE_SELECTION
 
+        checkCollectionMode()
+
+        initViewAnimations()
         initAllianceColorToggle()
-        initButtonAnimation(R.anim.fade_in)
         initProceedButton()
     }
 }

@@ -14,10 +14,11 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18dp</item>
     </style>
-    <style name="et_standard_linear_layout" parent="android:Widget">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">0dp</item>
+    <style name="et_standard_linear_layout_number" parent="android:Widget">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
+        <item name="android:inputType">number</item>
         <item name="android:padding">@dimen/small</item>
         <item name="android:textSize">24dp</item>
     </style>
@@ -31,4 +32,16 @@
         <item name="android:textSize">30dp</item>
         <item name="android:layout_margin">20dp</item>
     </style>
+    <style name="view_separator_horizontal" parent="android:Widget">
+        <item name="android:background">@color/black</item>
+        <item name="android:layout_height">3dp</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="view_separator_vertical" parent="android:Widget">
+        <item name="android:background">@color/black</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">3dp</item>
+    </style>
+
 </resources>
