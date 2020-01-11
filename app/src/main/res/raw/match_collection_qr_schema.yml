@@ -1,9 +1,11 @@
 # Used for Match Collection QR compression by Match Collection App and
 # QR decompression by Server
 
-# Version of schema file, should match end of file name
-# Incremented every merged schema change
-schema_version: 2
+# Contains information about this schema file
+schema_file:
+  # Version of schema file, should match end of file name
+  # Incremented every merged schema change
+  version: 3
 
 # Each decompressed variable name corresponds to a length 2 or 3 list
 # First item is the compressed variable name
@@ -20,6 +22,7 @@ generic_data:
   scout_name: [b, str]
   match_number: [c, int]
   alliance_color: [d, Enum]
+  timestamp: [e, int]
 
 # Data specific to objective match collection QR
 objective_tim:
