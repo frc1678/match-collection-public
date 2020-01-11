@@ -5,7 +5,7 @@
 schema_file:
   # Version of schema file, should match end of file name
   # Incremented every merged schema change
-  version: 3
+  version: 4
 
 # Each decompressed variable name corresponds to a length 2 or 3 list
 # First item is the compressed variable name
@@ -16,7 +16,7 @@ schema_file:
 # Data that is shared between the objective and subjective QRs. 
 generic_data:
   _separator: ^ # Separates key:value pairs
-  _section_separator: "@" # Separates generic from objective/subjective data
+  _section_separator: "!" # Separates generic from objective/subjective data
   schema_version: [A, int] # Must remain constant between versions
   serial_number: [a, str]
   scout_name: [b, str]
@@ -47,7 +47,7 @@ timeline:
   is_defended: [e, bool]
 
 # Data specific to subjective match collection QR
-subjective:
+subjective_aim:
   _start_character: "*" # First character in QR used to identify QR type
   _separator: ^ # Separates each key:value pair
   _separator_internal: "%" # Separates each ranking list item
