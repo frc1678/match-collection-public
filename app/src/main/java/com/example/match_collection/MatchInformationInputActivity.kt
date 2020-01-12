@@ -8,7 +8,9 @@
 
 package com.example.match_collection
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.EditText
@@ -38,7 +40,6 @@ class MatchInformationInputActivity : AppCompatActivity() {
 
                     //Switch statement to separate subjective and objective input safety.
                     when (collectionMode) {
-
                         //Check to make sure all objective related inputs are not empty.
                         Constants.MODE_SELECTION.OBJECTIVE -> if (checkInputNotEmpty(et_team_one)) {
                             //todo start match for objective
@@ -93,8 +94,9 @@ class MatchInformationInputActivity : AppCompatActivity() {
     }
 
     //Used to transition into the next activity.
+    //Calls MatchTimerThread from TimerUtility.kt and starts the timer
     private fun startMatchActivity() {
-        //todo Intent to start new activity
+        TimerUtility.MatchTimerThread().initTimer()
     }
 
     //Checks if collection mode is subjective and if true, makes other team inputs visible
