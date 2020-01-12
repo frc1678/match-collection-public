@@ -11,8 +11,10 @@ package com.example.match_collection
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.match_information_input_activity.*
 
 /* Class used to input the information of the match before the match's beginning.
@@ -27,17 +29,55 @@ class MatchInformationInputActivity : AppCompatActivity() {
     private fun initProceedButton() {
         btn_proceed_match_start.setOnClickListener { view ->
             if (getSerialNum(this) != null) {
-                scout_name = et_scout_name.text.toString()
-                match_number = Integer.parseInt(et_match_number.text.toString())
-                //Alliance color is already defined in ColoredToggleButtonElement.kt -> initializeToggleButtons()
+                if ((checkInputNotEmpty(et_scout_name, et_match_number)
+                            && (alliance_color != Constants.ALLIANCE_COLOR.NONE))) {
 
-                if (collectionMode == Constants.MODE_SELECTION.OBJECTIVE)
-                    team_number = Integer.parseInt(et_team_one.text.toString())
+                    //Reassigning variables in References.kt to inputed text.
+                    scout_name = et_scout_name.text.toString()
+                    match_number = Integer.parseInt(et_match_number.text.toString())
 
+                    //Switch statement to separate subjective and objective input safety.
+                    when (collectionMode) {
 
-                startMatchActivity()
+                        //Check to make sure all objective related inputs are not empty.
+                        Constants.MODE_SELECTION.OBJECTIVE -> if (checkInputNotEmpty(et_team_one)) {
+                            //todo start match for objective
+                            team_number = Integer.parseInt(et_team_one.text.toString())
+                            startMatchActivity()
+                        } else {
+                            createErrorMessage("Please input the team number!", view)
+                        }
+
+                        //Check to make sure all subjective related inputs are not empty.
+                        Constants.MODE_SELECTION.SUBJECTIVE -> if (checkInputNotEmpty(et_team_one, et_team_two, et_team_three)) {
+                            //todo start match for subjective
+                            startMatchActivity()
+                        } else {
+                            createErrorMessage("Please input the team numbers!", view)
+                        }
+                        else -> {
+                            //If collectionMode is NONE: exit out of the whole overall setOnClickListener function.
+                            return@setOnClickListener
+                        }
+                    }
+                } else {
+                    createErrorMessage("Please input the scout name, alliance color, and match number!", view)
+                }
             }
         }
+    }
+
+    //Create a snackbar error message with the given text. If no View is given, use 'this' as its value.
+    private fun createErrorMessage(text: String, view: View) {
+        Snackbar.make(view, text, Snackbar.LENGTH_LONG).show()
+    }
+
+    //Check if the given text inputs are not empty.
+    private fun checkInputNotEmpty(vararg views: EditText): Boolean {
+        for (view in views) {
+            if (view.text.isEmpty()) return false
+        }
+        return true
     }
 
     //Create the ColoredToggleButtonElement given its parameters.
