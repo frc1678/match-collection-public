@@ -27,8 +27,14 @@ class MatchInformationInputActivity : AppCompatActivity() {
     private fun initProceedButton() {
         btn_proceed_match_start.setOnClickListener { view ->
             if (getSerialNum(this) != null) {
-                //todo Update to fit super scout file name format
-                //todo HAVE ACCESS TO TEAM ONE THROUGH THREE BY REFERENCING "et_team_one.text.toString()" and etc
+                scout_name = et_scout_name.text.toString()
+                match_number = Integer.parseInt(et_match_number.text.toString())
+                //Alliance color is already defined in ColoredToggleButtonElement.kt -> initializeToggleButtons()
+
+                if (collectionMode == Constants.MODE_SELECTION.OBJECTIVE)
+                    team_number = Integer.parseInt(et_team_one.text.toString())
+
+
                 startMatchActivity()
             }
         }

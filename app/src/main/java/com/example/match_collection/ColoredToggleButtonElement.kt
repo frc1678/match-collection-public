@@ -20,9 +20,6 @@ class ColoredToggleButtonElement constructor(
     private var leftToggleButtonColorDark: Int = 0,
     private var rightToggleButtonColorDark: Int = 0) {
 
-    //Used to control the state of the toggle button. Default value is "none" or ALLIANCE_COLOR.NONE
-    var allianceColor = Constants.ALLIANCE_COLOR.NONE
-
     init {
         initializeToggleButtons()
     }
@@ -43,11 +40,11 @@ class ColoredToggleButtonElement constructor(
         resetBackground()
 
         leftToggleButton.setOnClickListener { view ->
-            allianceColor = Constants.ALLIANCE_COLOR.BLUE
+            alliance_color = Constants.ALLIANCE_COLOR.BLUE
             switchBorderToLeftToggle()
         }
         rightToggleButton.setOnClickListener { view ->
-            allianceColor = Constants.ALLIANCE_COLOR.RED
+            alliance_color = Constants.ALLIANCE_COLOR.RED
             switchBorderToRightToggle()
         }
     }
