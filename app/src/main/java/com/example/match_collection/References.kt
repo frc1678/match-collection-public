@@ -20,8 +20,8 @@ var timestamp: Int = 0
 var team_number: Int = 0
 var starting_location: Constants.STARTING_LOCATION = Constants.STARTING_LOCATION.NONE
 var is_no_show: Boolean = false
-var timeline: ArrayList<HashMap<String, String>> = arrayListOf(hashMapOf())
+var timeline: ArrayList<HashMap<String, String>> = ArrayList()
 
 // Subjective relative data collection variables.
-var speed_rankings: List<Int> = listOf()
-var agility_rankings: List<Int> = listOf()
+var speed_rankings: List<Int> = emptyList()
+var agility_rankings: List<Int> = emptyList()
