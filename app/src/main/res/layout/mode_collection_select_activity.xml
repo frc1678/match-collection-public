@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:padding="@dimen/small">
 
-    <Button style="@style/btn_white"
+    <Button
         android:id="@+id/btn_subjective_collection_select"
+        style="@style/btn_white"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="@string/btn_subjective_collection_select"
-        />
-
+        android:text="@string/btn_subjective_collection_select" />
     <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_margin="100dp"
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:layout_margin="50dp"
         android:background="@color/black"
-        />
+    />
 
-    <Button style="@style/btn_white"
+    <Button
         android:id="@+id/btn_objective_collection_select"
+        style="@style/btn_white"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="@string/btn_objective_collection_select"
-        />
+        android:text="@string/btn_objective_collection_select" />
 
 </LinearLayout>
