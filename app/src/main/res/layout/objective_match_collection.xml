@@ -2,24 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="fill_parent"
     android:layout_height="fill_parent" android:layout_weight="2">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical" android:layout_width="0dp"
-        android:layout_height="match_parent" android:layout_weight="2">
 
-        <Button style="@style/btn_placement"
-            android:id="@+id/btn_placement_1"
-            android:text="Placement 1">
-        </Button>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="vertical">
 
-        <Button style="@style/btn_placement"
-            android:id="@+id/btn_placement_2"
-            android:text="Placement 2">
-        </Button>
+        <Button
+            android:id="@+id/btn_placement_one"
+            style="@style/btn_placement"
+            android:baselineAligned="false"
+            android:text="Placement 1"></Button>
 
-        <Button style="@style/btn_placement"
-            android:id="@+id/btn_placement_3"
-            android:text="Placement 3">
-        </Button>
+        <Button
+            android:id="@+id/btn_placement_two"
+            style="@style/btn_placement"
+            android:text="Placement 2"></Button>
+
+        <Button
+            android:id="@+id/btn_placement_three"
+            style="@style/btn_placement"
+            android:text="Placement 3"></Button>
     </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

@@ -1,102 +1,89 @@
 package com.example.match_collection
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.objective_match_collection.*
-//Determines the functions for UI elements (ie Buttons, ToggleButtons) in the Objective Match Data Screen
+//Determines the functions for UI elements (ie Buttons, ToggleButtons) in the Objective Match Data Screen.
 class ObjectiveMatchCollectionActivity : AppCompatActivity() {
-    lateinit var placement1: Button
-    lateinit var placement2: Button
-    lateinit var placement3: Button
-    lateinit var incapToggle: ToggleButton
-    lateinit var defenseToggle: ToggleButton
+    //Define all variables.
+    private var placementOneValue = 0
+    private var placementTwoValue = 0
+    private var placementThreeValue = 0
 
-    fun initXML() {
-        placement1 = findViewById(R.id.btn_placement_1)
-        placement2 = findViewById(R.id.btn_placement_2)
-        placement3 = findViewById(R.id.btn_placement_3)
-        incapToggle = findViewById(R.id.tb_incap)
-        defenseToggle = findViewById(R.id.tb_defense)
+    private var placementOneNumber = 1
+    private var placementTwoNumber = 2
+    private var placementThreeNumber = 3
+
+    private var defended = false
+
+    //Adds a hashmap to the timeline variable including action type, is successufl, and is defended.
+    //If is_defended or is_successful are not applicable, pass in null for parameters.
+    fun timelineAdd(action_type: String, is_successful: Boolean?, is_defended: Boolean?) {
+        val ActionHashMap:HashMap<String, String> = hashMapOf(Pair("action_type",action_type), Pair("is_successful","$is_successful"), Pair("is_defeneded", "$is_defended"))
+        timeline.add(ActionHashMap)
+        Log.e("timeline contents", timeline.toString())
+    }
+
+    //Removes last entry in timeline variable.
+    fun timelineRemove() {
+        if (timeline.size >= 0) {
+            var timelineTemp: ArrayList<HashMap<String,String>> = timeline
+            timelineTemp.removeAt(timeline.size - 1)
+        }
+    }
+    //Increases increases placement value on button and calls on timelineAdd().
+    fun placementIncrementation(placementValue: Int, placementButton: Button, placementButtonNum: Int) {
+        placementButton.setText("Placement $placementButtonNum - $placementValue")
+        timelineAdd("outtake", true, defended)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.objective_match_collection)
-        initXML()
 
-        var placement1Value = 0
-        var placement2Value = 0
-        var placement3Value = 0
-
-        //Increments placement buttons by 1 when clicked
-        placement1.setOnClickListener(View.OnClickListener {
-            placement1Value = placement1Value + 1
-            placement1.setText("Placement 1 - $placement1Value")
+        //Increases placement#value by one and calls placementIncrementation function(above).
+        btn_placement_one.setOnClickListener(View.OnClickListener {
+            placementOneValue++
+            placementIncrementation(placementOneValue, btn_placement_one, placementOneNumber)
         })
 
-        placement2.setOnClickListener(View.OnClickListener {
-            placement2Value = placement2Value + 1
-            placement2.setText("Placement 2 - $placement2Value")
+        btn_placement_two.setOnClickListener(View.OnClickListener {
+            placementTwoValue++
+            placementIncrementation(placementTwoValue, btn_placement_two, placementTwoNumber)
         })
 
-        placement3.setOnClickListener(View.OnClickListener {
-            placement3Value = placement3Value + 1
-            placement3.setText("Placement 3 - $placement3Value")
+        btn_placement_three.setOnClickListener(View.OnClickListener {
+            placementThreeValue++
+            placementIncrementation(placementThreeValue, btn_placement_three, placementThreeNumber)
         })
 
-        //De-increments placement buttons by 1 when long clicked, unless the placement value is at 0
-        placement1.setOnLongClickListener(object : View.OnLongClickListener {
-            override fun onLongClick(v: View?): Boolean {
-                if (placement1Value > 0) {
-                    placement1Value = placement1Value - 1
-                    placement1.setText("Placement 1 - $placement1Value")
-                }
-                return true
-            }
-        })
-
-        placement2.setOnLongClickListener(object : View.OnLongClickListener {
-            override fun onLongClick(v: View?): Boolean {
-                if (placement2Value > 0) {
-                    placement2Value = placement2Value - 1
-                    placement2.setText("Placement 2 - $placement2Value")
-                }
-                return true
-            }
-        })
-
-        placement3.setOnLongClickListener(object : View.OnLongClickListener {
-            override fun onLongClick(v: View?): Boolean {
-                if (placement3Value > 0) {
-                    placement3Value = placement3Value - 1
-                    placement3.setText("Placement 3 - $placement3Value")
-                }
-                return true
-            }
-        })
-
-        //Disables placement buttons when incap toggleButton is checked/clicked
-        incapToggle.setOnCheckedChangeListener { _, isChecked ->
+        //Disables placement buttons when incap toggleButton is checked/clicked and calls timelineAdd().
+        tb_incap.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                placement1.setEnabled(false)
-                placement2.setEnabled(false)
-                placement3.setEnabled(false)
+                timelineAdd("intake", null, null)
+                btn_placement_one.setEnabled(false)
+                btn_placement_two.setEnabled(false)
+                btn_placement_three.setEnabled(false)
             } else {
-                placement1.setEnabled(true)
-                placement2.setEnabled(true)
-                placement3.setEnabled(true)
+                timelineAdd("intake", null, null)
+                btn_placement_one.setEnabled(true)
+                btn_placement_two.setEnabled(true)
+                btn_placement_three.setEnabled(true)
             }
         }
 
-        //When the defense button is toggled, notes the start/end time for defense
-        defenseToggle.setOnCheckedChangeListener { _, isChecked ->
+        //When the defense button is toggled, notes the start/end time for defense and sets defended variable to true (for checked) and false (for not checked).
+        //Lastly, calls timelineAdd() function.
+        tb_defense.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                //todo Note the start and end time for defense (once a counter is implemented)
+                defended = true
+                timelineAdd("intake", null, null)
             } else {
-                //todo Note the start and end time for defense (once a counter is implemented)
+                defended = false
+                timelineAdd("intake", null, null)
             }
         }
     }

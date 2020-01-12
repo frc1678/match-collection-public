@@ -96,6 +96,9 @@ class MatchInformationInputActivity : AppCompatActivity() {
     //Used to transition into the next activity.
     //Calls MatchTimerThread from TimerUtility.kt and starts the timer
     private fun startMatchActivity() {
+        if (collectionMode.equals(Constants.MODE_SELECTION.OBJECTIVE)) {
+            startActivity(Intent(this, ObjectiveMatchCollectionActivity::class.java))
+        }
         TimerUtility.MatchTimerThread().initTimer()
     }
 
