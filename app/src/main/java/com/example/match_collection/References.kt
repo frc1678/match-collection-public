@@ -12,12 +12,12 @@ package com.example.match_collection
 
 // Data that is shared between the objective and subjective QRs.
 var scout_name: String = ""
-var match_number: Int = 0
+var match_number: String = ""
 var alliance_color: Constants.ALLIANCE_COLOR = Constants.ALLIANCE_COLOR.NONE
 var timestamp: Int = 0
 
 // Data specific to objective match collection QR.
-var team_number: Int = 0
+var team_number: String = ""
 var starting_location: Constants.STARTING_LOCATION = Constants.STARTING_LOCATION.NONE
 var is_no_show: Boolean = false
 var timeline: ArrayList<HashMap<String, String>> = ArrayList()

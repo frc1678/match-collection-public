@@ -3,4 +3,8 @@
     <string name="btn_qr_generate">Generate QR</string>
     <string name="btn_objective_collection_select">Objective Collection</string>
     <string name="btn_subjective_collection_select">Subjective Collection</string>
+    <string name="btn_plus">+</string>
+    <string name="btn_minus">-</string>
+    <string name="tv_counter_starting_value">2</string>
+    <string name="btn_proceed">Proceed</string>
 </resources>

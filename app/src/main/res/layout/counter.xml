@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/counter">
+
+    <TextView
+        android:id="@+id/tv_data_name"
+        android:layout_margin="5dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"/>
+    <Button
+        android:id="@+id/btn_minus"
+        android:text="@string/btn_minus"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:layout_below="@+id/tv_data_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_score_counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:gravity="fill"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_toEndOf="@+id/btn_minus"
+        android:layout_marginTop="40dp"/>
+
+    <Button
+        android:id="@+id/btn_plus"
+        android:text="@string/btn_plus"
+        android:textSize="24sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_data_name"
+        android:layout_toEndOf="@+id/tv_score_counter"
+        android:gravity="center"/>
+</RelativeLayout>

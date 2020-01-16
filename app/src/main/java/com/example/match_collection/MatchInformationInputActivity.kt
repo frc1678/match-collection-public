@@ -8,9 +8,9 @@
 
 package com.example.match_collection
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.EditText
@@ -36,14 +36,13 @@ class MatchInformationInputActivity : AppCompatActivity() {
 
                     //Reassigning variables in References.kt to inputed text.
                     scout_name = et_scout_name.text.toString()
-                    match_number = Integer.parseInt(et_match_number.text.toString())
+                    match_number = et_match_number.text.toString()
 
                     //Switch statement to separate subjective and objective input safety.
                     when (collectionMode) {
                         //Check to make sure all objective related inputs are not empty.
                         Constants.MODE_SELECTION.OBJECTIVE -> if (checkInputNotEmpty(et_team_one)) {
-                            //todo start match for objective
-                            team_number = Integer.parseInt(et_team_one.text.toString())
+                            team_number = et_team_one.text.toString()
                             startMatchActivity()
                         } else {
                             createErrorMessage("Please input the team number!", view)
@@ -51,7 +50,6 @@ class MatchInformationInputActivity : AppCompatActivity() {
 
                         //Check to make sure all subjective related inputs are not empty.
                         Constants.MODE_SELECTION.SUBJECTIVE -> if (checkInputNotEmpty(et_team_one, et_team_two, et_team_three)) {
-                            //todo start match for subjective
                             startMatchActivity()
                         } else {
                             createErrorMessage("Please input the team numbers!", view)
@@ -97,9 +95,20 @@ class MatchInformationInputActivity : AppCompatActivity() {
     //Calls MatchTimerThread from TimerUtility.kt and starts the timer
     private fun startMatchActivity() {
         if (collectionMode.equals(Constants.MODE_SELECTION.OBJECTIVE)) {
-            startActivity(Intent(this, ObjectiveMatchCollectionActivity::class.java))
+            val intent = Intent(this, ObjectiveMatchCollectionActivity::class.java)
+            TimerUtility.MatchTimerThread().initTimer()
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this,
+                btn_proceed_match_start, "proceed_button").toBundle())
         }
-        TimerUtility.MatchTimerThread().initTimer()
+        else if (collectionMode.equals(Constants.MODE_SELECTION.SUBJECTIVE)) {
+            val intent = Intent(this, SubjectiveMatchCollectionActivity::class.java)
+            // Add alliance teams to the intent to be used in the SubjectiveMatchCollectionActivity.kt.
+            intent.putExtra("team_one", et_team_one.text.toString())
+                .putExtra("team_two", et_team_two.text.toString())
+                .putExtra("team_three", et_team_three.text.toString())
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this,
+                btn_proceed_match_start, "proceed_button").toBundle())
+        }
     }
 
     //Checks if collection mode is subjective and if true, makes other team inputs visible
