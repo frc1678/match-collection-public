@@ -38,7 +38,6 @@ class ColoredToggleButtonElement constructor(
     //Create the button onClick listeners.
     private fun initializeToggleButtons() {
         resetBackground()
-
         leftToggleButton.setOnClickListener { view ->
             alliance_color = Constants.ALLIANCE_COLOR.BLUE
             switchBorderToLeftToggle()

@@ -47,14 +47,14 @@
         android:orientation="horizontal">
 
         <Button style="?android:attr/borderlessButtonStyle"
-            android:id="@+id/leftToggleButton"
+            android:id="@+id/left_toggle_button"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="@dimen/small"/>
 
         <Button style="?android:attr/borderlessButtonStyle"
-            android:id="@+id/rightToggleButton"
+            android:id="@+id/right_toggle_button"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

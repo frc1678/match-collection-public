@@ -15,6 +15,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import androidx.core.content.ContextCompat
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -62,7 +63,7 @@ class ModeCollectionSelectActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
             != PackageManager.PERMISSION_GRANTED){
             try {
                 ActivityCompat.requestPermissions(
@@ -77,6 +78,8 @@ class ModeCollectionSelectActivity : AppCompatActivity() {
             csvFileRead(file = "match_schedule.csv", skipHeader = false)
         }
 
+
+        //82,B-3039,B-1785,B-4290,R-7567,R-3132,R-5242
         initButtonOnClicks()
     }
 }
