@@ -23,5 +23,5 @@ var is_no_show: Boolean = false
 var timeline: ArrayList<HashMap<String, String>> = ArrayList()
 
 // Subjective relative data collection variables.
-var speed_rankings: List<Int> = emptyList()
-var agility_rankings: List<Int> = emptyList()
+var speed_rankings: List<String> = emptyList()
+var agility_rankings: List<String> = emptyList()

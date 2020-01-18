@@ -1,9 +1,17 @@
+/*
+* SubjectiveMatchCollectionActivity.kt
+* match-collection
+*
+* Created on 1/18/2020
+* Copyright 2020 Citrus Circuits. All rights reserved.
+*/
+
 package com.example.match_collection
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.subjective_match_collection.*
 
 // Activity for subjective match collection of the three teams on a single alliance.
 class SubjectiveMatchCollectionActivity : AppCompatActivity() {
@@ -21,7 +29,33 @@ class SubjectiveMatchCollectionActivity : AppCompatActivity() {
         teamNumberOne = intent.getExtras()?.getString("team_one").toString()
         teamNumberTwo = intent.getExtras()?.getString("team_two").toString()
         teamNumberThree = intent.getExtras()?.getString("team_three").toString()
-        Log.e("TEAM_NUM", teamNumberOne)
+    }
+
+    // Function to create list of teams from best to worst of specific data point (i.e. speed, agility).
+    fun recordRankingData(dataName: String): ArrayList<String> {
+        val tempRankingList: ArrayList<String> = arrayListOf("rankOne", "rankTwo", "rankThree")
+
+        tempRankingList.set(panelOne.getRankingData().getValue(dataName) - 1, teamNumberOne)
+        tempRankingList.set(panelTwo.getRankingData().getValue(dataName) - 1, teamNumberTwo)
+        tempRankingList.set(panelThree.getRankingData().getValue(dataName) - 1, teamNumberThree)
+
+        return tempRankingList
+    }
+
+    // Initialize proceed button to record ranking data and proceed to QRGenerateActivity.kt when
+    // proceed button is pressed.
+    private fun initProceedButton() {
+        btn_proceed_qr_generate.setOnClickListener { view ->
+            speed_rankings = recordRankingData("Speed")
+            agility_rankings = recordRankingData("Agility")
+
+            if (speed_rankings.toString().contains("rank") || agility_rankings.toString().contains("rank")) {
+                createErrorMessage("Please input different ranking values!", view)
+            }
+            else {
+                // TODO START QRGENERATEACTIVITY
+            }
+        }
     }
 
     // Initiate counter panels for the three different teams.
@@ -45,6 +79,7 @@ class SubjectiveMatchCollectionActivity : AppCompatActivity() {
         setContentView(R.layout.subjective_match_collection)
 
         getExtras()
+        initProceedButton()
         initPanels()
     }
 }

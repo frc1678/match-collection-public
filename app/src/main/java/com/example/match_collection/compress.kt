@@ -116,12 +116,12 @@ fun compress(schema: HashMap<String, HashMap<String, Any>>, context: Context, mo
     // Compress and add subjective relative data collection.
     else if (mode.equals(Constants.MODE_SELECTION.SUBJECTIVE)) {
         // Compress speed and agility rankings.
-        val compressSpeedRankingsValues = speed_rankings[0].toString() + subjectiveSeparatorInternal +
-                speed_rankings[1].toString() + subjectiveSeparatorInternal +
-                speed_rankings[2].toString()
-        val compressAgilityRankingsValues = agility_rankings[0].toString() + subjectiveSeparatorInternal +
-                agility_rankings[1].toString() + subjectiveSeparatorInternal +
-                agility_rankings[2].toString()
+        val compressSpeedRankingsValues = speed_rankings[0] + subjectiveSeparatorInternal +
+                speed_rankings[1] + subjectiveSeparatorInternal +
+                speed_rankings[2]
+        val compressAgilityRankingsValues = agility_rankings[0] + subjectiveSeparatorInternal +
+                agility_rankings[1] + subjectiveSeparatorInternal +
+                agility_rankings[2]
 
         // Compress and add all subjective match collection data, including previously compressed
         // speed and agility rankings.

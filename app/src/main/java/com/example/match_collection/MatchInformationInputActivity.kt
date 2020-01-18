@@ -66,11 +66,6 @@ class MatchInformationInputActivity : AppCompatActivity() {
         }
     }
 
-    //Create a snackbar error message with the given text. If no View is given, use 'this' as its value.
-    private fun createErrorMessage(text: String, view: View) {
-        Snackbar.make(view, text, Snackbar.LENGTH_LONG).show()
-    }
-
     //Check if the given text inputs are not empty.
     private fun checkInputNotEmpty(vararg views: EditText): Boolean {
         for (view in views) {
