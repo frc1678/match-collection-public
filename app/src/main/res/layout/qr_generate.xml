@@ -2,18 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btn_qr_generate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/btn_qr_generate">
-    </Button>
-
     <ImageView
         android:id="@+id/iv_display_qr"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/btn_qr_generate">
+        android:layout_height="400dp">
     </ImageView>
+
+    <Button
+        android:id="@+id/btn_proceed_new_match"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/btn_proceed"
+        android:layout_below="@+id/iv_display_qr">
+    </Button>
 </RelativeLayout>

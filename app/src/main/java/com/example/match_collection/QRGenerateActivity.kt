@@ -8,45 +8,40 @@
 
 package com.example.match_collection
 
-import android.Manifest
-import android.content.pm.PackageManager
-import android.os.Build
-import android.os.Build.getSerial
+import android.app.ActivityOptions
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.Button
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
+import kotlinx.android.synthetic.main.qr_generate.*
 
 // Class to display QR code.
 class QRGenerateActivity: AppCompatActivity() {
-    lateinit var btnGenerateQR: Button
-
-    lateinit var ivDisplayQR: ImageView
-    lateinit var serial_number: String
-
-    lateinit var qrContent: String
-
-    fun initXML() {
-        btnGenerateQR = findViewById(R.id.btn_qr_generate)
-        ivDisplayQR = findViewById(R.id.iv_display_qr)
+    private fun initProceedButton() {
+        btn_proceed_new_match.setOnClickListener {
+            val intent = Intent(this, MatchInformationInputActivity::class.java)
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this,
+                btn_proceed_new_match, "proceed_button").toBundle())
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.qr_generate)
-        initXML()
 
-        getSerialNum(this)
+        initProceedButton()
 
-        // Populate QR code content.
-        qrContent = serial_number
+        // Populate QR code content and display QR.
+        val qrContents = compress(schemaRead(this), this, collection_mode)
+        displayQR(qrContents, iv_display_qr, this)
 
-        btnGenerateQR.setOnClickListener(View.OnClickListener {
-            displayQR(qrContent, ivDisplayQR, this)
-            //fileWrite("test.txt", qrContent)
-        })
+        // Write compressed QR string to file.
+        var fileName = ""
+        if (collection_mode.equals(Constants.MODE_SELECTION.OBJECTIVE)) {
+            fileName = match_number + "_" + team_number + "_" + getSerialNum(this) + ".txt"
+        }
+        else if (collection_mode.equals(Constants.MODE_SELECTION.SUBJECTIVE)) {
+            fileName = match_number + "_" + alliance_color.toString()[0] + ".txt"
+        }
+        writeToFile(fileName, qrContents)
     }
 }

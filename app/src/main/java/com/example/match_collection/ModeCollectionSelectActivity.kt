@@ -32,13 +32,13 @@ class ModeCollectionSelectActivity : AppCompatActivity() {
     private fun initButtonOnClicks() {
         val intent = Intent(this, MatchInformationInputActivity::class.java)
         btn_subjective_collection_select.setOnClickListener { view ->
-            intent.putExtra("collection_mode", Constants.MODE_SELECTION.SUBJECTIVE)
+            collection_mode = Constants.MODE_SELECTION.SUBJECTIVE
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this,
                 btn_subjective_collection_select, "proceed_button").toBundle())
         }
 
         btn_objective_collection_select.setOnClickListener { view ->
-            intent.putExtra("collection_mode", Constants.MODE_SELECTION.OBJECTIVE)
+            collection_mode = Constants.MODE_SELECTION.OBJECTIVE
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this,
                 btn_objective_collection_select, "proceed_button").toBundle())
         }

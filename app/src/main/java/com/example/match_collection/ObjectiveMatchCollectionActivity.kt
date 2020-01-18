@@ -1,11 +1,15 @@
 package com.example.match_collection
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.objective_match_collection.*
+import kotlinx.android.synthetic.main.qr_generate.*
+
 //Determines the functions for UI elements (ie Buttons, ToggleButtons) in the Objective Match Data Screen.
 class ObjectiveMatchCollectionActivity : AppCompatActivity() {
     //Define all variables.
@@ -19,11 +23,26 @@ class ObjectiveMatchCollectionActivity : AppCompatActivity() {
 
     private var defended = false
 
+    private fun initProceedButton() {
+        btn_proceed_qr_generate.setOnClickListener {
+            val intent = Intent(this, QRGenerateActivity::class.java)
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this,
+                btn_proceed_qr_generate, "proceed_button").toBundle())
+        }
+    }
+
     //Adds a hashmap to the timeline variable including action type, is successufl, and is defended.
     //If is_defended or is_successful are not applicable, pass in null for parameters.
     fun timelineAdd(action_type: String, is_successful: Boolean?, is_defended: Boolean?) {
-        val ActionHashMap:HashMap<String, String> = hashMapOf(Pair("action_type",action_type), Pair("is_successful","$is_successful"), Pair("is_defeneded", "$is_defended"))
-        timeline.add(ActionHashMap)
+        val actionHashMap: HashMap<String, String> = hashMapOf(Pair("time", "0"), Pair("action_type",action_type),
+            Pair("stage", "auto"))
+        if (is_successful != null) {
+            actionHashMap.put("is_successful", "$is_successful")
+        }
+        if (is_defended != null) {
+            actionHashMap.put("is_defended", "$is_defended")
+        }
+        timeline.add(actionHashMap)
         Log.e("timeline contents", timeline.toString())
     }
 
@@ -43,6 +62,8 @@ class ObjectiveMatchCollectionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.objective_match_collection)
+
+        initProceedButton()
 
         //Increases placement#value by one and calls placementIncrementation function(above).
         btn_placement_one.setOnClickListener(View.OnClickListener {

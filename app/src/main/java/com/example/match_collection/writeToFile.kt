@@ -1,5 +1,5 @@
 /*
-* appendToFile.kt
+* writeToFile.kt
 * match-collection
 *
 * Created on 1/2/2020
@@ -13,9 +13,9 @@ import java.io.BufferedWriter
 import java.io.FileWriter
 
 // Function used to append a given line to the given file
-fun appendToFile(file_name: String, message: String) {
+fun writeToFile(file_name: String, message: String) {
     var file = BufferedWriter(FileWriter(
-        "/storage/emulated/0/${Environment.DIRECTORY_DOWNLOADS}/$file_name", true))
+        "/storage/emulated/0/${Environment.DIRECTORY_DOWNLOADS}/$file_name", false))
     file.write("$message\n")
     file.close()
 }

@@ -8,6 +8,8 @@
 
 package com.example.match_collection
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.os.Bundle
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
@@ -53,7 +55,9 @@ class SubjectiveMatchCollectionActivity : AppCompatActivity() {
                 createErrorMessage("Please input different ranking values!", view)
             }
             else {
-                // TODO START QRGENERATEACTIVITY
+                val intent = Intent(this, QRGenerateActivity::class.java)
+                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this,
+                    btn_proceed_qr_generate, "proceed_button").toBundle())
             }
         }
     }

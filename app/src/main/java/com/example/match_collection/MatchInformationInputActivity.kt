@@ -25,7 +25,6 @@ import kotlinx.android.synthetic.main.match_information_input_activity.*
 /* Class used to input the information of the match before the match's beginning.
 * Information such as: teams in alliances, match number, and other. */
 class MatchInformationInputActivity : AppCompatActivity() {
-
     var collectionMode: Constants.MODE_SELECTION = Constants.MODE_SELECTION.NONE
     var leftToggleButtonColor: Int = 0
     var rightToggleButtonColor: Int = 0
@@ -47,7 +46,7 @@ class MatchInformationInputActivity : AppCompatActivity() {
                     match_number = et_match_number.text.toString()
 
                     //Switch statement to separate subjective and objective input safety.
-                    when (collectionMode) {
+                    when (collection_mode) {
                         //Check to make sure all objective related inputs are not empty.
                         Constants.MODE_SELECTION.OBJECTIVE -> if (checkInputNotEmpty(et_team_one)) {
                             team_number = et_team_one.text.toString()
@@ -87,13 +86,13 @@ class MatchInformationInputActivity : AppCompatActivity() {
     //Used to transition into the next activity.
     //Calls MatchTimerThread from TimerUtility.kt and starts the timer
     private fun startMatchActivity() {
-        if (collectionMode.equals(Constants.MODE_SELECTION.OBJECTIVE)) {
+        if (collection_mode.equals(Constants.MODE_SELECTION.OBJECTIVE)) {
             val intent = Intent(this, ObjectiveMatchCollectionActivity::class.java)
             TimerUtility.MatchTimerThread().initTimer()
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this,
                 btn_proceed_match_start, "proceed_button").toBundle())
         }
-        else if (collectionMode.equals(Constants.MODE_SELECTION.SUBJECTIVE)) {
+        else if (collection_mode.equals(Constants.MODE_SELECTION.SUBJECTIVE)) {
             val intent = Intent(this, SubjectiveMatchCollectionActivity::class.java)
             // Add alliance teams to the intent to be used in the SubjectiveMatchCollectionActivity.kt.
             intent.putExtra("team_one", et_team_one.text.toString())
@@ -106,7 +105,7 @@ class MatchInformationInputActivity : AppCompatActivity() {
 
     //Checks if collection mode is subjective and if true, makes other team inputs visible.
     private fun checkCollectionMode() {
-        if (collectionMode == Constants.MODE_SELECTION.SUBJECTIVE) {
+        if (collection_mode == Constants.MODE_SELECTION.SUBJECTIVE) {
             makeViewVisible(et_team_two, et_team_three, view_team_view_separator_one, view_team_view_separator_two)
         }
     }
@@ -130,7 +129,7 @@ class MatchInformationInputActivity : AppCompatActivity() {
         makeViewAnimation(et_team_one, et_match_number, et_scout_name, leftToggleButton, rightToggleButton, btn_proceed_match_start,
             view_alliance_color_separator, view_proceed_button_separator, view_scout_name_match_number_separator,
             view_team_view_separator_three, animation = R.anim.fade_in)
-        if (collectionMode == Constants.MODE_SELECTION.SUBJECTIVE)
+        if (collection_mode == Constants.MODE_SELECTION.SUBJECTIVE)
             makeViewAnimation(et_team_two, et_team_three, view_team_view_separator_one, view_team_view_separator_two,
                 animation = R.anim.fade_in)
     }
@@ -249,7 +248,8 @@ class MatchInformationInputActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.match_information_input_activity)
-        collectionMode = intent!!.extras!!.getSerializable("collection_mode") as Constants.MODE_SELECTION
+
+        resetReferences()
 
         checkCollectionMode()
         initializeToggleButtons()
