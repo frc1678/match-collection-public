@@ -37,10 +37,10 @@ class QRGenerateActivity: AppCompatActivity() {
         // Write compressed QR string to file.
         var fileName = ""
         if (collection_mode.equals(Constants.MODE_SELECTION.OBJECTIVE)) {
-            fileName = match_number + "_" + team_number + "_" + getSerialNum(this) + ".txt"
+            fileName = match_number + "_" + team_number + "_" + serial_number + "_" + timestamp + ".txt"
         }
         else if (collection_mode.equals(Constants.MODE_SELECTION.SUBJECTIVE)) {
-            fileName = match_number + "_" + alliance_color.toString()[0] + ".txt"
+            fileName = match_number + "_" + alliance_color.toString()[0] + "_" + timestamp + ".txt"
         }
         writeToFile(fileName, qrContents)
     }

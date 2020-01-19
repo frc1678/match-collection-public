@@ -73,7 +73,7 @@ fun compress(schema: HashMap<String, HashMap<String, Any>>, context: Context, mo
     // Compress and add data that is shared between the objective and subjective.
     compressedMatchInformation =
         compressSchemaVersion + schemaVersion + genericSeparator +
-                compressSerialNumber + getSerialNum(context) + genericSeparator +
+                compressSerialNumber + serial_number + genericSeparator +
                 compressScoutName + scout_name + genericSeparator +
                 compressMatchNumber + match_number + genericSeparator +
                 compressAllianceColor + allianceColorValues.indexOf(alliance_color.toString().toLowerCase()) + genericSeparator +
@@ -94,11 +94,11 @@ fun compress(schema: HashMap<String, HashMap<String, Any>>, context: Context, mo
                 // Compress and add timeline action attributes if they are present for the specific action.
                 if (actions.containsKey("is_successful")) {
                     compressTimelineActions = compressTimelineActions + timelineSeparatorInternal +
-                            compressTimelineIsSuccessful + actions.getValue("is_successful")
+                            compressTimelineIsSuccessful + actions.getValue("is_successful")[0]
                 }
                 if (actions.containsKey("is_defended")) {
                     compressTimelineActions = compressTimelineActions + timelineSeparatorInternal +
-                            compressTimelineIsDefended + actions.getValue("is_defended")
+                            compressTimelineIsDefended + actions.getValue("is_defended")[0]
                 }
             }
             // Remove unnecessary starting separators.
@@ -110,7 +110,7 @@ fun compress(schema: HashMap<String, HashMap<String, Any>>, context: Context, mo
         compressedMatchInformation = objectiveStartCharacter + compressedMatchInformation +
                 compressTeamNumber + team_number + objectiveSeparator +
                 compressStartingLocation + startingLocationValues.indexOf(starting_location.toString().toLowerCase()) + objectiveSeparator +
-                compressIsNoShow + is_no_show + objectiveSeparator +
+                compressIsNoShow + is_no_show.toString()[0] + objectiveSeparator +
                 compressTimeline + compressTimelineActions
     }
     // Compress and add subjective relative data collection.

@@ -12,6 +12,7 @@ import android.graphics.drawable.GradientDrawable
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Button
@@ -21,6 +22,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.match_information_input_activity.*
+import org.apache.commons.lang3.math.NumberUtils.toInt
+import java.lang.Integer.parseInt
+import java.security.Timestamp
+import java.time.Instant
+import java.time.format.DateTimeFormatter
 
 /* Class used to input the information of the match before the match's beginning.
 * Information such as: teams in alliances, match number, and other. */
@@ -37,7 +43,7 @@ class MatchInformationInputActivity : AppCompatActivity() {
     //Create the onclick listener for the proceed button.
     private fun initProceedButton() {
         btn_proceed_match_start.setOnClickListener { view ->
-            if (getSerialNum(this) != null) {
+            if (serial_number != null) {
                 if ((checkInputNotEmpty(et_scout_name, et_match_number)
                             && (alliance_color != Constants.ALLIANCE_COLOR.NONE))) {
 
@@ -83,9 +89,10 @@ class MatchInformationInputActivity : AppCompatActivity() {
         return true
     }
 
-    //Used to transition into the next activity.
-    //Calls MatchTimerThread from TimerUtility.kt and starts the timer
+    //Used to transition into the next activity and define timestamp for specific match.
     private fun startMatchActivity() {
+        timestamp = System.currentTimeMillis()
+
         if (collection_mode.equals(Constants.MODE_SELECTION.OBJECTIVE)) {
             val intent = Intent(this, ObjectiveMatchCollectionActivity::class.java)
             TimerUtility.MatchTimerThread().initTimer()
@@ -248,6 +255,8 @@ class MatchInformationInputActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.match_information_input_activity)
+
+        serial_number = getSerialNum(this)
 
         resetReferences()
 
