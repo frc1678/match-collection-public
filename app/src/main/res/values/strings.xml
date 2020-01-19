@@ -7,4 +7,12 @@
     <string name="btn_minus">-</string>
     <string name="tv_counter_starting_value">2</string>
     <string name="btn_proceed">Proceed</string>
+    <string name="btn_assignment">Assignment</string>
+    <string name="btn_resend">Resend</string>
+    <string name="btn_id">ID</string>
+    <string name="tv_team_number_input_one">Team One</string>
+    <string name="tv_team_number_input_two">Team Two</string>
+    <string name="tv_team_number_input_three">Team Three</string>
+    <string name="tv_match_number_input">Match Number</string>
+
 </resources>

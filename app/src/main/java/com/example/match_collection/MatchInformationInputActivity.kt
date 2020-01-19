@@ -20,7 +20,6 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.match_information_input_activity.*
 import org.apache.commons.lang3.math.NumberUtils.toInt
 import java.lang.Integer.parseInt
@@ -31,7 +30,6 @@ import java.time.format.DateTimeFormatter
 /* Class used to input the information of the match before the match's beginning.
 * Information such as: teams in alliances, match number, and other. */
 class MatchInformationInputActivity : AppCompatActivity() {
-    var collectionMode: Constants.MODE_SELECTION = Constants.MODE_SELECTION.NONE
     var leftToggleButtonColor: Int = 0
     var rightToggleButtonColor: Int = 0
     var leftToggleButtonColorDark: Int = 0
@@ -43,12 +41,11 @@ class MatchInformationInputActivity : AppCompatActivity() {
     //Create the onclick listener for the proceed button.
     private fun initProceedButton() {
         btn_proceed_match_start.setOnClickListener { view ->
-            if (serial_number != null) {
-                if ((checkInputNotEmpty(et_scout_name, et_match_number)
+            if (getSerialNum(this) != null) {
+                if ((checkInputNotEmpty(et_match_number) //todo ADD SCOUT NAME CHECK
                             && (alliance_color != Constants.ALLIANCE_COLOR.NONE))) {
 
                     //Reassigning variables in References.kt to inputed text.
-                    scout_name = et_scout_name.text.toString()
                     match_number = et_match_number.text.toString()
 
                     //Switch statement to separate subjective and objective input safety.
@@ -113,7 +110,8 @@ class MatchInformationInputActivity : AppCompatActivity() {
     //Checks if collection mode is subjective and if true, makes other team inputs visible.
     private fun checkCollectionMode() {
         if (collection_mode == Constants.MODE_SELECTION.SUBJECTIVE) {
-            makeViewVisible(et_team_two, et_team_three, view_team_view_separator_one, view_team_view_separator_two)
+            makeViewVisible(et_team_two, et_team_three, tv_hint_team_two, tv_hint_team_three,
+                separator_team_one_two, separator_team_two_three)
         }
     }
 
@@ -124,23 +122,6 @@ class MatchInformationInputActivity : AppCompatActivity() {
         }
     }
 
-    //Makes inputs and buttons have animations.
-    private fun makeViewAnimation(vararg views: View, animation: Int) {
-        for (view in views) {
-            view.startAnimation(AnimationUtils.loadAnimation(this, animation))
-        }
-    }
-
-    //Calls for the animations, and adds animations for the subjective specific objects.
-    private fun initViewAnimations() {
-        makeViewAnimation(et_team_one, et_match_number, et_scout_name, leftToggleButton, rightToggleButton, btn_proceed_match_start,
-            view_alliance_color_separator, view_proceed_button_separator, view_scout_name_match_number_separator,
-            view_team_view_separator_three, animation = R.anim.fade_in)
-        if (collection_mode == Constants.MODE_SELECTION.SUBJECTIVE)
-            makeViewAnimation(et_team_two, et_team_three, view_team_view_separator_one, view_team_view_separator_two,
-                animation = R.anim.fade_in)
-    }
-
     //Assigns team number based on collection mode.
     private fun createMatchNumberTextChangeListener() {
         et_match_number.addTextChangedListener {
@@ -148,11 +129,11 @@ class MatchInformationInputActivity : AppCompatActivity() {
         }
     }
 
-    //Auto assigns team numbers and seperates by collection mode.
+    //Auto assigns team numbers and separate by collection mode.
     private fun autoAssignTeamInputsGivenMatch() {
         val scoutId = 2 //todo create system to choose scoutId
 
-        when (collectionMode) {
+        when (collection_mode) {
             Constants.MODE_SELECTION.OBJECTIVE -> {
                 assignTeamByScoutIdObjective(et_team_one, scoutId, et_match_number.text.toString())
             }
@@ -168,7 +149,7 @@ class MatchInformationInputActivity : AppCompatActivity() {
 
     //Assigns the team number for objective.
     private fun assignTeamByScoutIdObjective(teamInput: EditText, scoutId: Int, matchNumber: String) {
-        teamInput.setText(getTeamOfGivenMatch(getMatchInfo(matchNumber), scoutId))
+        teamInput.setText(removeTeamPrefix(getTeamOfGivenMatch(getMatchInfo(matchNumber), scoutId)))
     }
 
     //Assign team numbers for subjective based on alliance color.
@@ -264,7 +245,6 @@ class MatchInformationInputActivity : AppCompatActivity() {
         initializeToggleButtons()
         createMatchNumberTextChangeListener()
         autoAssignTeamInputsGivenMatch()
-        initViewAnimations()
         initProceedButton()
 
     }
