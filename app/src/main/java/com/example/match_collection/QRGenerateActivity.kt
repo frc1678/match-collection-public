@@ -11,6 +11,7 @@ package com.example.match_collection
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.qr_generate.*
 
@@ -37,10 +38,10 @@ class QRGenerateActivity: AppCompatActivity() {
         // Write compressed QR string to file.
         var fileName = ""
         if (collection_mode.equals(Constants.MODE_SELECTION.OBJECTIVE)) {
-            fileName = match_number + "_" + team_number + "_" + serial_number + "_" + timestamp + ".txt"
+            fileName = match_number.toString() + "_" + team_number + "_" + getSerialNum(this) + ".txt"
         }
         else if (collection_mode.equals(Constants.MODE_SELECTION.SUBJECTIVE)) {
-            fileName = match_number + "_" + alliance_color.toString()[0] + "_" + timestamp + ".txt"
+            fileName = match_number.toString() + "_" + alliance_color.toString()[0] + ".txt"
         }
         writeToFile(fileName, qrContents)
     }

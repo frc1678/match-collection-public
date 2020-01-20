@@ -179,7 +179,8 @@
             android:gravity="center"/>
 
         <EditText style="@style/et_standard_linear_layout_number"
-            android:id="@+id/et_match_number"/>
+            android:id="@+id/et_match_number"
+            android:text=""/>
 
         <View style="@style/view_separator_horizontal"/>
 

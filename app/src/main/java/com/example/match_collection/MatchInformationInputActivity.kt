@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import kotlinx.android.synthetic.main.match_information_input_activity.*
+import java.lang.Integer.parseInt
 
 /* Class used to input the information of the match before the match's beginning.
 * Information such as: teams in alliances, match number, and other. */
@@ -40,7 +41,7 @@ class MatchInformationInputActivity : AppCompatActivity() {
                     && (alliance_color != Constants.ALLIANCE_COLOR.NONE)) {
 
                     //Reassigning variables in References.kt to inputed text.
-                    match_number = et_match_number.text.toString()
+                    match_number = parseInt(et_match_number.text.toString())
 
                     //Switch statement to separate subjective and objective input safety.
                     when (collection_mode) {
@@ -117,6 +118,9 @@ class MatchInformationInputActivity : AppCompatActivity() {
     private fun createMatchNumberTextChangeListener() {
         et_match_number.addTextChangedListener {
             autoAssignTeamInputsGivenMatch()
+            if (et_match_number.text.toString() != "") {
+                match_number = parseInt(et_match_number.text.toString())
+            }
         }
     }
 
@@ -256,6 +260,9 @@ class MatchInformationInputActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.match_information_input_activity)
 
+        match_number++
+
+        et_match_number.setText(match_number.toString())
         serial_number = getSerialNum(this)
 
         resetReferences()
@@ -267,5 +274,7 @@ class MatchInformationInputActivity : AppCompatActivity() {
         autoAssignTeamInputsGivenMatch()
         initProceedButton()
 
+
     }
+
 }
