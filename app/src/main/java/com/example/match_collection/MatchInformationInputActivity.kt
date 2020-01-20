@@ -53,9 +53,7 @@ class MatchInformationInputActivity : AppCompatActivity() {
                         }
 
                         //Check to make sure all subjective related inputs are not empty.
-                        Constants.MODE_SELECTION.SUBJECTIVE -> if (checkInputNotEmpty(et_team_one,
-                                et_team_two, et_team_three)) {
-                            //todo start match for subjective
+                        Constants.MODE_SELECTION.SUBJECTIVE -> if (checkInputNotEmpty(et_team_one, et_team_two, et_team_three)) {
                             startMatchActivity()
                         } else {
                             createErrorMessage("Please input the team numbers!", view)
@@ -86,7 +84,6 @@ class MatchInformationInputActivity : AppCompatActivity() {
 
         if (collection_mode.equals(Constants.MODE_SELECTION.OBJECTIVE)) {
             val intent = Intent(this, ObjectiveMatchCollectionActivity::class.java)
-            TimerUtility.MatchTimerThread().initTimer()
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this,
                 btn_proceed_match_start, "proceed_button").toBundle())
         }

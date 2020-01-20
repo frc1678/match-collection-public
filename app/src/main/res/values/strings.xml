@@ -3,6 +3,13 @@
     <string name="btn_qr_generate">Generate QR</string>
     <string name="btn_objective_collection_select">Objective Collection</string>
     <string name="btn_subjective_collection_select">Subjective Collection</string>
+    <string name="btn_placement_one">Placement 1</string>
+    <string name="btn_placement_two">Placement 2</string>
+    <string name="btn_placement_three">Placement 3</string>
+    <string name="btn_start_match">Start Match</string>
+    <string name="tb_incap">Incap</string>
+    <string name="tb_defense">Defense</string>
+    <string name="btn_next">Next</string>
     <string name="btn_plus">+</string>
     <string name="btn_minus">-</string>
     <string name="tv_counter_starting_value">2</string>
@@ -14,5 +21,4 @@
     <string name="tv_team_number_input_two">Team Two</string>
     <string name="tv_team_number_input_three">Team Three</string>
     <string name="tv_match_number_input">Match Number</string>
-
 </resources>
