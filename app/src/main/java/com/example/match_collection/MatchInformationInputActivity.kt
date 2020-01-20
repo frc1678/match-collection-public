@@ -10,17 +10,18 @@ package com.example.match_collection
 
 import android.graphics.drawable.GradientDrawable
 import android.app.ActivityOptions
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.Button
-import android.widget.EditText
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
+import kotlinx.android.synthetic.main.dialog_scout_id.*
 import kotlinx.android.synthetic.main.match_information_input_activity.*
 import java.lang.Integer.parseInt
+
 
 /* Class used to input the information of the match before the match's beginning.
 * Information such as: teams in alliances, match number, and other. */
@@ -126,11 +127,14 @@ class MatchInformationInputActivity : AppCompatActivity() {
 
     //Auto assigns team numbers and separate by collection mode.
     private fun autoAssignTeamInputsGivenMatch() {
-        val scoutId = 2 //todo create system to choose scoutId
-
         when (collection_mode) {
             Constants.MODE_SELECTION.OBJECTIVE -> {
-                assignTeamByScoutIdObjective(et_team_one, scoutId, et_match_number.text.toString())
+                if ((scout_id.isEmpty()) or (scout_id == (Constants.NONE_VALUE))) {
+                    createErrorMessage(getString(R.string.scout_id_error),
+                        linear_layout_team_number)
+                    return
+                }
+                assignTeamByScoutIdObjective(et_team_one, (scout_id.toInt() % 6) + 1, et_match_number.text.toString())
             }
             Constants.MODE_SELECTION.SUBJECTIVE -> {
                 var iterationNumber = 0
@@ -255,6 +259,33 @@ class MatchInformationInputActivity : AppCompatActivity() {
         return scoutNameList
     }
 
+    //Return a list of the contents of the scout id collection.
+    private fun scoutIdContentsList(noneValueText: String, idMin: Int, idMax: Int): ArrayList<Any> {
+        var scoutIdContents = ArrayList<Any>()
+        scoutIdContents.add(noneValueText)
+        (idMin..idMax).forEach { scoutIdContents.add(it) }
+        return scoutIdContents
+    }
+
+    //Create the on long click listener for the scout id button to prompt for a scout id input.
+    private fun initScoutIdLongClick(noneValueText: String, idMin: Int, idMax: Int) {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_scout_id)
+        btn_scout_id.setOnLongClickListener {
+            dialog.show()
+            dialog.lv_scout_id_view.adapter =
+                ArrayAdapter<Any>(this, android.R.layout.simple_list_item_1,
+                    scoutIdContentsList(noneValueText, idMin, idMax))
+            dialog.lv_scout_id_view.setOnItemClickListener { _, _, position, _ ->
+                btn_scout_id.text = getString(R.string.btn_scout_id_message,
+                    scoutIdContentsList(noneValueText, idMin, idMax)[position].toString())
+                scout_id = scoutIdContentsList(noneValueText, idMin, idMax)[position].toString()
+                autoAssignTeamInputsGivenMatch()
+                dialog.dismiss()
+            }
+            return@setOnLongClickListener true
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -268,6 +299,7 @@ class MatchInformationInputActivity : AppCompatActivity() {
         resetReferences()
 
         initScoutSpinner()
+        initScoutIdLongClick(noneValueText = Constants.NONE_VALUE, idMin = 1, idMax = 18)
         checkCollectionMode()
         initializeToggleButtons()
         createMatchNumberTextChangeListener()

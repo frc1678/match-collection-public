@@ -16,9 +16,11 @@
     <string name="btn_proceed">Proceed</string>
     <string name="btn_assignment">Assignment</string>
     <string name="btn_resend">Resend</string>
-    <string name="btn_id">ID</string>
+    <string name="btn_id_default">SCOUT ID: NONE</string>
     <string name="tv_team_number_input_one">Team One</string>
     <string name="tv_team_number_input_two">Team Two</string>
     <string name="tv_team_number_input_three">Team Three</string>
     <string name="tv_match_number_input">Match Number</string>
+    <string name="btn_scout_id_message">SCOUT ID: %1$s</string>
+    <string name="scout_id_error">Please input a scout ID!</string>
 </resources>

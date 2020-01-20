@@ -14,6 +14,7 @@ var collection_mode: Constants.MODE_SELECTION = Constants.MODE_SELECTION.NONE
 // Data that is shared between the objective and subjective QRs.
 var serial_number: String? = ""
 var scout_name: String = ""
+var scout_id: String = ""
 var match_number: Int = 0
 var alliance_color: Constants.ALLIANCE_COLOR = Constants.ALLIANCE_COLOR.NONE
 var timestamp: Long = 0
@@ -31,6 +32,7 @@ var agility_rankings: List<String> = emptyList()
 // Function to reset References.kt variables for new match.
 fun resetReferences() {
     scout_name = ""
+    scout_id = ""
     alliance_color = Constants.ALLIANCE_COLOR.NONE
     timestamp = 0
 

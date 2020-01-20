@@ -10,6 +10,9 @@ package com.example.match_collection
 
 //Class that contains a collection of Constant values, or final values that never change
 class Constants {
+    companion object {
+        var NONE_VALUE: String = "NONE"
+    }
     enum class MODE_SELECTION {
         SUBJECTIVE,
         OBJECTIVE,
