@@ -31,6 +31,16 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/light_gray_but_a_bit_darker</item>
     </style>
+    <style name="tv_standard_spinner" parent="android:Widget">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_margin">@dimen/very_small</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:layout_marginLeft">@dimen/very_small</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
       <style name="btn_placement" parent="android:Widget">
         <item name="android:background">@color/yellow</item>
         <item name="android:textColor">@color/black</item>

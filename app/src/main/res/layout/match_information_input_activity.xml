@@ -44,11 +44,12 @@
             android:orientation="vertical">
 
             <Spinner
-                android:id="@+id/et_scout_name"
+                android:id="@+id/spinner_scout_name"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="FILLER SCOUT"/>
+                android:background="@android:color/transparent"
+            />
 
             <View style="@style/view_separator_horizontal"/>
 

@@ -12,20 +12,14 @@ import android.graphics.drawable.GradientDrawable
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.view.animation.AnimationUtils
+import android.widget.AdapterView
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import kotlinx.android.synthetic.main.match_information_input_activity.*
-import org.apache.commons.lang3.math.NumberUtils.toInt
-import java.lang.Integer.parseInt
-import java.security.Timestamp
-import java.time.Instant
-import java.time.format.DateTimeFormatter
 
 /* Class used to input the information of the match before the match's beginning.
 * Information such as: teams in alliances, match number, and other. */
@@ -42,8 +36,8 @@ class MatchInformationInputActivity : AppCompatActivity() {
     private fun initProceedButton() {
         btn_proceed_match_start.setOnClickListener { view ->
             if (getSerialNum(this) != null) {
-                if ((checkInputNotEmpty(et_match_number) //todo ADD SCOUT NAME CHECK
-                            && (alliance_color != Constants.ALLIANCE_COLOR.NONE))) {
+                if (checkInputNotEmpty(et_match_number)
+                    && (alliance_color != Constants.ALLIANCE_COLOR.NONE)) {
 
                     //Reassigning variables in References.kt to inputed text.
                     match_number = et_match_number.text.toString()
@@ -147,6 +141,19 @@ class MatchInformationInputActivity : AppCompatActivity() {
         }
     }
 
+    //Initialize the adapter and onItemSelectedListener for the scout name input.
+    private fun initScoutSpinner() {
+        spinner_scout_name.adapter = StandardSpinnerAdapter(this, populateScoutNameSpinner())
+        spinner_scout_name.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                scout_name = populateScoutNameSpinner()[position]
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("not implemented")
+            }
+        }
+    }
+
     //Assigns the team number for objective.
     private fun assignTeamByScoutIdObjective(teamInput: EditText, scoutId: Int, matchNumber: String) {
         teamInput.setText(removeTeamPrefix(getTeamOfGivenMatch(getMatchInfo(matchNumber), scoutId)))
@@ -232,6 +239,21 @@ class MatchInformationInputActivity : AppCompatActivity() {
         toggleButton.background = backgroundDrawable
     }
 
+    //Makes scouts.txt into a readable List
+    private fun populateScoutNameSpinner(): ArrayList<String> {
+        var scoutNameList: ArrayList<String> = ArrayList()
+        val bufferedReader =  this.resources.openRawResource(R.raw.scouts).bufferedReader()
+        var currentLine = bufferedReader.readLine()
+
+        while (currentLine != null) {
+            scoutNameList.add(currentLine)
+            currentLine = bufferedReader.readLine()
+        }
+
+        bufferedReader.close()
+        return scoutNameList
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -241,6 +263,7 @@ class MatchInformationInputActivity : AppCompatActivity() {
 
         resetReferences()
 
+        initScoutSpinner()
         checkCollectionMode()
         initializeToggleButtons()
         createMatchNumberTextChangeListener()
