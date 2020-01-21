@@ -78,8 +78,6 @@ class ModeCollectionSelectActivity : AppCompatActivity() {
             csvFileRead(file = "match_schedule.csv", skipHeader = false)
         }
 
-
-        //82,B-3039,B-1785,B-4290,R-7567,R-3132,R-5242
         initButtonOnClicks()
     }
 }
