@@ -16,10 +16,11 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.qr_generate.*
 
 // Class to display QR code.
-class QRGenerateActivity: AppCompatActivity() {
+class QRGenerateActivity: CollectionActivity() {
     private fun initProceedButton() {
         btn_proceed_new_match.setOnClickListener {
-            val intent = Intent(this, MatchInformationInputActivity::class.java)
+            match_number ++
+            val intent = Intent(this, ModeCollectionSelectActivity::class.java)
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this,
                 btn_proceed_new_match, "proceed_button").toBundle())
         }

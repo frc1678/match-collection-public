@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.objective_match_collection.*
 import java.lang.Integer.parseInt
 
 //Determines the functions for UI elements (ie Buttons, ToggleButtons) in the Objective Match Data Screen.
-class ObjectiveMatchCollectionActivity : AppCompatActivity() {
+class ObjectiveMatchCollectionActivity : CollectionActivity() {
     //Define all variables.
     var placementOneValue = 0
     var placementTwoValue = 0

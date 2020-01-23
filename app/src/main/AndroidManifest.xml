@@ -23,6 +23,7 @@
         <activity android:name=".ObjectiveMatchCollectionActivity" />
         <activity android:name=".MatchInformationInputActivity" />
         <activity android:name=".SubjectiveMatchCollectionActivity"/>
+        <activity android:name=".CollectionActivity"/>
 
     </application>
 

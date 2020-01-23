@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.subjective_match_collection.*
 
 // Activity for subjective match collection of the three teams on a single alliance.
-class SubjectiveMatchCollectionActivity : AppCompatActivity() {
+class SubjectiveMatchCollectionActivity : CollectionActivity() {
     lateinit var panelOne: CounterPanel
     lateinit var panelTwo: CounterPanel
     lateinit var panelThree: CounterPanel

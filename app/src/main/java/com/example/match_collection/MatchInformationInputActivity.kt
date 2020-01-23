@@ -10,6 +10,7 @@ package com.example.match_collection
 
 import android.graphics.drawable.GradientDrawable
 import android.app.ActivityOptions
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
@@ -25,7 +26,7 @@ import java.lang.Integer.parseInt
 
 /* Class used to input the information of the match before the match's beginning.
 * Information such as: teams in alliances, match number, and other. */
-class MatchInformationInputActivity : AppCompatActivity() {
+class MatchInformationInputActivity : CollectionActivity() {
     var leftToggleButtonColor: Int = 0
     var rightToggleButtonColor: Int = 0
     var leftToggleButtonColorDark: Int = 0
@@ -287,11 +288,14 @@ class MatchInformationInputActivity : AppCompatActivity() {
         }
     }
 
+    //Prevents user from pressing the back button unless it's a long click.
+    override fun onBackPressed() {
+        AlertDialog.Builder(this).setMessage(R.string.error_back_click).show()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.match_information_input_activity)
-
-        match_number++
 
         et_match_number.setText(match_number.toString())
         serial_number = getSerialNum(this)
