@@ -5,7 +5,7 @@
 schema_file:
   # Version of schema file, should match end of file name
   # Incremented every merged schema change
-  version: 4
+  version: 5
 
 # Each decompressed variable name corresponds to a length 2 or 3 list
 # First item is the compressed variable name
@@ -29,7 +29,6 @@ objective_tim:
   _start_character: "?" # First character in QR used to identify QR type
   _separator: ^ # Separates key:value pairs
   team_number: [Z, str] # Mostly used as a str, not needed as int
-  starting_location: [Y, Enum]
   is_no_show: [W, bool]
   timeline: [V, list, dict] # List of dictionaries
 
@@ -43,8 +42,7 @@ timeline:
   action_type: [b, Enum]
   stage: [c, Enum]
   # Present for specific actions:
-  is_successful: [d, bool]
-  is_defended: [e, bool]
+  scoring_location: [f, Enum] # Tracks high goal vs low goal
 
 # Data specific to subjective match collection QR
 subjective_aim:
@@ -59,14 +57,16 @@ enums:
   alliance_color:
     red: 0
     blue: 1
-  starting_location:
-    left: 0
-    right: 1
-    center: 2
   action_type:
     intake: 0
     outtake: 1
-    incap: 2
+    start_incap: 2
+    end_incap: 3
+    control_panel_rotation: 4
+    control_panel_position: 5
   stage:
     auto: 0
     tele: 1
+  scoring_location:
+    low: 0
+    high: 1
