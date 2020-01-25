@@ -21,7 +21,6 @@ var timestamp: Long = 0
 
 // Data specific to objective match collection QR.
 var team_number: String = ""
-var starting_location: Constants.STARTING_LOCATION = Constants.STARTING_LOCATION.NONE
 var is_no_show: Boolean = false
 var timeline: ArrayList<HashMap<String, String>> = ArrayList()
 
@@ -37,7 +36,6 @@ fun resetReferences() {
     timestamp = 0
 
     team_number = ""
-    starting_location = Constants.STARTING_LOCATION.NONE
     is_no_show = false
     timeline = ArrayList()
 

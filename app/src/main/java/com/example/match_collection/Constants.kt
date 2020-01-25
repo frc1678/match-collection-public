@@ -23,19 +23,19 @@ class Constants {
         BLUE,
         NONE
     }
-    enum class STARTING_LOCATION {
-        LEFT,
-        RIGHT,
-        CENTER,
-        NONE
-    }
     enum class ACTION_TYPE {
-        INTAKE,
-        OUTAKE,
-        INCAP
+        OUTTAKE,
+        START_INCAP,
+        END_INCAP,
+        CONTROL_PANEL_ROTATION,
+        CONTROL_PANEL_POSITION
     }
     enum class STAGE {
         AUTO,
         TELE
+    }
+    enum class SCORING_LOCATION {
+        LOW,
+        HIGH
     }
 }

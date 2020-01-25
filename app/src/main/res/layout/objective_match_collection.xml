@@ -12,25 +12,27 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/btn_placement_one"
-            style="@style/btn_placement"
+            android:id="@+id/btn_timer"
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="20dp"
+            android:text="@string/btn_timer_start">
+        </Button>
+
+        <Button
+            android:id="@+id/btn_action_one"
+            style="@style/btn_action"
             android:layout_weight="1"
             android:baselineAligned="false"
-            android:text="@string/btn_placement_one">
+            android:text="@string/btn_action_one">
         </Button>
 
         <Button
-            android:id="@+id/btn_placement_two"
-            style="@style/btn_placement"
+            android:id="@+id/btn_action_two"
+            style="@style/btn_action"
             android:layout_weight="1"
-            android:text="@string/btn_placement_two">
-        </Button>
-
-        <Button
-            android:id="@+id/btn_placement_three"
-            style="@style/btn_placement"
-            android:layout_weight="1"
-            android:text="@string/btn_placement_three">
+            android:text="@string/btn_action_two">
         </Button>
     </LinearLayout>
 
@@ -40,55 +42,55 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_start_match"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_margin="20dp"
-            android:layout_weight="1"
-            android:text="@string/btn_start_match"
-            android:textColor="@color/black"
-            android:textSize="40sp">
-        </Button>
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:layout_weight="3"
             android:orientation="horizontal">
 
             <ToggleButton
-                android:id="@+id/tb_incap"
+                android:id="@+id/tb_action_one"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:checked="false"
-                android:textOff="@string/tb_incap"
-                android:textOn="@string/tb_incap"
+                android:textOff="@string/tb_action_bool_one_off"
+                android:textOn="@string/tb_action_bool_one_on"
                 android:enabled="false">
             </ToggleButton>
 
             <ToggleButton
-                android:id="@+id/tb_defense"
+                android:id="@+id/tb_action_two"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:checked="false"
-                android:textOff="@string/tb_defense"
-                android:textOn="@string/tb_defense"
+                android:textOff="@string/tb_action_bool_two_off"
+                android:textOn="@string/tb_action_bool_two_on"
                 android:enabled="false">
             </ToggleButton>
         </LinearLayout>
+
+        <ToggleButton
+            android:id="@+id/tb_action_three"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:checked="false"
+            android:textOff="@string/tb_action_bool_three_off"
+            android:textOn="@string/tb_action_bool_three_on"
+            android:enabled="false">
+        </ToggleButton>
 
         <Button
             android:id="@+id/btn_proceed_qr_generate"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_margin="20dp"
             android:layout_weight="1"
-            android:text="@string/btn_next">
+            android:layout_margin="20dp"
+            android:text="@string/btn_proceed">
         </Button>
     </LinearLayout>
 

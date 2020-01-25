@@ -42,7 +42,6 @@ fun compress(schema: HashMap<String, HashMap<String, Any>>, context: Context, mo
     val objectiveSeparator = objectiveData.getValue("_separator").toString()
     // Define compression characters for objective data.
     val compressTeamNumber = objectiveData.getValue("team_number").toString().split(",")[0]
-    val compressStartingLocation = objectiveData.getValue("starting_location").toString().split(",")[0]
     val compressIsNoShow = objectiveData.getValue("is_no_show").toString().split(",")[0]
     val compressTimeline = objectiveData.getValue("timeline").toString().split(",")[0]
     // Define compression characters for timeline separators.
@@ -53,8 +52,7 @@ fun compress(schema: HashMap<String, HashMap<String, Any>>, context: Context, mo
     val compressTimelineActionType = timelineData.getValue("action_type").toString().split(",")[0]
     val compressTimelineStage = timelineData.getValue("stage").toString().split(",")[0]
     // Define compression characters for timeline data not present in all timeline actions.
-    val compressTimelineIsSuccessful = timelineData.getValue("is_successful").toString().split(",")[0]
-    val compressTimelineIsDefended = timelineData.getValue("is_defended").toString().split(",")[0]
+    val compressTimelineScoringLocation = timelineData.getValue("scoring_location").toString().split(",")[0]
 
     // Define compression characters for subjective separators.
     val subjectiveStartCharacter = subjectiveData.getValue("_start_character").toString()
@@ -66,9 +64,9 @@ fun compress(schema: HashMap<String, HashMap<String, Any>>, context: Context, mo
 
     // Define compression characters for enum values.
     val allianceColorValues = enumToList("alliance_color", enumData)
-    val startingLocationValues = enumToList("starting_location", enumData)
     val actionTypeValues = enumToList("action_type", enumData)
     val stageValues = enumToList("stage", enumData)
+    val scoringLocationValues = enumToList("scoring_location", enumData)
 
     // Compress and add data that is shared between the objective and subjective.
     compressedMatchInformation =
@@ -89,16 +87,12 @@ fun compress(schema: HashMap<String, HashMap<String, Any>>, context: Context, mo
                 // Compress and add timeline action attributes present for all actions.
                 compressTimelineActions = compressTimelineActions + timelineSeparator +
                         compressTimelineTime + actions.getValue("time") + timelineSeparatorInternal +
-                        compressTimelineActionType + actionTypeValues.indexOf(actions.getValue("action_type")) + timelineSeparatorInternal +
-                        compressTimelineStage + stageValues.indexOf(actions.getValue("stage"))
+                        compressTimelineActionType + actionTypeValues.indexOf(actions.getValue("action_type").toString().toLowerCase()) + timelineSeparatorInternal +
+                        compressTimelineStage + stageValues.indexOf(actions.getValue("stage").toString().toLowerCase())
                 // Compress and add timeline action attributes if they are present for the specific action.
-                if (actions.containsKey("is_successful")) {
+                if (actions.containsKey("scoring_location")) {
                     compressTimelineActions = compressTimelineActions + timelineSeparatorInternal +
-                            compressTimelineIsSuccessful + actions.getValue("is_successful")[0]
-                }
-                if (actions.containsKey("is_defended")) {
-                    compressTimelineActions = compressTimelineActions + timelineSeparatorInternal +
-                            compressTimelineIsDefended + actions.getValue("is_defended")[0]
+                            compressTimelineScoringLocation + scoringLocationValues.indexOf(actions.getValue("scoring_location").toString().toLowerCase())
                 }
             }
             // Remove unnecessary starting separators.
@@ -109,7 +103,6 @@ fun compress(schema: HashMap<String, HashMap<String, Any>>, context: Context, mo
         // timeline actions.
         compressedMatchInformation = objectiveStartCharacter + compressedMatchInformation +
                 compressTeamNumber + team_number + objectiveSeparator +
-                compressStartingLocation + startingLocationValues.indexOf(starting_location.toString().toLowerCase()) + objectiveSeparator +
                 compressIsNoShow + is_no_show.toString()[0] + objectiveSeparator +
                 compressTimeline + compressTimelineActions
     }
