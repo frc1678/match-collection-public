@@ -72,7 +72,7 @@ fun compress(schema: HashMap<String, HashMap<String, Any>>, context: Context, mo
     compressedMatchInformation =
         compressSchemaVersion + schemaVersion + genericSeparator +
                 compressSerialNumber + serial_number + genericSeparator +
-                compressScoutName + scout_name + genericSeparator +
+                compressScoutName + scout_name.toUpperCase() + genericSeparator +
                 compressMatchNumber + match_number + genericSeparator +
                 compressAllianceColor + allianceColorValues.indexOf(alliance_color.toString().toLowerCase()) + genericSeparator +
                 compressTimestamp + timestamp +
