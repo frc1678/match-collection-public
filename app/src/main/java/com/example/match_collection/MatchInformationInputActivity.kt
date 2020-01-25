@@ -151,9 +151,14 @@ class MatchInformationInputActivity : CollectionActivity() {
     //Initialize the adapter and onItemSelectedListener for the scout name input.
     private fun initScoutSpinner() {
         spinner_scout_name.adapter = StandardSpinnerAdapter(this, populateScoutNameSpinner())
+        if (this.getSharedPreferences("PREFS", 0).contains("scout_name")) {
+            spinner_scout_name.setSelection(populateScoutNameSpinner()
+                    .indexOf(retrieveFromStorage(this, "scout_name")))
+        }
         spinner_scout_name.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 scout_name = populateScoutNameSpinner()[position]
+                putIntoStorage(this@MatchInformationInputActivity, "scout_name", scout_name)
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 TODO("not implemented")
