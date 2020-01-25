@@ -1,11 +1,11 @@
-# Used for Match Collection QR compression by Match Collection App and
-# QR decompression by Server
+# Used for Match Collection QR compression by Match Collection App and QR decompression by Server
+# QR is encoded in an Alphanumeric QR
 
 # Contains information about this schema file
 schema_file:
   # Version of schema file, should match end of file name
   # Incremented every merged schema change
-  version: 5
+  version: 6
 
 # Each decompressed variable name corresponds to a length 2 or 3 list
 # First item is the compressed variable name
@@ -15,8 +15,8 @@ schema_file:
 
 # Data that is shared between the objective and subjective QRs. 
 generic_data:
-  _separator: ^ # Separates key:value pairs
-  _section_separator: "!" # Separates generic from objective/subjective data
+  _separator: z # Separates key:value pairs
+  _section_separator: y # Separates generic from objective/subjective data
   schema_version: [A, int] # Must remain constant between versions
   serial_number: [a, str]
   scout_name: [b, str]
@@ -26,8 +26,8 @@ generic_data:
 
 # Data specific to objective match collection QR
 objective_tim:
-  _start_character: "?" # First character in QR used to identify QR type
-  _separator: ^ # Separates key:value pairs
+  _start_character: w # First character in QR used to identify QR type
+  _separator: z # Separates key:value pairs
   team_number: [Z, str] # Mostly used as a str, not needed as int
   is_no_show: [W, bool]
   timeline: [V, list, dict] # List of dictionaries
@@ -35,20 +35,15 @@ objective_tim:
 # Timeline is part of objective match collection QR
 # Data for an action in the timeline
 timeline:
-  _separator: "%" # Separates timeline actions
-  _separator_internal: "~" # Separates key:value pairs within one timeline action
-  # Present for all actions:
-  time: [a, float]
-  action_type: [b, Enum]
-  stage: [c, Enum]
-  # Present for specific actions:
-  scoring_location: [f, Enum] # Tracks high goal vs low goal
+  # No separators within timeline to reduce QR size. Each action is a fixed 5-character length
+  time: [a, int] # Encoded in base 10. Always length 3, eg '051' for 51 seconds
+  action_type: [b, Enum] # Encoded in base 36. Always length 2 eg '0a' for the 10th action
 
 # Data specific to subjective match collection QR
 subjective_aim:
-  _start_character: "*" # First character in QR used to identify QR type
-  _separator: ^ # Separates each key:value pair
-  _separator_internal: "%" # Separates each ranking list item
+  _start_character: v # First character in QR used to identify QR type
+  _separator: z # Separates each key:value pair
+  _separator_internal: x # Separates each ranking list item
   speed_rankings: [a, list, str] # List of team numbers (strings)
   agility_rankings: [b, list, str] # List of team numbers (strings)
 
@@ -58,8 +53,8 @@ enums:
     red: 0
     blue: 1
   action_type:
-    intake: 0
-    outtake: 1
+    score_ball_high: 0
+    score_ball_low: 1
     start_incap: 2
     end_incap: 3
     control_panel_rotation: 4
@@ -67,6 +62,3 @@ enums:
   stage:
     auto: 0
     tele: 1
-  scoring_location:
-    low: 0
-    high: 1
