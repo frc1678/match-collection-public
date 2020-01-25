@@ -288,6 +288,13 @@ class MatchInformationInputActivity : CollectionActivity() {
     private fun initScoutIdLongClick(noneValueText: String, idMin: Int, idMax: Int) {
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.dialog_scout_id)
+
+        if (this.getSharedPreferences("PREFS", 0).contains("scout_id")) {
+            btn_scout_id.text = getString(R.string.btn_scout_id_message,
+                retrieveFromStorage(this, "scout_id"))
+            scout_id = retrieveFromStorage(this, "scout_id")
+        }
+
         btn_scout_id.setOnLongClickListener {
             dialog.show()
             dialog.lv_scout_id_view.adapter =
@@ -297,6 +304,7 @@ class MatchInformationInputActivity : CollectionActivity() {
                 btn_scout_id.text = getString(R.string.btn_scout_id_message,
                     scoutIdContentsList(noneValueText, idMin, idMax)[position].toString())
                 scout_id = scoutIdContentsList(noneValueText, idMin, idMax)[position].toString()
+                putIntoStorage(this, "scout_id", scout_id)
                 autoAssignTeamInputsGivenMatch()
                 dialog.dismiss()
             }
