@@ -84,6 +84,7 @@ class MatchInformationInputActivity : CollectionActivity() {
     private fun startMatchActivity() {
         timestamp = System.currentTimeMillis()
         putIntoStorage(this, key = "match_number", value = match_number)
+        putIntoStorage(this, key = "alliance_color", value = alliance_color)
 
         if (collection_mode.equals(Constants.MODE_SELECTION.OBJECTIVE)) {
             val intent = Intent(this, ObjectiveMatchCollectionActivity::class.java)
@@ -201,6 +202,16 @@ class MatchInformationInputActivity : CollectionActivity() {
         rightToggleButton = right_toggle_button
 
         resetBackground()
+
+        if (alliance_color != Constants.ALLIANCE_COLOR.NONE) {
+            when (alliance_color) {
+                Constants.ALLIANCE_COLOR.BLUE -> switchBorderToLeftToggle()
+                Constants.ALLIANCE_COLOR.RED -> switchBorderToRightToggle()
+                else -> return
+            }
+            autoAssignTeamInputsGivenMatch()
+        }
+
         leftToggleButton.setOnClickListener { view ->
             alliance_color = Constants.ALLIANCE_COLOR.BLUE
             autoAssignTeamInputsGivenMatch()
@@ -297,14 +308,16 @@ class MatchInformationInputActivity : CollectionActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.match_information_input_activity)
         et_match_number.setText(retrieveFromStorage(this, "match_number"))
+        alliance_color = toAllianceColorFormatFromString(
+            retrieveFromStorage(this, "alliance_color"))
         serial_number = getSerialNum(this)
 
         resetReferences()
 
-        initScoutSpinner()
-        initScoutIdLongClick(noneValueText = Constants.NONE_VALUE, idMin = 1, idMax = 18)
-        checkCollectionMode()
         initializeToggleButtons()
+        initScoutSpinner()
+        initScoutIdLongClick(noneValueText = Constants.NONE_VALUE, idMin = 1, idMax = Constants.NUMBER_OF_ACTIVE_SCOUTS)
+        checkCollectionMode()
         createMatchNumberTextChangeListener()
         autoAssignTeamInputsGivenMatch()
         initProceedButton()

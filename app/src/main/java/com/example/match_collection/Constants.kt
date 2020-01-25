@@ -12,6 +12,7 @@ package com.example.match_collection
 class Constants {
     companion object {
         var NONE_VALUE: String = "NONE"
+        var NUMBER_OF_ACTIVE_SCOUTS: Int = 18
     }
     enum class MODE_SELECTION {
         SUBJECTIVE,

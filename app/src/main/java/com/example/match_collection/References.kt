@@ -32,7 +32,6 @@ var agility_rankings: List<String> = emptyList()
 fun resetReferences() {
     scout_name = ""
     scout_id = ""
-    alliance_color = Constants.ALLIANCE_COLOR.NONE
     timestamp = 0
 
     team_number = ""
