@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.qr_generate.*
 class QRGenerateActivity: CollectionActivity() {
     private fun initProceedButton() {
         btn_proceed_new_match.setOnClickListener {
-            match_number ++
+            putIntoStorage(this, "match_number", match_number + 1)
             val intent = Intent(this, ModeCollectionSelectActivity::class.java)
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this,
                 btn_proceed_new_match, "proceed_button").toBundle())

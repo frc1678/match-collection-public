@@ -16,7 +16,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import kotlinx.android.synthetic.main.dialog_scout_id.*
@@ -84,6 +83,7 @@ class MatchInformationInputActivity : CollectionActivity() {
     //Used to transition into the next activity and define timestamp for specific match.
     private fun startMatchActivity() {
         timestamp = System.currentTimeMillis()
+        putIntoStorage(this, key = "match_number", value = match_number)
 
         if (collection_mode.equals(Constants.MODE_SELECTION.OBJECTIVE)) {
             val intent = Intent(this, ObjectiveMatchCollectionActivity::class.java)
@@ -296,8 +296,7 @@ class MatchInformationInputActivity : CollectionActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.match_information_input_activity)
-
-        et_match_number.setText(match_number.toString())
+        et_match_number.setText(retrieveFromStorage(this, "match_number"))
         serial_number = getSerialNum(this)
 
         resetReferences()
