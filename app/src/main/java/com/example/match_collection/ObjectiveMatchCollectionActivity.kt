@@ -3,12 +3,12 @@ package com.example.match_collection
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.objective_match_collection.*
 import java.lang.Integer.parseInt
+import kotlin.concurrent.timer
 
 //Determines the functions for UI elements (ie Buttons, ToggleButtons) in the Objective Match Data Screen.
 class ObjectiveMatchCollectionActivity : CollectionActivity() {
@@ -51,6 +51,10 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         }
         if (tb_action_two.isChecked == false) {
             tb_action_two.isEnabled = enable
+        }
+
+        if (tb_action_four.isChecked == false) {
+            tb_action_four.isEnabled = enable
         }
     }
 
@@ -111,6 +115,17 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
             } else {
                 timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.END_INCAP)
                 enableButtons(true)
+            }
+        }
+
+        tb_action_four.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.START_CLIMB)
+                enableButtons(false)
+            } else {
+                timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.END_CLIMB)
+                enableButtons(true)
+                //TODO ADD SAFETY SO CLIMB BUTTON CAN ONLY BE PRESSED IN LAST 30 SEC
             }
         }
     }
