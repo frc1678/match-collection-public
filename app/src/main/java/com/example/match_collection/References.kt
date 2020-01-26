@@ -21,7 +21,6 @@ var timestamp: Long = 0
 
 // Data specific to objective match collection QR.
 var team_number: String = ""
-var is_no_show: Boolean = false
 var timeline: ArrayList<HashMap<String, String>> = ArrayList()
 
 // Subjective relative data collection variables.
@@ -35,7 +34,6 @@ fun resetReferences() {
     timestamp = 0
 
     team_number = ""
-    is_no_show = false
     timeline = ArrayList()
 
     speed_rankings = emptyList()

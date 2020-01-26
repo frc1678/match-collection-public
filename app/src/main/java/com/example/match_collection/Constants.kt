@@ -25,18 +25,17 @@ class Constants {
         NONE
     }
     enum class ACTION_TYPE {
-        OUTTAKE,
+        SCORE_BALL_HIGH,
+        SCORE_BALL_LOW,
         START_INCAP,
         END_INCAP,
         CONTROL_PANEL_ROTATION,
-        CONTROL_PANEL_POSITION
+        CONTROL_PANEL_POSITION,
+        START_CLIMB,
+        END_CLIMB
     }
     enum class STAGE {
         AUTO,
         TELE
-    }
-    enum class SCORING_LOCATION {
-        LOW,
-        HIGH
     }
 }

@@ -32,19 +32,11 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
 
     //Adds a hashmap to the timeline variable including action type, is successful, and is defended.
     //If is_defended or is_successful are not applicable, pass in null for parameters.
-    fun timelineAdd(
-        time: Int,
-        action_type: Constants.ACTION_TYPE,
-        scoring_location: Constants.SCORING_LOCATION?
-    ) {
+    fun timelineAdd(time: Int, action_type: Constants.ACTION_TYPE) {
         val actionHashMap: HashMap<String, String> = hashMapOf(
             Pair("time", "$time"),
-            Pair("action_type", "$action_type"),
-            Pair("stage", "${returnStage(time)}")
+            Pair("action_type", "$action_type")
         )
-        if (scoring_location != null) {
-            actionHashMap.put("scoring_location", scoring_location.toString())
-        }
         timeline.add(actionHashMap)
     }
 
@@ -89,23 +81,23 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         btn_action_one.setOnClickListener(View.OnClickListener {
             actionOneValue++
             btn_action_one.setText("${getString(R.string.btn_action_one)} - $actionOneValue")
-            timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.OUTTAKE, Constants.SCORING_LOCATION.HIGH)
+            timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.SCORE_BALL_HIGH)
         })
 
         btn_action_two.setOnClickListener(View.OnClickListener {
             actionTwoValue++
             btn_action_two.setText("${getString(R.string.btn_action_two)} - $actionTwoValue")
-            timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.OUTTAKE, Constants.SCORING_LOCATION.LOW)
+            timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.SCORE_BALL_LOW)
         })
 
         tb_action_one.setOnCheckedChangeListener { _, isChecked ->
-            timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.CONTROL_PANEL_ROTATION, null)
+            timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.CONTROL_PANEL_ROTATION)
             tb_action_one.isEnabled = false
             // TODO MAKE UNCHECKING TOGGLE REMOVE CONTROL PANEL ROTATION FROM TIMELINE.
         }
 
         tb_action_two.setOnCheckedChangeListener { _, isChecked ->
-            timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.CONTROL_PANEL_POSITION, null)
+            timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.CONTROL_PANEL_POSITION)
             tb_action_two.isEnabled = false
             // TODO MAKE UNCHECKING TOGGLE REMOVE CONTROL PANEL POSITION FROM TIMELINE.
         }
@@ -114,10 +106,10 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
             // Action buttons (aside from incap) are disabled/enabled when incap toggle button is
             // checked/unchecked, as incap robots cannot perform actions.
             if (isChecked) {
-                timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.START_INCAP, null)
+                timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.START_INCAP)
                 enableButtons(false)
             } else {
-                timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.END_INCAP, null)
+                timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.END_INCAP)
                 enableButtons(true)
             }
         }
