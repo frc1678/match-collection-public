@@ -16,6 +16,7 @@
     <string name="tb_action_bool_three_on">Incap</string>
     <string name="tb_action_bool_four_off">Start Climb</string>
     <string name="tb_action_bool_four_on">End Climb</string>
+    <string name="btn_undo">Undo</string>
     <string name="btn_plus">+</string>
     <string name="btn_minus">-</string>
     <string name="tv_counter_starting_value">2</string>

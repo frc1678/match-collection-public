@@ -13,10 +13,9 @@
 
         <Button
             android:id="@+id/btn_timer"
-            android:layout_height="0dp"
+            android:layout_height="60dp"
             android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
             android:text="@string/btn_timer_start">
         </Button>
 
@@ -25,27 +24,22 @@
             style="@style/btn_action"
             android:layout_weight="1"
             android:baselineAligned="false"
-            android:text="@string/btn_action_one">
+            android:text="@string/btn_action_one"
+            android:enabled="false">
         </Button>
 
         <Button
             android:id="@+id/btn_action_two"
             style="@style/btn_action"
             android:layout_weight="1"
-            android:text="@string/btn_action_two">
+            android:text="@string/btn_action_two"
+            android:enabled="false">
         </Button>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
+            android:layout_weight="4"
             android:orientation="horizontal">
 
             <ToggleButton
@@ -72,24 +66,27 @@
                 android:enabled="false">
             </ToggleButton>
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_proceed_qr_generate"
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:text="@string/btn_proceed">
+        </Button>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3"
             android:orientation="horizontal">
-
-            <ToggleButton
-                android:id="@+id/tb_action_four"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:checked="false"
-                android:textOff="@string/tb_action_bool_four_off"
-                android:textOn="@string/tb_action_bool_four_on"
-                android:enabled="false">
-            </ToggleButton>
 
             <ToggleButton
                 android:id="@+id/tb_action_three"
@@ -103,15 +100,27 @@
                 android:enabled="false">
             </ToggleButton>
 
+            <ToggleButton
+                android:id="@+id/tb_action_four"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:checked="false"
+                android:textOff="@string/tb_action_bool_four_off"
+                android:textOn="@string/tb_action_bool_four_on"
+                android:enabled="false">
+            </ToggleButton>
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_proceed_qr_generate"
+            android:id="@+id/btn_undo"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_margin="20dp"
-            android:text="@string/btn_proceed">
+            android:layout_margin="10dp"
+            android:text="@string/btn_undo"
+            android:enabled="false">
         </Button>
     </LinearLayout>
 

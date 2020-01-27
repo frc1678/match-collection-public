@@ -32,12 +32,57 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
 
     //Adds a hashmap to the timeline variable including action type, is successful, and is defended.
     //If is_defended or is_successful are not applicable, pass in null for parameters.
-    fun timelineAdd(time: Int, action_type: Constants.ACTION_TYPE) {
+    private fun timelineAdd(time: Int, action_type: Constants.ACTION_TYPE) {
         val actionHashMap: HashMap<String, String> = hashMapOf(
             Pair("time", "$time"),
             Pair("action_type", "$action_type")
         )
         timeline.add(actionHashMap)
+
+        // Enable the undo button because an action has been added to the timeline.
+        btn_undo.isEnabled = true
+    }
+
+    // Function to remove an action from the timeline.
+    private fun timelineRemove() {
+        // Decrement action values and display on counters by one if removing a counter action from the timeline.
+        // Reset the toggle buttons to their previous state if removing a toggled action from the timeline.
+        when (timeline[timeline.size - 1]["action_type"].toString().toLowerCase()) {
+            "score_ball_high" -> {
+                actionOneValue--
+                btn_action_one.text = ("${getString(R.string.btn_action_one)} - $actionOneValue")
+            }
+            "score_ball_low" -> {
+                actionTwoValue--
+                btn_action_two.text = ("${getString(R.string.btn_action_two)} - $actionTwoValue")
+            }
+            "control_panel_rotation" -> {
+                tb_action_one.isChecked = false
+                tb_action_one.isEnabled = true
+            }
+            "control_panel_position" -> {
+                tb_action_two.isChecked = false
+                tb_action_two.isEnabled = true
+            }
+            "start_incap" -> {
+                tb_action_three.isChecked = false
+                enableButtons(true)
+            }
+            "end_incap" -> {
+                tb_action_three.isChecked = true
+                enableButtons(false)
+            }
+            "start_climb" -> {
+                tb_action_four.isChecked = false
+                enableButtons(true)
+            }
+            "end_climb" -> {
+                tb_action_four.isChecked = true
+                enableButtons(false)
+            }
+        }
+        // Remove most recent timeline entry.
+        timeline.removeAt(timeline.size - 1)
     }
 
     // Function to enable/disable buttons.
@@ -94,32 +139,30 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
             timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.SCORE_BALL_LOW)
         })
 
-        tb_action_one.setOnCheckedChangeListener { _, isChecked ->
+        tb_action_one.setOnClickListener(View.OnClickListener {
             timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.CONTROL_PANEL_ROTATION)
             tb_action_one.isEnabled = false
-            // TODO MAKE UNCHECKING TOGGLE REMOVE CONTROL PANEL ROTATION FROM TIMELINE.
-        }
+        })
 
-        tb_action_two.setOnCheckedChangeListener { _, isChecked ->
+        tb_action_two.setOnClickListener(View.OnClickListener {
             timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.CONTROL_PANEL_POSITION)
             tb_action_two.isEnabled = false
-            // TODO MAKE UNCHECKING TOGGLE REMOVE CONTROL PANEL POSITION FROM TIMELINE.
-        }
+        })
 
-        tb_action_three.setOnCheckedChangeListener { _, isChecked ->
+        tb_action_three.setOnClickListener(View.OnClickListener {
             // Action buttons (aside from incap) are disabled/enabled when incap toggle button is
             // checked/unchecked, as incap robots cannot perform actions.
-            if (isChecked) {
+            if (tb_action_three.isChecked) {
                 timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.START_INCAP)
                 enableButtons(false)
             } else {
                 timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.END_INCAP)
                 enableButtons(true)
             }
-        }
+        })
 
-        tb_action_four.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
+        tb_action_four.setOnClickListener(View.OnClickListener {
+            if (tb_action_four.isChecked) {
                 timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.START_CLIMB)
                 enableButtons(false)
             } else {
@@ -127,7 +170,12 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
                 enableButtons(true)
                 //TODO ADD SAFETY SO CLIMB BUTTON CAN ONLY BE PRESSED IN LAST 30 SEC
             }
-        }
+        })
+
+        btn_undo.setOnClickListener(View.OnClickListener {
+            timelineRemove()
+            btn_undo.isEnabled = false
+        })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
