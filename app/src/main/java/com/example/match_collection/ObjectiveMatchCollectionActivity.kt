@@ -4,8 +4,6 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.objective_match_collection.*
 import java.lang.Integer.parseInt
 import kotlin.concurrent.timer
@@ -22,8 +20,6 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         var stage: Constants.STAGE
         if (time >= 135) {
             stage = Constants.STAGE.AUTO
-        } else if (time < 135 && time >= 30) {
-            stage = Constants.STAGE.TELE
         } else {
             stage = Constants.STAGE.TELE
         }
@@ -32,9 +28,9 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
 
     //Adds a hashmap to the timeline variable including action type, is successful, and is defended.
     //If is_defended or is_successful are not applicable, pass in null for parameters.
-    private fun timelineAdd(time: Int, action_type: Constants.ACTION_TYPE) {
+    private fun timelineAdd(match_time: String, action_type: Constants.ACTION_TYPE) {
         val actionHashMap: HashMap<String, String> = hashMapOf(
-            Pair("time", "$time"),
+            Pair("match_time", "$match_time"),
             Pair("action_type", "$action_type")
         )
         timeline.add(actionHashMap)
@@ -84,7 +80,7 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         // Remove most recent timeline entry.
         timeline.removeAt(timeline.size - 1)
     }
-
+    
     // Function to enable/disable buttons.
     // To enable, pass through "true," to disable, pass through "false."
     private fun enableButtons(enable: Boolean) {
@@ -108,7 +104,6 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         btn_timer.setOnClickListener(View.OnClickListener {
             TimerUtility.MatchTimerThread().initTimer(btn_timer)
             //TODO create a Timer reset function
-
             // Disable timer button and enable incap toggle button.
             // Enable incap toggle button separate from enableButtons function, as enableButtons
             // is primarily used for disabling/enabling buttons when incap is checked/unchecked.
@@ -130,22 +125,22 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         btn_action_one.setOnClickListener(View.OnClickListener {
             actionOneValue++
             btn_action_one.setText("${getString(R.string.btn_action_one)} - $actionOneValue")
-            timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.SCORE_BALL_HIGH)
+            timelineAdd(match_time, Constants.ACTION_TYPE.SCORE_BALL_HIGH)
         })
 
         btn_action_two.setOnClickListener(View.OnClickListener {
             actionTwoValue++
             btn_action_two.setText("${getString(R.string.btn_action_two)} - $actionTwoValue")
-            timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.SCORE_BALL_LOW)
+            timelineAdd(match_time, Constants.ACTION_TYPE.SCORE_BALL_LOW)
         })
 
         tb_action_one.setOnClickListener(View.OnClickListener {
-            timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.CONTROL_PANEL_ROTATION)
+            timelineAdd(match_time, Constants.ACTION_TYPE.CONTROL_PANEL_ROTATION)
             tb_action_one.isEnabled = false
         })
 
         tb_action_two.setOnClickListener(View.OnClickListener {
-            timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.CONTROL_PANEL_POSITION)
+            timelineAdd(match_time, Constants.ACTION_TYPE.CONTROL_PANEL_POSITION)
             tb_action_two.isEnabled = false
         })
 
@@ -153,20 +148,20 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
             // Action buttons (aside from incap) are disabled/enabled when incap toggle button is
             // checked/unchecked, as incap robots cannot perform actions.
             if (tb_action_three.isChecked) {
-                timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.START_INCAP)
+                timelineAdd(match_time, Constants.ACTION_TYPE.START_INCAP)
                 enableButtons(false)
             } else {
-                timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.END_INCAP)
+                timelineAdd(match_time, Constants.ACTION_TYPE.END_INCAP)
                 enableButtons(true)
             }
         })
 
         tb_action_four.setOnClickListener(View.OnClickListener {
             if (tb_action_four.isChecked) {
-                timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.START_CLIMB)
+                timelineAdd(match_time, Constants.ACTION_TYPE.START_CLIMB)
                 enableButtons(false)
             } else {
-                timelineAdd(parseInt(btn_timer.text.toString().split(" - ")[1]), Constants.ACTION_TYPE.END_CLIMB)
+                timelineAdd(match_time, Constants.ACTION_TYPE.END_CLIMB)
                 enableButtons(true)
                 //TODO ADD SAFETY SO CLIMB BUTTON CAN ONLY BE PRESSED IN LAST 30 SEC
             }
