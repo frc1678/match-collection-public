@@ -82,7 +82,7 @@ class MatchInformationInputActivity : CollectionActivity() {
 
     //Used to transition into the next activity and define timestamp for specific match.
     private fun startMatchActivity() {
-        timestamp = System.currentTimeMillis()
+        timestamp = System.currentTimeMillis()/1000
         putIntoStorage(this, key = "match_number", value = match_number)
         putIntoStorage(this, key = "alliance_color", value = alliance_color)
 
