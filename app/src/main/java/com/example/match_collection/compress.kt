@@ -67,7 +67,7 @@ fun compress(schema: HashMap<String, HashMap<String, Any>>, context: Context, mo
             for (actions in timeline) {
                 // Compress and add timeline action attributes present for all actions.
                 compressTimelineActions = compressTimelineActions +
-                        actions.getValue("time") + actionTypeData.getValue(actions.getValue("action_type").toString().toLowerCase())
+                        actions.getValue("match_time") + actionTypeData.getValue(actions.getValue("action_type").toString().toLowerCase())
             }
         }
         // Compress and add all objective match collection data, including previously compressed
