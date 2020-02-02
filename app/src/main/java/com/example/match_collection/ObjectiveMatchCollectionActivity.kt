@@ -5,18 +5,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.objective_match_collection.*
-import java.lang.Integer.parseInt
-import kotlin.concurrent.timer
 
 //Determines the functions for UI elements (ie Buttons, ToggleButtons) in the Objective Match Data Screen.
 class ObjectiveMatchCollectionActivity : CollectionActivity() {
     //Define all variables.
     var actionOneValue = 0
     var actionTwoValue = 0
+    private var isTimerRunning = false
 
     //Adds a hashmap to the timeline variable including action type, is successful, and is defended.
     //If is_defended or is_successful are not applicable, pass in null for parameters.
-    fun returnStage (time:Int): Constants.STAGE {
+    fun returnStage(time: Int): Constants.STAGE {
         var stage: Constants.STAGE
         if (time >= 135) {
             stage = Constants.STAGE.AUTO
@@ -37,6 +36,14 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
 
         // Enable the undo button because an action has been added to the timeline.
         btn_undo.isEnabled = true
+        btn_timer.isEnabled = false
+    }
+    
+    //Function to set timer to start match when timer is pressed before actual match start.
+    private fun timerReset() {
+        match_timer?.cancel()
+        match_timer = null
+        btn_timer.text = getString(R.string.btn_timer_start)
     }
 
     // Function to remove an action from the timeline.
@@ -93,7 +100,6 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         if (tb_action_two.isChecked == false) {
             tb_action_two.isEnabled = enable
         }
-
         if (tb_action_four.isChecked == false) {
             tb_action_four.isEnabled = enable
         }
@@ -102,17 +108,27 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
     // Initialize onClickListeners for timer, proceed button, and robot actions (which add to timeline).
     private fun initOnClicks() {
         btn_timer.setOnClickListener(View.OnClickListener {
-            TimerUtility.MatchTimerThread().initTimer(btn_timer)
-            //TODO create a Timer reset function
-            // Disable timer button and enable incap toggle button.
-            // Enable incap toggle button separate from enableButtons function, as enableButtons
-            // is primarily used for disabling/enabling buttons when incap is checked/unchecked.
-            btn_timer.isEnabled = false
-            tb_action_three.isEnabled = true
-            enableButtons(true)
+            if (!isTimerRunning) {
+                TimerUtility.MatchTimerThread().initTimer(btn_timer, btn_proceed_qr_generate)
+                isTimerRunning = true
+                tb_action_three.isEnabled = true
+                enableButtons(true)
+            } else {
+                timerReset()
+                timeline = ArrayList()
+                isTimerRunning = false
+                tb_action_three.isEnabled = false
+                enableButtons(false)
+            }
+
+            // TODO Disable timer button and enable incap toggle button.
+            // TODO Enable incap toggle button separate from enableButtons function, as enableButtons
+            //      is primarily used for disabling/enabling buttons when incap is checked/unchecked.
+
+
         })
 
-        btn_proceed_qr_generate.setOnClickListener {
+        btn_proceed_qr_generate.setOnClickListener (View.OnClickListener {
             val intent = Intent(this, QRGenerateActivity::class.java)
             startActivity(
                 intent, ActivityOptions.makeSceneTransitionAnimation(
@@ -120,7 +136,7 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
                     btn_proceed_qr_generate, "proceed_button"
                 ).toBundle()
             )
-        }
+        })
 
         btn_action_one.setOnClickListener(View.OnClickListener {
             actionOneValue++
@@ -177,6 +193,8 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.objective_match_collection)
 
+        timerReset()
         initOnClicks()
     }
 }
+
