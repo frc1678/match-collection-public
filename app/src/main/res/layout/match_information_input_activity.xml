@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -9,7 +8,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="3"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <LinearLayout
@@ -48,8 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@android:color/transparent"
-            />
+                android:background="@android:color/transparent" />
 
             <View style="@style/view_separator_horizontal"/>
 
@@ -79,20 +77,36 @@
             android:layout_weight="1"
             android:text="@string/btn_id_default"/>
 
-
     </LinearLayout>
 
     <View style="@style/view_separator_vertical"
         android:layout_width="10dp"/>
 
     <LinearLayout
-        android:id="@+id/linear_layout_team_number"
+        android:id="@+id/linear_layout_panels_two"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
+        android:layout_weight="1"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView style="@style/tv_standard_linear_layout"
+                android:text="@string/tv_match_number_input"
+                android:gravity="center"/>
+
+            <EditText style="@style/et_standard_linear_layout_number"
+                android:id="@+id/et_match_number"
+                android:text=""/>
+
+        </LinearLayout>
+
+        <View style="@style/view_separator_horizontal"
+            android:layout_height="10dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -146,7 +160,7 @@
 
             <View style="@style/view_separator_horizontal"
                 android:id="@+id/separator_team_two_three"
-                android:visibility="invisible"/>
+                android:visibility="invisible" />
 
             <TextView style="@style/tv_standard_linear_layout"
                 android:id="@+id/tv_hint_team_three"
@@ -163,36 +177,15 @@
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <View style="@style/view_separator_vertical"
-        android:layout_width="10dp"/>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:orientation="vertical">
-
-        <TextView style="@style/tv_standard_linear_layout"
-            android:text="@string/tv_match_number_input"
-            android:gravity="center"/>
-
-        <EditText style="@style/et_standard_linear_layout_number"
-            android:id="@+id/et_match_number"
-            android:text=""/>
-
-        <View style="@style/view_separator_horizontal"/>
+        <View style="@style/view_separator_horizontal"
+            android:layout_height="10dp"/>
 
         <Button style="@style/btn_white"
             android:id="@+id/btn_proceed_match_start"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4"
+            android:layout_weight="1"
             android:text="@string/btn_proceed"/>
 
     </LinearLayout>
-
 </LinearLayout>

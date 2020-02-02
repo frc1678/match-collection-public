@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.counter_panel.*
 
@@ -23,9 +23,9 @@ class CounterPanel : Fragment() {
     // Retrieves inputted subjective data of specific team in dictionary of data points to their rankings.
     fun getRankingData(): HashMap<String, Int> {
         val rankingData: HashMap<String, Int> = HashMap()
-        val rootLayout = getView() as LinearLayout
+        val rootLayout = getView() as RelativeLayout
         var counter: Counter
-        for (i in 0 until (getView() as LinearLayout).childCount - 1) {
+        for (i in 0 until (getView() as RelativeLayout).childCount - 1) {
             counter = rootLayout.getChildAt(i + 1) as Counter
             rankingData.put(counter.dataName, counter.value)
         }

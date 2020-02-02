@@ -6,8 +6,8 @@
     <string name="btn_timer_start">Start Match</string>
     <string name="btn_timer_auto">Auto</string>
     <string name="btn_timer_teleop">Teleop</string>
-    <string name="btn_action_one">Upper Port</string>
-    <string name="btn_action_two">Lower Port</string>
+    <string name="btn_action_one">High Goal</string>
+    <string name="btn_action_two">Low Goal</string>
     <string name="tb_action_bool_one_off">Rotation</string>
     <string name="tb_action_bool_one_on">Rotation Activated</string>
     <string name="tb_action_bool_two_off">Position</string>

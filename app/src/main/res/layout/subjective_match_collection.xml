@@ -4,34 +4,40 @@
     android:layout_height="fill_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:orientation="horizontal"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:orientation="vertical"
         android:id="@+id/linear_layout_panels"
-        android:baselineAligned="false">
+        android:baselineAligned="false"
+        android:padding="30dp">
         <fragment
             android:name="com.example.match_collection.CounterPanel"
             android:id="@+id/robotOne"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:paddingTop="30dp"/>
         <fragment
             android:name="com.example.match_collection.CounterPanel"
             android:id="@+id/robotTwo"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:paddingTop="30dp"/>
         <fragment
             android:name="com.example.match_collection.CounterPanel"
             android:id="@+id/robotThree"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:paddingTop="30dp"/>
     </LinearLayout>
 
     <Button
         android:id="@+id/btn_proceed_qr_generate"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="@string/btn_proceed">
     </Button>
 </LinearLayout>

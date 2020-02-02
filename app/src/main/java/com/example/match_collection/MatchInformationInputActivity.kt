@@ -133,7 +133,7 @@ class MatchInformationInputActivity : CollectionActivity() {
             Constants.MODE_SELECTION.OBJECTIVE -> {
                 if ((scout_id.isEmpty()) or (scout_id == (Constants.NONE_VALUE))) {
                     createErrorMessage(getString(R.string.scout_id_error),
-                        linear_layout_team_number)
+                        linear_layout_panels_two)
                     return
                 }
                 assignTeamByScoutIdObjective(et_team_one, (scout_id.toInt() % 6) + 1, et_match_number.text.toString())

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,22 +10,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
-        android:textSize="20sp"
+        android:textSize="50sp"
         android:textStyle="bold"
-        android:clickable="true" />
+        android:layout_centerHorizontal="true" />
 
     <com.example.match_collection.Counter
         android:id="@+id/counter_speed"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingTop="5dp"
-        custom:dataName="Speed"/>
+        android:layout_height="wrap_content"
+        custom:dataName="Speed"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tv_team_number"
+        android:layout_marginEnd="45dp"/>
     <com.example.match_collection.Counter
         android:id="@+id/counter_agility"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingTop="3dp"
-        custom:dataName="Agility"/>
-</LinearLayout>
+        android:layout_height="wrap_content"
+        custom:dataName="Agility"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/tv_team_number"
+        android:layout_toRightOf="@+id/counter_speed"
+        android:layout_marginStart="45dp"/>
+</RelativeLayout>

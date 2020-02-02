@@ -13,18 +13,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".ModeCollectionSelectActivity" >
+            android:name=".ModeCollectionSelectActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".QRGenerateActivity" />
-        <activity android:name=".ObjectiveMatchCollectionActivity" />
-        <activity android:name=".MatchInformationInputActivity" />
-        <activity android:name=".SubjectiveMatchCollectionActivity"/>
-        <activity android:name=".CollectionActivity"/>
-
+        <activity android:name=".QRGenerateActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ObjectiveMatchCollectionActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".MatchInformationInputActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".SubjectiveMatchCollectionActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".CollectionActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

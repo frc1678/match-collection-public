@@ -15,7 +15,6 @@
             android:id="@+id/btn_timer"
             android:layout_height="60dp"
             android:layout_width="match_parent"
-            android:layout_margin="10dp"
             android:text="@string/btn_timer_start">
         </Button>
 
@@ -28,6 +27,30 @@
             android:enabled="false">
         </Button>
 
+        <ToggleButton
+            android:id="@+id/tb_action_one"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="30dp"
+            android:checked="false"
+            android:textOff="@string/tb_action_bool_one_off"
+            android:textOn="@string/tb_action_bool_one_on"
+            android:enabled="false">
+        </ToggleButton>
+
+        <ToggleButton
+            android:id="@+id/tb_action_two"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="30dp"
+            android:checked="false"
+            android:textOff="@string/tb_action_bool_two_off"
+            android:textOn="@string/tb_action_bool_two_on"
+            android:enabled="false">
+        </ToggleButton>
+
         <Button
             android:id="@+id/btn_action_two"
             style="@style/btn_action"
@@ -35,37 +58,6 @@
             android:text="@string/btn_action_two"
             android:enabled="false">
         </Button>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4"
-            android:orientation="horizontal">
-
-            <ToggleButton
-                android:id="@+id/tb_action_one"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:checked="false"
-                android:textOff="@string/tb_action_bool_one_off"
-                android:textOn="@string/tb_action_bool_one_on"
-                android:enabled="false">
-            </ToggleButton>
-
-            <ToggleButton
-                android:id="@+id/tb_action_two"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:checked="false"
-                android:textOff="@string/tb_action_bool_two_off"
-                android:textOn="@string/tb_action_bool_two_on"
-                android:enabled="false">
-            </ToggleButton>
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -78,48 +70,40 @@
             android:id="@+id/btn_proceed_qr_generate"
             android:layout_width="fill_parent"
             android:layout_height="60dp"
-            android:layout_margin="10dp"
             android:text="@string/btn_proceed"
             android:enabled="false">
         </Button>
 
-        <LinearLayout
+        <ToggleButton
+            android:id="@+id/tb_action_three"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:textSize="30dp"
+            android:checked="false"
+            android:textOff="@string/tb_action_bool_three_off"
+            android:textOn="@string/tb_action_bool_three_on"
+            android:enabled="false">
+        </ToggleButton>
 
-            <ToggleButton
-                android:id="@+id/tb_action_three"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:checked="false"
-                android:textOff="@string/tb_action_bool_three_off"
-                android:textOn="@string/tb_action_bool_three_on"
-                android:enabled="false">
-            </ToggleButton>
-
-            <ToggleButton
-                android:id="@+id/tb_action_four"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:checked="false"
-                android:textOff="@string/tb_action_bool_four_off"
-                android:textOn="@string/tb_action_bool_four_on"
-                android:enabled="false">
-            </ToggleButton>
-        </LinearLayout>
+        <ToggleButton
+            android:id="@+id/tb_action_four"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="30dp"
+            android:checked="false"
+            android:textOff="@string/tb_action_bool_four_off"
+            android:textOn="@string/tb_action_bool_four_on"
+            android:enabled="false">
+        </ToggleButton>
 
         <Button
             android:id="@+id/btn_undo"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_margin="10dp"
+            android:textSize="30dp"
             android:text="@string/btn_undo"
             android:enabled="false">
         </Button>
