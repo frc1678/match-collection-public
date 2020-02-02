@@ -25,6 +25,18 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         return (stage)
     }
 
+    //Function to end incap or climb if still activated at match end.
+    fun endAction () {
+        if (tb_action_three.isChecked == true) {
+            tb_action_three.isChecked = false
+            timelineAdd(match_time, Constants.ACTION_TYPE.END_INCAP)
+        }
+        if (tb_action_four.isChecked == true) {
+            tb_action_four.isChecked = false
+            timelineAdd(match_time, Constants.ACTION_TYPE.END_CLIMB)
+        }
+    }
+
     //Adds a hashmap to the timeline variable including action type, is successful, and is defended.
     //If is_defended or is_successful are not applicable, pass in null for parameters.
     private fun timelineAdd(match_time: String, action_type: Constants.ACTION_TYPE) {
@@ -129,6 +141,7 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         })
 
         btn_proceed_qr_generate.setOnClickListener (View.OnClickListener {
+            endAction()
             val intent = Intent(this, QRGenerateActivity::class.java)
             startActivity(
                 intent, ActivityOptions.makeSceneTransitionAnimation(
