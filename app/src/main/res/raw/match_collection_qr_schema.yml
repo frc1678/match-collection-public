@@ -5,7 +5,7 @@
 schema_file:
   # Version of schema file
   # Incremented every merged schema change
-  version: 10
+  version: 11
 
 # Each decompressed variable name corresponds to a length 2 or 3 list
 # First item is the compressed variable name
@@ -27,7 +27,7 @@ generic_data:
 objective_tim:
   _start_character: '+' # First character in QR used to identify QR type
   _separator: '$' # Separates key:value pairs
-  team_number: [Z, str] # Mostly used as a str, not needed as int
+  team_number: [Z, int] # int properties not needed but int is more intuitive
   timeline: [V, list, dict] # List of dictionaries
 
 # Timeline is part of objective match collection QR
@@ -44,8 +44,8 @@ subjective_aim:
   _start_character: '*' # First character in QR used to identify QR type
   _separator: '$' # Separates each key:value pair
   _separator_internal: ':' # Separates each ranking list item
-  speed_rankings: [A, list, str] # List of team numbers (strings)
-  agility_rankings: [B, list, str] # List of team numbers (strings)
+  speed_rankings: [A, list, int] # List of team numbers (ints)
+  agility_rankings: [B, list, int] # List of team numbers (ints)
 
 
 # Contains all the enums and their values
