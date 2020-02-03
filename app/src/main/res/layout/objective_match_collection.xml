@@ -11,52 +11,33 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_timer"
-            android:layout_height="60dp"
-            android:layout_width="match_parent"
-            android:text="@string/btn_timer_start">
+        <Button style="@style/btn_timer"
+            android:id="@+id/btn_timer">
         </Button>
 
-        <Button
+        <Button style="@style/btn_action"
             android:id="@+id/btn_action_one"
-            style="@style/btn_action"
             android:layout_weight="1"
             android:baselineAligned="false"
-            android:text="@string/btn_action_one"
-            android:enabled="false">
+            android:text="@string/btn_action_one">
         </Button>
 
-        <ToggleButton
+        <ToggleButton style="@style/tb_control"
             android:id="@+id/tb_action_one"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textSize="30dp"
-            android:checked="false"
-            android:textOff="@string/tb_action_bool_one_off"
             android:textOn="@string/tb_action_bool_one_on"
-            android:enabled="false">
+            android:textOff="@string/tb_action_bool_one_off">
         </ToggleButton>
 
-        <ToggleButton
+        <ToggleButton style="@style/tb_control"
             android:id="@+id/tb_action_two"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textSize="30dp"
-            android:checked="false"
-            android:textOff="@string/tb_action_bool_two_off"
             android:textOn="@string/tb_action_bool_two_on"
-            android:enabled="false">
+            android:textOff="@string/tb_action_bool_two_off">
         </ToggleButton>
 
-        <Button
+        <Button style="@style/btn_action"
             android:id="@+id/btn_action_two"
-            style="@style/btn_action"
             android:layout_weight="1"
-            android:text="@string/btn_action_two"
-            android:enabled="false">
+            android:text="@string/btn_action_two">
         </Button>
     </LinearLayout>
 
@@ -66,46 +47,39 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <Button
+        <Button style="@style/btn_proceed"
             android:id="@+id/btn_proceed_qr_generate"
             android:layout_width="fill_parent"
             android:layout_height="60dp"
-            android:text="@string/btn_proceed"
-            android:enabled="false">
+            android:text="@string/btn_proceed">
         </Button>
 
-        <ToggleButton
+        <ToggleButton style="@style/tb_incap"
             android:id="@+id/tb_action_three"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:textSize="30dp"
             android:checked="false"
             android:textOff="@string/tb_action_bool_three_off"
-            android:textOn="@string/tb_action_bool_three_on"
-            android:enabled="false">
+            android:textOn="@string/tb_action_bool_three_on">
         </ToggleButton>
 
-        <ToggleButton
+        <ToggleButton style="@style/tb_climb"
             android:id="@+id/tb_action_four"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:textSize="30dp"
             android:checked="false"
             android:textOff="@string/tb_action_bool_four_off"
-            android:textOn="@string/tb_action_bool_four_on"
-            android:enabled="false">
+            android:textOn="@string/tb_action_bool_four_on">
         </ToggleButton>
 
-        <Button
+        <Button style="@style/btn_undo"
             android:id="@+id/btn_undo"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:textSize="30dp"
-            android:text="@string/btn_undo"
-            android:enabled="false">
+            android:text="@string/btn_undo">
         </Button>
     </LinearLayout>
 

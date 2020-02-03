@@ -11,6 +11,7 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
     //Define all variables.
     var actionOneValue = 0
     var actionTwoValue = 0
+
     private var isTimerRunning = false
 
     //Adds a hashmap to the timeline variable including action type, is successful, and is defended.
@@ -82,18 +83,22 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
             "start_incap" -> {
                 tb_action_three.isChecked = false
                 enableButtons(true)
+                tb_action_four.isEnabled = true
             }
             "end_incap" -> {
                 tb_action_three.isChecked = true
                 enableButtons(false)
+                tb_action_four.isEnabled = false
             }
             "start_climb" -> {
                 tb_action_four.isChecked = false
                 enableButtons(true)
+                tb_action_three.isEnabled = true
             }
             "end_climb" -> {
                 tb_action_four.isChecked = true
                 enableButtons(false)
+                tb_action_three.isEnabled = false
             }
         }
         // Remove most recent timeline entry.
@@ -115,6 +120,11 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         if (tb_action_four.isChecked == false) {
             tb_action_four.isEnabled = enable
         }
+    }
+
+    private fun setCounterTexts() {
+        btn_action_one.setText("${getString(R.string.btn_action_one)} - 0")
+        btn_action_two.setText("${getString(R.string.btn_action_two)} - 0")
     }
 
     // Initialize onClickListeners for timer, proceed button, and robot actions (which add to timeline).
@@ -179,9 +189,11 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
             if (tb_action_three.isChecked) {
                 timelineAdd(match_time, Constants.ACTION_TYPE.START_INCAP)
                 enableButtons(false)
+                tb_action_four.isEnabled = false
             } else {
                 timelineAdd(match_time, Constants.ACTION_TYPE.END_INCAP)
                 enableButtons(true)
+                tb_action_four.isEnabled = true
             }
         })
 
@@ -189,9 +201,11 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
             if (tb_action_four.isChecked) {
                 timelineAdd(match_time, Constants.ACTION_TYPE.START_CLIMB)
                 enableButtons(false)
+                tb_action_three.isEnabled = false
             } else {
                 timelineAdd(match_time, Constants.ACTION_TYPE.END_CLIMB)
                 enableButtons(true)
+                tb_action_three.isEnabled = true
                 //TODO ADD SAFETY SO CLIMB BUTTON CAN ONLY BE PRESSED IN LAST 30 SEC
             }
         })
@@ -207,6 +221,7 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         setContentView(R.layout.objective_match_collection)
 
         timerReset()
+        setCounterTexts()
         initOnClicks()
     }
 }

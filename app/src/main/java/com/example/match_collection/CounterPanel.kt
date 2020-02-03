@@ -20,6 +20,16 @@ class CounterPanel : Fragment() {
         tv_team_number.setText(teamNumber)
     }
 
+    // Set text color of team numbers to alliance color.
+    fun setAllianceColor() {
+        if (alliance_color == Constants.ALLIANCE_COLOR.RED) {
+            tv_team_number.setTextColor(resources.getColor(R.color.alliance_red_dark, null))
+        }
+        else if (alliance_color == Constants.ALLIANCE_COLOR.BLUE) {
+            tv_team_number.setTextColor(resources.getColor(R.color.alliance_blue_dark, null))
+        }
+    }
+
     // Retrieves inputted subjective data of specific team in dictionary of data points to their rankings.
     fun getRankingData(): HashMap<String, Int> {
         val rankingData: HashMap<String, Int> = HashMap()

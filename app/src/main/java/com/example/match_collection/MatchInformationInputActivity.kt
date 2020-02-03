@@ -199,10 +199,10 @@ class MatchInformationInputActivity : CollectionActivity() {
 
     //Create the button onClick listeners.
     private fun initializeToggleButtons() {
-        rightToggleButtonColor = ContextCompat.getColor(this, R.color.light_red)
-        leftToggleButtonColor = ContextCompat.getColor(this, R.color.light_blue)
-        rightToggleButtonColorDark = ContextCompat.getColor(this, R.color.dark_red)
-        leftToggleButtonColorDark = ContextCompat.getColor(this, R.color.dark_blue)
+        rightToggleButtonColor = ContextCompat.getColor(this, R.color.alliance_red_light)
+        leftToggleButtonColor = ContextCompat.getColor(this, R.color.alliance_blue_light)
+        rightToggleButtonColorDark = ContextCompat.getColor(this, R.color.alliance_red_dark)
+        leftToggleButtonColorDark = ContextCompat.getColor(this, R.color.alliance_blue_dark)
         leftToggleButton = left_toggle_button
         rightToggleButton = right_toggle_button
 

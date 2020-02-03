@@ -12,8 +12,8 @@
     <string name="tb_action_bool_one_on">Rotation Activated</string>
     <string name="tb_action_bool_two_off">Position</string>
     <string name="tb_action_bool_two_on">Position Activated</string>
-    <string name="tb_action_bool_three_off">Incap</string>
-    <string name="tb_action_bool_three_on">Incap</string>
+    <string name="tb_action_bool_three_off">Start Incap</string>
+    <string name="tb_action_bool_three_on">End Incap</string>
     <string name="tb_action_bool_four_off">Start Climb</string>
     <string name="tb_action_bool_four_on">End Climb</string>
     <string name="btn_undo">Undo</string>
@@ -21,6 +21,7 @@
     <string name="btn_minus">-</string>
     <string name="tv_counter_starting_value">2</string>
     <string name="btn_proceed">Proceed</string>
+    <string name="btn_to_teleop">To Teleop</string>
     <string name="btn_assignment">Assignment</string>
     <string name="btn_resend">Resend</string>
     <string name="btn_id_default">SCOUT ID: NONE</string>
@@ -30,5 +31,5 @@
     <string name="tv_match_number_input">Match Number</string>
     <string name="btn_scout_id_message">SCOUT ID: %1$s</string>
     <string name="scout_id_error">Please input a scout ID!</string>
-    <string name="error_back_click">"long click the back button if you're certain you'd like to go back. thanks -1678 software scouting"</string>
+    <string name="error_back_click">"Long click the back button to go back"</string>
 </resources>

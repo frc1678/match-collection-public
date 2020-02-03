@@ -12,15 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"/>
-    <Button
-        android:id="@+id/btn_minus"
-        android:text="@string/btn_minus"
-        android:textSize="24sp"
-        android:gravity="center"
-        android:layout_below="@+id/tv_data_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
+    <Button style="@style/btn_minus"
+        android:id="@+id/btn_minus"
+        android:layout_below="@+id/tv_data_name"/>
     <TextView
         android:id="@+id/tv_score_counter"
         android:layout_width="wrap_content"
@@ -32,14 +27,8 @@
         android:layout_centerHorizontal="true"
         android:layout_toEndOf="@+id/btn_minus"
         android:layout_marginTop="40dp"/>
-
-    <Button
+    <Button style="@style/btn_plus"
         android:id="@+id/btn_plus"
-        android:text="@string/btn_plus"
-        android:textSize="24sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_below="@+id/tv_data_name"
-        android:layout_toEndOf="@+id/tv_score_counter"
-        android:gravity="center"/>
+        android:layout_toEndOf="@+id/tv_score_counter"/>
 </RelativeLayout>

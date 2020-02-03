@@ -6,12 +6,29 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="light_gray">#efefef</color>
-    <color name="light_gray_but_a_bit_darker">#8e8e8e</color>
-    <color name="yellow">#FFF4B8</color>
+    <color name="darker_gray">#8e8e8e</color>
     <color name="transparent">#ffffff00</color>
-    <color name="light_red">#d8675e</color>
-    <color name="light_blue">#3399ff</color>
-    <color name="dark_red">#8b0000</color>
-    <color name="dark_blue">#00008b</color>
 
+    <color name="alliance_red_light">#d8675e</color>
+    <color name="alliance_blue_light">#3399ff</color>
+    <color name="alliance_red_dark">#8b0000</color>
+    <color name="alliance_blue_dark">#00008b</color>
+
+    <color name="action_yellow">#FFF4B8</color>
+    <color name="action_yellow_pressed">#FFED87</color>
+    <color name="proceed_blue">#2AF5FF</color>
+    <color name="proceed_blue_border">#23C9D1</color>
+    <color name="control_teal">#5DD9C1</color>
+    <color name="control_teal_border">#4DB29E</color>
+    <color name="incap_gray">#CCD5FF</color>
+    <color name="incap_gray_activated">#A0B1FF</color>
+    <color name="climb_pink_start">#EDCDEA</color>
+    <color name="climb_pink_end">#E7BBE3</color>
+    <color name="undo_orange">#F79256</color>
+    <color name="undo_orange_pressed">#E1854F</color>
+
+    <color name="plus_green">#b7e1cd</color>
+    <color name="plus_green_pressed">#A5CA9E</color>
+    <color name="minus_red">#f4c7c3</color>
+    <color name="minus_red_pressed">#F4AAA4</color>
 </resources>

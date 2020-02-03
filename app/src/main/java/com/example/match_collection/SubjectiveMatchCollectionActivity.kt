@@ -71,6 +71,10 @@ class SubjectiveMatchCollectionActivity : CollectionActivity() {
         panelOne.setTeamNumber(teamNumberOne)
         panelTwo.setTeamNumber(teamNumberTwo)
         panelThree.setTeamNumber(teamNumberThree)
+
+        panelOne.setAllianceColor()
+        panelTwo.setAllianceColor()
+        panelThree.setAllianceColor()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
