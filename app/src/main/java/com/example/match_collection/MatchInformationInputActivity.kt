@@ -37,37 +37,47 @@ class MatchInformationInputActivity : CollectionActivity() {
     //Create the onclick listener for the proceed button.
     private fun initProceedButton() {
         btn_proceed_match_start.setOnClickListener { view ->
-            if (getSerialNum(this) != null) {
-                if (checkInputNotEmpty(et_match_number)
-                    && (alliance_color != Constants.ALLIANCE_COLOR.NONE)) {
+            if (getSerialNum(this) == null) {
+                createErrorMessage("NO SERIAL NUMBER - PLEASE ENABLE PHONE PERMISSIONS", view)
+            }
+            else if (checkInputNotEmpty(et_match_number)
+                && alliance_color != Constants.ALLIANCE_COLOR.NONE) {
 
-                    //Reassigning variables in References.kt to inputed text.
-                    match_number = parseInt(et_match_number.text.toString())
-
-                    //Switch statement to separate subjective and objective input safety.
-                    when (collection_mode) {
-                        //Check to make sure all objective related inputs are not empty.
-                        Constants.MODE_SELECTION.OBJECTIVE -> if (checkInputNotEmpty(et_team_one)) {
-                            team_number = et_team_one.text.toString()
-                            startMatchActivity()
-                        } else {
-                            createErrorMessage("Please input the team number!", view)
-                        }
-
-                        //Check to make sure all subjective related inputs are not empty.
-                        Constants.MODE_SELECTION.SUBJECTIVE -> if (checkInputNotEmpty(et_team_one, et_team_two, et_team_three)) {
-                            startMatchActivity()
-                        } else {
-                            createErrorMessage("Please input the team numbers!", view)
-                        }
-                        else -> {
-                            //If collectionMode is NONE: exit out of the whole overall setOnClickListener function.
-                            return@setOnClickListener
-                        }
+                //Switch statement to separate subjective and objective input safety.
+                when (collection_mode) {
+                    //Check to make sure all objective related inputs are not empty.
+                    Constants.MODE_SELECTION.OBJECTIVE -> if (checkInputNotEmpty(et_team_one) && scout_name != "" && scout_id != (Constants.NONE_VALUE)) {
+                        team_number = et_team_one.text.toString()
+                        startMatchActivity()
+                    } else {
+                        createErrorMessage(getString(R.string.error_missing_information), view)
                     }
-                } else {
-                    createErrorMessage("Please input the scout name, alliance color, and match number!", view)
+                    //Check to make sure all subjective related inputs are not empty.
+                    Constants.MODE_SELECTION.SUBJECTIVE -> if (checkInputNotEmpty(
+                            et_team_one,
+                            et_team_two,
+                            et_team_three
+                        )
+                    ) {
+                        // Ensure that inputted team numbers are different.
+                        if (et_team_one.text.toString() != et_team_two.text.toString() &&
+                            et_team_one.text.toString() != et_team_three.text.toString() &&
+                            et_team_two.text.toString() != et_team_three.text.toString()) {
+                            startMatchActivity()
+                        } else {
+                            createErrorMessage("PLEASE ENSURE TEAMS ARE DIFFERENT", view)
+                        }
+                    } else {
+                        createErrorMessage(getString(R.string.error_missing_information), view)
+                    }
+                    else -> {
+                        //If collectionMode is NONE: exit out of the whole overall setOnClickListener function.
+                        return@setOnClickListener
+                    }
                 }
+            }
+            else {
+                createErrorMessage(getString(R.string.error_missing_information), view)
             }
         }
     }
@@ -82,6 +92,7 @@ class MatchInformationInputActivity : CollectionActivity() {
 
     //Used to transition into the next activity and define timestamp for specific match.
     private fun startMatchActivity() {
+        match_number = parseInt(et_match_number.text.toString())
         timestamp = System.currentTimeMillis()/1000
         putIntoStorage(this, key = "match_number", value = match_number)
         putIntoStorage(this, key = "alliance_color", value = alliance_color)
@@ -107,6 +118,7 @@ class MatchInformationInputActivity : CollectionActivity() {
         if (collection_mode == Constants.MODE_SELECTION.SUBJECTIVE) {
             makeViewVisible(et_team_two, et_team_three, tv_hint_team_two, tv_hint_team_three,
                 separator_team_one_two, separator_team_two_three)
+            makeViewInisible(spinner_scout_name, separator_name_id, btn_scout_id)
         }
     }
 
@@ -114,6 +126,13 @@ class MatchInformationInputActivity : CollectionActivity() {
     private fun makeViewVisible(vararg views: View) {
         for (view in views) {
             view.visibility = View.VISIBLE
+        }
+    }
+
+    // Allow for inputs to become invisible.
+    private fun makeViewInisible(vararg views: View) {
+        for (view in views) {
+            view.visibility = View.INVISIBLE
         }
     }
 
@@ -161,7 +180,7 @@ class MatchInformationInputActivity : CollectionActivity() {
                 putIntoStorage(this@MatchInformationInputActivity, "scout_name", scout_name)
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("not implemented")
+                scout_name = ""
             }
         }
     }

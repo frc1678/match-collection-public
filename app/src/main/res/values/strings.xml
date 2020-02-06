@@ -30,6 +30,7 @@
     <string name="tv_team_number_input_three">Team Three</string>
     <string name="tv_match_number_input">Match Number</string>
     <string name="btn_scout_id_message">SCOUT ID: %1$s</string>
-    <string name="scout_id_error">Please input a scout ID!</string>
-    <string name="error_back_click">"Long click the back button to go back"</string>
+    <string name="scout_id_error">PLEASE INPUT A SCOUT ID!</string>
+    <string name="error_back_click">"LONG CLICK THE BACK BUTTON TO GO BACK"</string>
+    <string name="error_missing_information">"PLEASE INPUT ALL INFORMATION!"</string>
 </resources>

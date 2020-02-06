@@ -9,6 +9,9 @@
     </style>
 
     <style name="btn_white" parent="android:Widget">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:background">@drawable/btn_white_selector</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
@@ -18,7 +21,7 @@
     <style name="et_standard_linear_layout_number" parent="android:Widget">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0dp</item>
-        <item name="android:layout_weight">1</item>
+        <item name="android:layout_weight">5</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:inputType">number</item>
         <item name="android:gravity">center</item>
