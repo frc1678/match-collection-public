@@ -14,9 +14,14 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.qr_generate.*
+import java.util.regex.Pattern
+import kotlin.text.Regex.Companion.escape
 
 // Class to display QR code.
 class QRGenerateActivity: CollectionActivity() {
+    // Define regex to validate that QR only contains acceptable characters.
+    private var regex: Pattern = Pattern.compile("[A-Z0-9"+escape("$%*+-./: ")+"]+")
+
     private fun initProceedButton() {
         btn_proceed_new_match.setOnClickListener {
             putIntoStorage(this, "match_number", match_number + 1)
@@ -32,17 +37,22 @@ class QRGenerateActivity: CollectionActivity() {
 
         initProceedButton()
 
-        // Populate QR code content and display QR.
+        // Populate QR code content and display QR if it is valid (only contains Alphanumeric characters).
         val qrContents = compress(schemaRead(this), this, collection_mode)
-        displayQR(qrContents, iv_display_qr, this)
+        if (regex.matcher(qrContents).matches()) {
+            displayQR(qrContents, iv_display_qr, this)
+        }
+        else {
+            createErrorMessage("INVALID QR CODE", iv_display_qr)
+        }
 
         // Write compressed QR string to file.
         var fileName = ""
         if (collection_mode.equals(Constants.MODE_SELECTION.OBJECTIVE)) {
-            fileName = match_number.toString() + "_" + team_number + "_" + getSerialNum(this) + ".txt"
+            fileName = "${match_number}_${team_number}_${getSerialNum(this)}_$timestamp.txt"
         }
         else if (collection_mode.equals(Constants.MODE_SELECTION.SUBJECTIVE)) {
-            fileName = match_number.toString() + "_" + alliance_color.toString()[0] + ".txt"
+            fileName = "${match_number}_$timestamp.txt"
         }
         writeToFile(fileName, qrContents)
     }
