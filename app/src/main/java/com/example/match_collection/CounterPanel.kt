@@ -23,10 +23,10 @@ class CounterPanel : Fragment() {
     // Set text color of team numbers to alliance color.
     fun setAllianceColor() {
         if (alliance_color == Constants.ALLIANCE_COLOR.RED) {
-            tv_team_number.setTextColor(resources.getColor(R.color.alliance_red_dark, null))
+            tv_team_number.setTextColor(resources.getColor(R.color.alliance_red_light, null))
         }
         else if (alliance_color == Constants.ALLIANCE_COLOR.BLUE) {
-            tv_team_number.setTextColor(resources.getColor(R.color.alliance_blue_dark, null))
+            tv_team_number.setTextColor(resources.getColor(R.color.alliance_blue_light, null))
         }
     }
 

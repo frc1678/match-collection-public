@@ -216,6 +216,16 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         })
     }
 
+    fun initTeamNum() {
+        tv_team_number.setText(team_number)
+        if (alliance_color == Constants.ALLIANCE_COLOR.RED) {
+            tv_team_number.setTextColor(resources.getColor(R.color.alliance_red_light, null))
+        }
+        else if (alliance_color == Constants.ALLIANCE_COLOR.BLUE) {
+            tv_team_number.setTextColor(resources.getColor(R.color.alliance_blue_light, null))
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.objective_match_collection)
@@ -223,6 +233,7 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         timerReset()
         setCounterTexts()
         initOnClicks()
+        initTeamNum()
     }
 }
 
