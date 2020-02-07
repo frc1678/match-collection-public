@@ -44,10 +44,31 @@
 
             <Button style="@style/btn_action"
                 android:id="@+id/btn_action_one"
-                android:layout_weight="1"
-                android:baselineAligned="false"
                 android:text="@string/btn_action_one">
             </Button>
+
+            <ToggleButton style="@style/tb_incap"
+                android:id="@+id/tb_action_three"
+                android:textOff="@string/tb_action_bool_three_off"
+                android:textOn="@string/tb_action_bool_three_on">
+            </ToggleButton>
+
+            <Button style="@style/btn_action"
+                android:id="@+id/btn_action_two"
+                android:text="@string/btn_action_two">
+            </Button>
+
+            <Button style="@style/btn_undo"
+                android:id="@+id/btn_undo"
+                android:text="@string/btn_undo">
+            </Button>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <ToggleButton style="@style/tb_control"
                 android:id="@+id/tb_action_one"
@@ -61,45 +82,15 @@
                 android:textOff="@string/tb_action_bool_two_off">
             </ToggleButton>
 
-            <Button style="@style/btn_action"
-                android:id="@+id/btn_action_two"
-                android:layout_weight="1"
-                android:text="@string/btn_action_two">
-            </Button>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ToggleButton style="@style/tb_incap"
-                android:id="@+id/tb_action_three"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:checked="false"
-                android:textOff="@string/tb_action_bool_three_off"
-                android:textOn="@string/tb_action_bool_three_on">
-            </ToggleButton>
-
             <ToggleButton style="@style/tb_climb"
                 android:id="@+id/tb_action_four"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:checked="false"
                 android:textOff="@string/tb_action_bool_four_off"
                 android:textOn="@string/tb_action_bool_four_on">
             </ToggleButton>
 
-            <Button style="@style/btn_undo"
-                android:id="@+id/btn_undo"
-                android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/btn_undo">
+            <Button style="@style/btn_redo"
+                android:id="@+id/btn_redo"
+                android:text="@string/btn_redo">
             </Button>
         </LinearLayout>
     </LinearLayout>

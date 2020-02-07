@@ -100,7 +100,7 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">30sp</item>
         <item name="android:layout_margin">10dp</item>
@@ -111,7 +111,7 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">30sp</item>
         <item name="android:layout_margin">10dp</item>
@@ -122,8 +122,19 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">0.5</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:enabled">false</item>
+    </style>
+    <style name="btn_redo" parent="android:Widget">
+        <item name="android:background">@drawable/btn_redo_selector</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">0.5</item>
         <item name="android:textSize">30sp</item>
         <item name="android:layout_margin">10dp</item>
         <item name="android:enabled">false</item>

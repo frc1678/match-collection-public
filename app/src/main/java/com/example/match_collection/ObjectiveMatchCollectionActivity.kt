@@ -13,6 +13,7 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
     var actionTwoValue = 0
 
     private var isTimerRunning = false
+    var removedTimelineActions: ArrayList<HashMap<String, String>> = ArrayList()
 
     //Adds a hashmap to the timeline variable including action type, is successful, and is defended.
     //If is_defended or is_successful are not applicable, pass in null for parameters.
@@ -24,6 +25,15 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
             stage = Constants.STAGE.TELE
         }
         return (stage)
+    }
+
+    //Function to set timer to start match when timer is pressed before actual match start.
+    private fun timerReset() {
+        match_timer?.cancel()
+        match_timer = null
+        timeline.clear()
+        removedTimelineActions.clear()
+        btn_timer.text = getString(R.string.btn_timer_start)
     }
 
     //Function to end incap or climb if still activated at match end.
@@ -46,17 +56,12 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
             Pair("action_type", "$action_type")
         )
         timeline.add(actionHashMap)
+        removedTimelineActions.clear()
 
         // Enable the undo button because an action has been added to the timeline.
         btn_undo.isEnabled = true
+        btn_redo.isEnabled = false
         btn_timer.isEnabled = false
-    }
-    
-    //Function to set timer to start match when timer is pressed before actual match start.
-    private fun timerReset() {
-        match_timer?.cancel()
-        match_timer = null
-        btn_timer.text = getString(R.string.btn_timer_start)
     }
 
     // Function to remove an action from the timeline.
@@ -101,10 +106,60 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
                 tb_action_three.isEnabled = false
             }
         }
+
+        removedTimelineActions.add(timeline.get(timeline.size - 1)) //value of index timeline.size - 1
+
         // Remove most recent timeline entry.
         timeline.removeAt(timeline.size - 1)
     }
-    
+
+    private fun timelineReplace() {
+        timeline.add(removedTimelineActions[removedTimelineActions.size - 1])
+
+        btn_undo.isEnabled = true
+
+        when (removedTimelineActions[removedTimelineActions.size - 1]["action_type"].toString().toLowerCase()) {
+            "score_ball_high" -> {
+                actionOneValue++
+                btn_action_one.text = ("${getString(R.string.btn_action_one)} - $actionOneValue")
+            }
+            "score_ball_low" -> {
+                actionTwoValue++
+                btn_action_two.text = ("${getString(R.string.btn_action_two)} - $actionTwoValue")
+            }
+            "control_panel_rotation" -> {
+                tb_action_one.isChecked = true
+                tb_action_one.isEnabled = false
+            }
+            "control_panel_position" -> {
+                tb_action_two.isChecked = true
+                tb_action_two.isEnabled = false
+            }
+            "start_incap" -> {
+                tb_action_three.isChecked = true
+                enableButtons(false)
+                tb_action_four.isEnabled = false
+            }
+            "end_incap" -> {
+                tb_action_three.isChecked = false
+                enableButtons(true)
+                tb_action_four.isEnabled = true
+            }
+            "start_climb" -> {
+                tb_action_four.isChecked = true
+                enableButtons(false)
+                tb_action_three.isEnabled = false
+            }
+            "end_climb" -> {
+                tb_action_four.isChecked = false
+                enableButtons(true)
+                tb_action_three.isEnabled = true
+            }
+        }
+
+        removedTimelineActions.removeAt(removedTimelineActions.size - 1)
+    }
+
     // Function to enable/disable buttons.
     // To enable, pass through "true," to disable, pass through "false."
     private fun enableButtons(enable: Boolean) {
@@ -212,7 +267,17 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
 
         btn_undo.setOnClickListener(View.OnClickListener {
             timelineRemove()
-            btn_undo.isEnabled = false
+            btn_redo.isEnabled = true
+            if (timeline.size == 0) {
+                btn_undo.isEnabled = false
+            }
+        })
+
+        btn_redo.setOnClickListener(View.OnClickListener {
+            timelineReplace()
+            if (removedTimelineActions.size == 0) {
+                btn_redo.isEnabled = false
+            }
         })
     }
 
