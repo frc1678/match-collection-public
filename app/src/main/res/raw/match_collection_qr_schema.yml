@@ -5,7 +5,7 @@
 schema_file:
   # Version of schema file
   # Incremented every merged schema change
-  version: 11
+  version: 12
 
 # Each decompressed variable name corresponds to a length 2 or 3 list
 # First item is the compressed variable name
@@ -13,22 +13,22 @@ schema_file:
 # Third item (if it exists) is the type within the list
 # Names starting with "_" do not correspond to a compressed variable, they are used to aid in (de)compression
 
-# Data that is shared between the objective and subjective QRs.
+# Data that is shared between the objective and subjective QRs. 
 generic_data:
   _separator: '$' # Separates key:value pairs
   _section_separator: '%' # Separates generic from objective/subjective data
   schema_version: [A, int] # Must remain constant between versions
   serial_number: [B, str]
-  scout_name: [C, str]
-  match_number: [D, int]
-  timestamp: [E, int]
+  match_number: [C, int]
+  timestamp: [D, int]
 
 # Data specific to objective match collection QR
 objective_tim:
   _start_character: '+' # First character in QR used to identify QR type
   _separator: '$' # Separates key:value pairs
   team_number: [Z, int] # int properties not needed but int is more intuitive
-  timeline: [V, list, dict] # List of dictionaries
+  scout_name: [Y, str]
+  timeline: [X, list, dict] # List of dictionaries
 
 # Timeline is part of objective match collection QR
 # Data for an action in the timeline
