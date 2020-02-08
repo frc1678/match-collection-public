@@ -23,7 +23,6 @@
     <string name="tv_counter_starting_value">2</string>
     <string name="btn_proceed">Proceed</string>
     <string name="btn_to_teleop">To Teleop</string>
-    <string name="btn_assignment">Assignment</string>
     <string name="btn_resend">Resend</string>
     <string name="btn_id_default">SCOUT ID: NONE</string>
     <string name="tv_team_number_input_one">Team One</string>

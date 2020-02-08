@@ -38,4 +38,10 @@ class Constants {
         AUTO,
         TELE
     }
+
+    enum class ASSIGN_MODE {
+        NONE,
+        ASSIGNMENT,
+        OVERRIDE
+    }
 }

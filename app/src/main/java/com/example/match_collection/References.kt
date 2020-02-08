@@ -13,6 +13,7 @@ import android.os.CountDownTimer
 // File to store information to be used to create the final match information map.
 var match_timer: CountDownTimer? = null
 var collection_mode: Constants.MODE_SELECTION = Constants.MODE_SELECTION.NONE
+var assign_mode: Constants.ASSIGN_MODE = Constants.ASSIGN_MODE.NONE
 
 // Data that is shared between the objective and subjective QRs.
 var serial_number: String? = ""

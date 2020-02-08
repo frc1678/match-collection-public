@@ -17,6 +17,7 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import android.view.Window
 import androidx.core.app.ActivityCompat
+import kotlinx.android.synthetic.main.match_information_input_activity.*
 import java.io.File
 import kotlinx.android.synthetic.main.mode_collection_select_activity.*
 import java.lang.Exception

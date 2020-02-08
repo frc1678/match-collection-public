@@ -42,8 +42,10 @@
             android:layout_weight="3"
             android:orientation="vertical">
 
-            <Button style="@style/btn_white"
-                android:text="@string/btn_assignment"/>
+            <View style="@style/view_separator_horizontal"/>
+
+            <Spinner style="@style/btn_white"
+                android:id="@+id/spinner_assign_mode"/>
 
             <View style="@style/view_separator_horizontal"/>
 
@@ -89,6 +91,7 @@
 
             <EditText style="@style/et_standard_linear_layout_number"
                 android:id="@+id/et_match_number"
+                android:maxLength="3"
                 android:text=""/>
 
         </LinearLayout>
@@ -107,7 +110,8 @@
                 android:text="@string/tv_team_number_input_one"/>
 
             <EditText style="@style/et_standard_linear_layout_number"
-                android:id="@+id/et_team_one"/>
+                android:id="@+id/et_team_one"
+                android:maxLength="4"/>
 
         </LinearLayout>
 
@@ -128,6 +132,7 @@
 
             <EditText style="@style/et_standard_linear_layout_number"
                 android:id="@+id/et_team_two"
+                android:maxLength="4"
                 android:visibility="invisible"/>
 
         </LinearLayout>
@@ -149,6 +154,7 @@
 
             <EditText style="@style/et_standard_linear_layout_number"
                 android:id="@+id/et_team_three"
+                android:maxLength="4"
                 android:visibility="invisible"/>
 
         </LinearLayout>

@@ -139,30 +139,70 @@ class MatchInformationInputActivity : CollectionActivity() {
     //Assigns team number based on collection mode.
     private fun createMatchNumberTextChangeListener() {
         et_match_number.addTextChangedListener {
-            autoAssignTeamInputsGivenMatch()
-            if (et_match_number.text.toString() != "") {
-                match_number = parseInt(et_match_number.text.toString())
+            if (checkInputNotEmpty(et_match_number)){
+                autoAssignTeamInputsGivenMatch()
+                if (et_match_number.text.toString() != "") {
+                    match_number = parseInt(et_match_number.text.toString())
+                }
             }
         }
     }
 
     //Auto assigns team numbers and separate by collection mode.
     private fun autoAssignTeamInputsGivenMatch() {
-        when (collection_mode) {
-            Constants.MODE_SELECTION.OBJECTIVE -> {
-                if ((scout_id.isEmpty()) or (scout_id == (Constants.NONE_VALUE))) {
-                    createErrorMessage(getString(R.string.scout_id_error),
-                        linear_layout_panels_two)
-                    return
+        if (assign_mode == Constants.ASSIGN_MODE.ASSIGNMENT) {
+            when (collection_mode) {
+                Constants.MODE_SELECTION.OBJECTIVE -> {
+                    if ((scout_id.isEmpty()) or (scout_id == (Constants.NONE_VALUE))) {
+                        createErrorMessage(getString(R.string.scout_id_error),
+                            linear_layout_panels_two)
+                        return
+                    }
+                    assignTeamByScoutIdObjective(et_team_one, (scout_id.toInt() % 6) + 1, et_match_number.text.toString())
                 }
-                assignTeamByScoutIdObjective(et_team_one, (scout_id.toInt() % 6) + 1, et_match_number.text.toString())
+                Constants.MODE_SELECTION.SUBJECTIVE -> {
+                    var iterationNumber = 0
+                    listOf<EditText>(et_team_one, et_team_two, et_team_three).forEach {
+                        assignTeamByScoutIdSubjective(it, alliance_color, et_match_number.text.toString(), iterationNumber)
+                        iterationNumber++
+                    }
+                }
             }
-            Constants.MODE_SELECTION.SUBJECTIVE -> {
-                var iterationNumber = 0
-                listOf<EditText>(et_team_one, et_team_two, et_team_three).forEach {
-                    assignTeamByScoutIdSubjective(it, alliance_color, et_match_number.text.toString(), iterationNumber)
-                    iterationNumber++
+        }
+    }
+
+    //Initialize the adapter and onItemSelectedListener for the assignment mode input.
+    private fun initAssignModeSpinner() {
+        spinner_assign_mode.adapter = StandardSpinnerAdapter(this, arrayListOf("Assignment", "Override"))
+        if (this.getSharedPreferences("PREFS", 0).contains("assignmentMode")) {
+            spinner_assign_mode.setSelection(parseInt(retrieveFromStorage(this, "assignmentMode")))
+        }
+        spinner_assign_mode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                putIntoStorage(this@MatchInformationInputActivity, "assignmentMode", position)
+                if(position == 0){
+                    assign_mode = Constants.ASSIGN_MODE.ASSIGNMENT
+                    et_team_one.isEnabled = false
+                    et_team_two.isEnabled = false
+                    et_team_three.isEnabled = false
+                    if(collection_mode == Constants.MODE_SELECTION.OBJECTIVE){
+                        left_toggle_button.isEnabled = false
+                        right_toggle_button.isEnabled = false
+                    }
+                    autoAssignTeamInputsGivenMatch()
+                }else{
+                    assign_mode = Constants.ASSIGN_MODE.OVERRIDE
+                    et_team_one.isEnabled = true
+                    et_team_two.isEnabled = true
+                    et_team_three.isEnabled = true
+                    if(collection_mode == Constants.MODE_SELECTION.OBJECTIVE){
+                        left_toggle_button.isEnabled = true
+                        right_toggle_button.isEnabled = true
+                    }
                 }
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("not implemented")
             }
         }
     }
@@ -188,6 +228,11 @@ class MatchInformationInputActivity : CollectionActivity() {
     //Assigns the team number for objective.
     private fun assignTeamByScoutIdObjective(teamInput: EditText, scoutId: Int, matchNumber: String) {
         teamInput.setText(removeTeamPrefix(getTeamOfGivenMatch(getMatchInfo(matchNumber), scoutId)))
+        if (getTeamOfGivenMatch(getMatchInfo(matchNumber), scoutId).contains("R")) {
+            switchBorderToRightToggle()
+        }else{
+            switchBorderToLeftToggle()
+        }
     }
 
     //Assign team numbers for subjective based on alliance color.
@@ -351,9 +396,8 @@ class MatchInformationInputActivity : CollectionActivity() {
         initScoutIdLongClick(noneValueText = Constants.NONE_VALUE, idMin = 1, idMax = Constants.NUMBER_OF_ACTIVE_SCOUTS)
         checkCollectionMode()
         createMatchNumberTextChangeListener()
-        autoAssignTeamInputsGivenMatch()
         initProceedButton()
-
+        initAssignModeSpinner()
 
     }
 
