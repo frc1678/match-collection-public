@@ -36,6 +36,7 @@ class MatchInformationInputActivity : CollectionActivity() {
 
     //Create the onclick listener for the proceed button.
     private fun initProceedButton() {
+        requestReadPhoneState(this, this)
         btn_proceed_match_start.setOnClickListener { view ->
             if (getSerialNum(this) == null) {
                 createErrorMessage("NO SERIAL NUMBER - PLEASE ENABLE PHONE PERMISSIONS", view)
@@ -150,6 +151,7 @@ class MatchInformationInputActivity : CollectionActivity() {
 
     //Auto assigns team numbers and separate by collection mode.
     private fun autoAssignTeamInputsGivenMatch() {
+        requestWriteExternalStorage(this, this)
         if (assign_mode == Constants.ASSIGN_MODE.ASSIGNMENT) {
             when (collection_mode) {
                 Constants.MODE_SELECTION.OBJECTIVE -> {
@@ -360,6 +362,7 @@ class MatchInformationInputActivity : CollectionActivity() {
         }
 
         btn_scout_id.setOnLongClickListener {
+            requestReadPhoneState(this, this)
             dialog.show()
             dialog.lv_scout_id_view.adapter =
                 ArrayAdapter<Any>(this, android.R.layout.simple_list_item_1,

@@ -69,26 +69,8 @@ class ModeCollectionSelectActivity : CollectionActivity() {
 
         setContentView(R.layout.mode_collection_select_activity)
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            != PackageManager.PERMISSION_GRANTED) {
-            try {
-                ActivityCompat.requestPermissions(
-                    this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    100)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
-            != PackageManager.PERMISSION_GRANTED){
-            try {
-                ActivityCompat.requestPermissions(
-                    Activity(), arrayOf(Manifest.permission.READ_PHONE_STATE),
-                    99)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
+        requestWriteExternalStorage(this, this)
+        requestReadPhoneState(this, this)
 
         if (File(this.getExternalFilesDir(null)!!.absolutePath + "/match_schedule.csv").exists()) {
             csvFileRead(file = "match_schedule.csv", skipHeader = false)
