@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/objective_match_collection_layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
@@ -12,7 +13,8 @@
 
         <Button style="@style/btn_proceed"
             android:id="@+id/btn_timer"
-            android:text="@string/btn_timer_start">
+            android:text="@string/btn_timer_start"
+            android:enabled="true">
         </Button>
 
         <TextView
@@ -27,7 +29,8 @@
 
         <Button style="@style/btn_proceed"
             android:id="@+id/btn_proceed_qr_generate"
-            android:text="@string/btn_to_teleop"
+            android:layout_height="60dp"
+            android:text="@string/btn_to_tele"
             android:enabled="false">
         </Button>
     </LinearLayout>

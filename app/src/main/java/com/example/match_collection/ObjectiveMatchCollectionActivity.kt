@@ -5,20 +5,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.objective_match_collection.*
+import java.lang.Integer.parseInt
 
-//Determines the functions for UI elements (ie Buttons, ToggleButtons) in the Objective Match Data Screen.
+
+// Determines the functions for UI elements (ie Buttons, ToggleButtons) in the Objective Match Data Screen.
 class ObjectiveMatchCollectionActivity : CollectionActivity() {
-    //Define all variables.
-    var actionOneValue = 0
-    var actionTwoValue = 0
-
+    // Define all variables.
+    private var actionOneValue = 0
+    private var actionTwoValue = 0
     private var isTimerRunning = false
+    private var isTeleActivated = false
     var removedTimelineActions: ArrayList<HashMap<String, String>> = ArrayList()
 
-    //Adds a hashmap to the timeline variable including action type, is successful, and is defended.
-    //If is_defended or is_successful are not applicable, pass in null for parameters.
+    // Function that returns stage to be displayed on timer.
     fun returnStage(time: Int): Constants.STAGE {
-        var stage: Constants.STAGE
+        val stage: Constants.STAGE
         if (time >= 135) {
             stage = Constants.STAGE.AUTO
         } else {
@@ -27,7 +28,7 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         return (stage)
     }
 
-    //Function to set timer to start match when timer is pressed before actual match start.
+    // Function to set timer to start match when timer is pressed before actual match start.
     private fun timerReset() {
         match_timer?.cancel()
         match_timer = null
@@ -36,7 +37,7 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         btn_timer.text = getString(R.string.btn_timer_start)
     }
 
-    //Function to end incap or climb if still activated at match end.
+    // Function to end incap or climb if still activated at match end.
     fun endAction () {
         if (tb_action_three.isChecked == true) {
             tb_action_three.isChecked = false
@@ -48,8 +49,8 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         }
     }
 
-    //Adds a hashmap to the timeline variable including action type, is successful, and is defended.
-    //If is_defended or is_successful are not applicable, pass in null for parameters.
+    // Adds a hashmap to the timeline variable including action type, is successful, and is defended.
+    // If is_defended or is_successful are not applicable, pass in null for parameters.
     private fun timelineAdd(match_time: String, action_type: Constants.ACTION_TYPE) {
         val actionHashMap: HashMap<String, String> = hashMapOf(
             Pair("match_time", "$match_time"),
@@ -177,9 +178,21 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         }
     }
 
+    // Function to set texts of high and low goal counters.
     private fun setCounterTexts() {
         btn_action_one.setText("${getString(R.string.btn_action_one)} - 0")
         btn_action_two.setText("${getString(R.string.btn_action_two)} - 0")
+    }
+
+    // Function to add to timeline depending on whether Tele is activated.
+    private fun timelineAddWithStage(action_type: Constants.ACTION_TYPE) {
+        if (!isTeleActivated && parseInt(match_time) < 135) {
+            timelineAdd(getString(R.string.final_auto_time), action_type)
+        } else if (isTeleActivated && parseInt(match_time) > 135) {
+            timelineAdd(getString(R.string.initial_tele_time), action_type)
+        } else {
+            timelineAdd(match_time, action_type)
+        }
     }
 
     // Initialize onClickListeners for timer, proceed button, and robot actions (which add to timeline).
@@ -190,52 +203,58 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
                 isTimerRunning = true
                 tb_action_three.isEnabled = true
                 enableButtons(true)
+                btn_proceed_qr_generate.isEnabled = true
             } else {
                 timerReset()
                 timeline = ArrayList()
                 isTimerRunning = false
+                isTeleActivated = false
                 tb_action_three.isEnabled = false
                 enableButtons(false)
+                btn_proceed_qr_generate.isEnabled = false
+                btn_proceed_qr_generate.text = getString(R.string.btn_to_tele)
             }
-
-            // TODO Disable timer button and enable incap toggle button.
-            // TODO Enable incap toggle button separate from enableButtons function, as enableButtons
-            //      is primarily used for disabling/enabling buttons when incap is checked/unchecked.
-
-
         })
 
         btn_proceed_qr_generate.setOnClickListener (View.OnClickListener {
-            endAction()
-            val intent = Intent(this, QRGenerateActivity::class.java)
-            startActivity(
-                intent, ActivityOptions.makeSceneTransitionAnimation(
-                    this,
-                    btn_proceed_qr_generate, "proceed_button"
-                ).toBundle()
-            )
+            if (!isTeleActivated) {
+                isTeleActivated = true
+                btn_proceed_qr_generate.setText("${getString(R.string.btn_proceed)}")
+                btn_proceed_qr_generate.isEnabled = false
+            } else {
+                endAction()
+                val intent = Intent(this, QRGenerateActivity::class.java)
+                startActivity(
+                    intent, ActivityOptions.makeSceneTransitionAnimation(
+                        this,
+                        btn_proceed_qr_generate, "proceed_button"
+                    ).toBundle()
+                )
+            }
         })
 
         btn_action_one.setOnClickListener(View.OnClickListener {
             actionOneValue++
             btn_action_one.setText("${getString(R.string.btn_action_one)} - $actionOneValue")
-            timelineAdd(match_time, Constants.ACTION_TYPE.SCORE_BALL_HIGH)
+            timelineAddWithStage(Constants.ACTION_TYPE.SCORE_BALL_HIGH)
         })
 
         btn_action_two.setOnClickListener(View.OnClickListener {
             actionTwoValue++
             btn_action_two.setText("${getString(R.string.btn_action_two)} - $actionTwoValue")
-            timelineAdd(match_time, Constants.ACTION_TYPE.SCORE_BALL_LOW)
+            timelineAddWithStage(Constants.ACTION_TYPE.SCORE_BALL_LOW)
         })
 
         tb_action_one.setOnClickListener(View.OnClickListener {
             timelineAdd(match_time, Constants.ACTION_TYPE.CONTROL_PANEL_ROTATION)
             tb_action_one.isEnabled = false
+            // TODO ADD SAFETY SO ROTATION AND POSITION CONTROL CANNOT BE ACTIVATED DURING AUTO
         })
 
         tb_action_two.setOnClickListener(View.OnClickListener {
             timelineAdd(match_time, Constants.ACTION_TYPE.CONTROL_PANEL_POSITION)
             tb_action_two.isEnabled = false
+            // TODO ADD SAFETY SO ROTATION CONTROL CANNOT BE ACTIVATED AFTER POSITION CONTROL
         })
 
         tb_action_three.setOnClickListener(View.OnClickListener {
@@ -261,7 +280,7 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
                 timelineAdd(match_time, Constants.ACTION_TYPE.END_CLIMB)
                 enableButtons(true)
                 tb_action_three.isEnabled = true
-                //TODO ADD SAFETY SO CLIMB BUTTON CAN ONLY BE PRESSED IN LAST 30 SEC
+                // TODO ADD SAFETY SO CLIMB BUTTON CAN ONLY BE PRESSED IN LAST 30 SEC
             }
         })
 
