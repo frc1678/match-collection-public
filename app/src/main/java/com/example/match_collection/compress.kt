@@ -31,7 +31,6 @@ fun compress(schema: HashMap<String, HashMap<String, Any>>, context: Context, mo
     // Define compression characters for generic data.
     val compressSchemaVersion = genericData.getValue("schema_version").toString().split(",")[0]
     val compressSerialNumber = genericData.getValue("serial_number").toString().split(",")[0]
-    val compressScoutName = genericData.getValue("scout_name").toString().split(",")[0]
     val compressMatchNumber = genericData.getValue("match_number").toString().split(",")[0]
     val compressTimestamp = genericData.getValue("timestamp").toString().split(",")[0]
 
@@ -40,6 +39,7 @@ fun compress(schema: HashMap<String, HashMap<String, Any>>, context: Context, mo
     val objectiveSeparator = objectiveData.getValue("_separator").toString()
     // Define compression characters for objective data.
     val compressTeamNumber = objectiveData.getValue("team_number").toString().split(",")[0]
+    val compressScoutName = objectiveData.getValue("scout_name").toString().split(",")[0]
     val compressTimeline = objectiveData.getValue("timeline").toString().split(",")[0]
 
     // Define compression characters for subjective separators.
