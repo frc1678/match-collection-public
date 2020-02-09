@@ -54,7 +54,6 @@ fun compress(schema: HashMap<String, HashMap<String, Any>>, context: Context, mo
     compressedMatchInformation =
         compressSchemaVersion + schemaVersion + genericSeparator +
                 compressSerialNumber + serial_number + genericSeparator +
-                compressScoutName + scout_name.toUpperCase() + genericSeparator +
                 compressMatchNumber + match_number + genericSeparator +
                 compressTimestamp + timestamp +
                 genericSectionSeparator
@@ -74,6 +73,7 @@ fun compress(schema: HashMap<String, HashMap<String, Any>>, context: Context, mo
         // timeline actions.
         compressedMatchInformation = objectiveStartCharacter + compressedMatchInformation +
                 compressTeamNumber + team_number + objectiveSeparator +
+                compressScoutName + scout_name.toUpperCase() + objectiveSeparator +
                 compressTimeline + compressTimelineActions
     }
     // Compress and add subjective relative data collection.
