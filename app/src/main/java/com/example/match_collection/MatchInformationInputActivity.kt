@@ -232,8 +232,10 @@ class MatchInformationInputActivity : CollectionActivity() {
         teamInput.setText(removeTeamPrefix(getTeamOfGivenMatch(getMatchInfo(matchNumber), scoutId)))
         if (getTeamOfGivenMatch(getMatchInfo(matchNumber), scoutId).contains("R")) {
             switchBorderToRightToggle()
+            alliance_color = Constants.ALLIANCE_COLOR.RED
         }else{
             switchBorderToLeftToggle()
+            alliance_color = Constants.ALLIANCE_COLOR.BLUE
         }
     }
 
