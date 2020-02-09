@@ -15,7 +15,7 @@
         <item name="android:background">@drawable/btn_white_selector</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">40dp</item>
     </style>
 
     <style name="et_standard_linear_layout_number" parent="android:Widget">
@@ -42,8 +42,8 @@
         <item name="android:layout_margin">@dimen/very_small</item>
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
-        <item name="android:textSize">18dp</item>
-        <item name="android:layout_marginLeft">@dimen/very_small</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:padding">20dp</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
@@ -67,8 +67,8 @@
         <item name="android:background">@drawable/btn_action_selector</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">30sp</item>
         <item name="android:layout_margin">10dp</item>
@@ -78,7 +78,7 @@
         <item name="android:background">@drawable/btn_proceed_selector</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">20sp</item>
         <item name="android:layout_margin">10dp</item>
@@ -88,8 +88,8 @@
         <item name="android:background">@drawable/tb_control_selector</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">30sp</item>
         <item name="android:layout_margin">10dp</item>
@@ -99,8 +99,8 @@
         <item name="android:background">@drawable/tb_incap_selector</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">30sp</item>
         <item name="android:layout_margin">10dp</item>
@@ -110,8 +110,8 @@
         <item name="android:background">@drawable/tb_climb_selector</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">30sp</item>
         <item name="android:layout_margin">10dp</item>
@@ -121,9 +121,9 @@
         <item name="android:background">@drawable/btn_undo_selector</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:layout_weight">0.5</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:textSize">30sp</item>
         <item name="android:layout_margin">10dp</item>
         <item name="android:enabled">false</item>
@@ -132,9 +132,9 @@
         <item name="android:background">@drawable/btn_redo_selector</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:layout_weight">0.5</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:textSize">30sp</item>
         <item name="android:layout_margin">10dp</item>
         <item name="android:enabled">false</item>
@@ -145,17 +145,17 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:text">@string/btn_plus</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">80dp</item>
         <item name="android:gravity">center</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">30sp</item>
     </style>
     <style name="btn_minus" parent="android:Widget">
         <item name="android:background">@drawable/btn_minus_selector</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:text">@string/btn_minus</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">80dp</item>
         <item name="android:gravity">center</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">30sp</item>
     </style>
 </resources>

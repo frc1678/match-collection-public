@@ -36,12 +36,12 @@ class Constants {
     }
     enum class STAGE {
         AUTO,
-        TELE
+        TELEOP
     }
 
     enum class ASSIGN_MODE {
         NONE,
-        ASSIGNMENT,
+        AUTOMATIC_ASSIGNMENT,
         OVERRIDE
     }
 }

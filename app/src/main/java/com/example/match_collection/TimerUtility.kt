@@ -20,7 +20,7 @@ class TimerUtility {
                     match_time = (time - 1).toInt().toString().padStart(3, '0')
                 }
                 override fun onFinish() {
-                    btn_timer.setText(R.string.btn_timer_tele_zero)
+                    btn_timer.setText("${ObjectiveMatchCollectionActivity().returnStage(time.roundToInt())} - 0")
                     btn_timer.isEnabled = false
                     btn_proceed.isEnabled = true
                 }

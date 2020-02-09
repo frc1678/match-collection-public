@@ -49,11 +49,6 @@
 
             <View style="@style/view_separator_horizontal"/>
 
-            <Button style="@style/btn_white"
-                android:text="@string/btn_resend"/>
-
-            <View style="@style/view_separator_horizontal"/>
-
             <Spinner style="@style/btn_white"
                 android:id="@+id/spinner_scout_name" />
 

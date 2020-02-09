@@ -9,8 +9,8 @@
         android:id="@+id/tv_team_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:textSize="50sp"
+        android:paddingTop="20dp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:layout_centerHorizontal="true" />
 
@@ -21,7 +21,7 @@
         custom:dataName="Speed"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tv_team_number"
-        android:layout_marginEnd="45dp"/>
+        android:layout_marginEnd="30dp"/>
     <com.example.match_collection.Counter
         android:id="@+id/counter_agility"
         android:layout_width="wrap_content"
@@ -30,5 +30,5 @@
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/tv_team_number"
         android:layout_toRightOf="@+id/counter_speed"
-        android:layout_marginStart="45dp"/>
+        android:layout_marginStart="30dp"/>
 </RelativeLayout>

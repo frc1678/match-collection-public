@@ -152,7 +152,7 @@ class MatchInformationInputActivity : CollectionActivity() {
     //Auto assigns team numbers and separate by collection mode.
     private fun autoAssignTeamInputsGivenMatch() {
         requestWriteExternalStorage(this, this)
-        if (assign_mode == Constants.ASSIGN_MODE.ASSIGNMENT) {
+        if (assign_mode == Constants.ASSIGN_MODE.AUTOMATIC_ASSIGNMENT) {
             when (collection_mode) {
                 Constants.MODE_SELECTION.OBJECTIVE -> {
                     if ((scout_id.isEmpty()) or (scout_id == (Constants.NONE_VALUE))) {
@@ -175,7 +175,7 @@ class MatchInformationInputActivity : CollectionActivity() {
 
     //Initialize the adapter and onItemSelectedListener for the assignment mode input.
     private fun initAssignModeSpinner() {
-        spinner_assign_mode.adapter = StandardSpinnerAdapter(this, arrayListOf("Assignment", "Override"))
+        spinner_assign_mode.adapter = StandardSpinnerAdapter(this, arrayListOf("Automatic Assignment", "Override"))
         if (this.getSharedPreferences("PREFS", 0).contains("assignmentMode")) {
             spinner_assign_mode.setSelection(parseInt(retrieveFromStorage(this, "assignmentMode")))
         }
@@ -183,7 +183,7 @@ class MatchInformationInputActivity : CollectionActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 putIntoStorage(this@MatchInformationInputActivity, "assignmentMode", position)
                 if(position == 0){
-                    assign_mode = Constants.ASSIGN_MODE.ASSIGNMENT
+                    assign_mode = Constants.ASSIGN_MODE.AUTOMATIC_ASSIGNMENT
                     et_team_one.isEnabled = false
                     et_team_two.isEnabled = false
                     et_team_three.isEnabled = false
@@ -365,7 +365,7 @@ class MatchInformationInputActivity : CollectionActivity() {
             requestReadPhoneState(this, this)
             dialog.show()
             dialog.lv_scout_id_view.adapter =
-                ArrayAdapter<Any>(this, android.R.layout.simple_list_item_1,
+                ArrayAdapter<Any>(this, R.layout.scout_id_text_view,
                     scoutIdContentsList(noneValueText, idMin, idMax))
             dialog.lv_scout_id_view.setOnItemClickListener { _, _, position, _ ->
                 btn_scout_id.text = getString(R.string.btn_scout_id_message,

@@ -4,9 +4,6 @@
     <string name="btn_objective_collection_select">Objective Collection</string>
     <string name="btn_subjective_collection_select">Subjective Collection</string>
     <string name="btn_timer_start">Start Match</string>
-    <string name="btn_timer_auto">Auto</string>
-    <string name="btn_timer_tele">Tele</string>
-    <string name="btn_timer_tele_zero">Tele - 0</string>
     <string name="btn_action_one">High Goal</string>
     <string name="btn_action_two">Low Goal</string>
     <string name="tb_action_bool_one_off">Rotation</string>
@@ -23,8 +20,8 @@
     <string name="btn_minus">-</string>
     <string name="tv_counter_starting_value">2</string>
     <string name="btn_proceed">Proceed</string>
-    <string name="btn_to_tele">To Tele</string>
-    <string name="btn_assignment">Assignment</string>
+    <string name="btn_to_teleop">To Teleop</string>
+    <string name="btn_assignment">Automatic Assignment</string>
     <string name="btn_resend">Resend</string>
     <string name="btn_id_default">SCOUT ID: NONE</string>
     <string name="tv_team_number_input_one">Team One</string>

@@ -6,6 +6,8 @@
     <ListView
         android:id="@+id/lv_scout_id_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:divider="@color/black"
+        android:dividerHeight="1dp"/>
 
 </RelativeLayout>

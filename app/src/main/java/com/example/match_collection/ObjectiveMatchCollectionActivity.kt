@@ -23,7 +23,7 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         if (time >= 135) {
             stage = Constants.STAGE.AUTO
         } else {
-            stage = Constants.STAGE.TELE
+            stage = Constants.STAGE.TELEOP
         }
         return (stage)
     }
@@ -212,7 +212,7 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
                 tb_action_three.isEnabled = false
                 enableButtons(false)
                 btn_proceed_qr_generate.isEnabled = false
-                btn_proceed_qr_generate.text = getString(R.string.btn_to_tele)
+                btn_proceed_qr_generate.text = getString(R.string.btn_to_teleop)
             }
         })
 
