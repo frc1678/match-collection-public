@@ -209,9 +209,19 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
                 TimerUtility.MatchTimerThread().initTimer(btn_timer, btn_proceed_qr_generate)
                 isTimerRunning = true
                 tb_action_three.isEnabled = true
-                enableButtons(tb_action_one, tb_action_two, tb_action_three, tb_action_four, enable = false)
+                enableButtons(
+                    tb_action_one,
+                    tb_action_two,
+                    tb_action_three,
+                    tb_action_four,
+                    enable = false
+                )
                 btn_proceed_qr_generate.isEnabled = true
-            } else {
+            }
+        })
+
+        btn_timer.setOnLongClickListener(View.OnLongClickListener {
+            if (isTimerRunning && !isTeleActivated) {
                 timerReset()
                 timeline = ArrayList()
                 isTimerRunning = false
@@ -220,7 +230,9 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
                 btn_proceed_qr_generate.isEnabled = false
                 btn_proceed_qr_generate.text = getString(R.string.btn_to_teleop)
             }
+            return@OnLongClickListener true
         })
+
 
         btn_proceed_qr_generate.setOnClickListener (View.OnClickListener {
             if (!isTeleActivated) {
