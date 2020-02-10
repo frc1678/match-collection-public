@@ -31,6 +31,10 @@ class QRGenerateActivity: CollectionActivity() {
         }
     }
 
+    // Prevents user from going back to previous screen unless it is a long click.
+    override fun onBackPressed() {
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.qr_generate)

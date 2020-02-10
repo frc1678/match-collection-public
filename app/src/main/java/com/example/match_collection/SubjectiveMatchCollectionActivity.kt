@@ -62,6 +62,10 @@ class SubjectiveMatchCollectionActivity : CollectionActivity() {
         }
     }
 
+    // Prevents user from going back to previous screen unless it is a long click.
+    override fun onBackPressed() {
+    }
+
     // Initiate counter panels for the three different teams.
     fun initPanels() {
         panelOne = supportFragmentManager.findFragmentById(R.id.robotOne) as CounterPanel

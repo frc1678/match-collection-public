@@ -202,6 +202,10 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         }
     }
 
+    // Prevents user from going back to previous screen unless it is a long click.
+    override fun onBackPressed() {
+    }
+
     // Initialize onClickListeners for timer, proceed button, and robot actions (which add to timeline).
     private fun initOnClicks() {
         btn_timer.setOnClickListener(View.OnClickListener {
