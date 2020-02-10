@@ -40,6 +40,7 @@ fun compress(schema: HashMap<String, HashMap<String, Any>>, context: Context, mo
     // Define compression characters for objective data.
     val compressTeamNumber = objectiveData.getValue("team_number").toString().split(",")[0]
     val compressScoutName = objectiveData.getValue("scout_name").toString().split(",")[0]
+    val compressScoutId = objectiveData.getValue("scout_id").toString().split(",")[0]
     val compressTimeline = objectiveData.getValue("timeline").toString().split(",")[0]
 
     // Define compression characters for subjective separators.
@@ -74,6 +75,7 @@ fun compress(schema: HashMap<String, HashMap<String, Any>>, context: Context, mo
         compressedMatchInformation = objectiveStartCharacter + compressedMatchInformation +
                 compressTeamNumber + team_number + objectiveSeparator +
                 compressScoutName + scout_name.toUpperCase() + objectiveSeparator +
+                compressScoutId + scout_id + objectiveSeparator +
                 compressTimeline + compressTimelineActions
     }
     // Compress and add subjective relative data collection.
