@@ -119,7 +119,7 @@ class MatchInformationInputActivity : CollectionActivity() {
         if (collection_mode == Constants.MODE_SELECTION.SUBJECTIVE) {
             makeViewVisible(et_team_two, et_team_three, tv_hint_team_two, tv_hint_team_three,
                 separator_team_one_two, separator_team_two_three)
-            makeViewInisible(spinner_scout_name, separator_name_id, btn_scout_id)
+            makeViewInvisible(spinner_scout_name, separator_name_id, btn_scout_id)
         }
     }
 
@@ -131,7 +131,7 @@ class MatchInformationInputActivity : CollectionActivity() {
     }
 
     // Allow for inputs to become invisible.
-    private fun makeViewInisible(vararg views: View) {
+    private fun makeViewInvisible(vararg views: View) {
         for (view in views) {
             view.visibility = View.INVISIBLE
         }
