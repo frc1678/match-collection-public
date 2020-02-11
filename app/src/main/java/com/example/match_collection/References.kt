@@ -13,6 +13,7 @@ import android.os.CountDownTimer
 // File to store information to be used to create the final match information map.
 var match_timer: CountDownTimer? = null
 var match_time: String = ""
+var is_tele_activated: Boolean = false
 var collection_mode: Constants.MODE_SELECTION = Constants.MODE_SELECTION.NONE
 var assign_mode: Constants.ASSIGN_MODE = Constants.ASSIGN_MODE.NONE
 
@@ -34,6 +35,8 @@ var agility_rankings: List<String> = emptyList()
 
 // Function to reset References.kt variables for new match.
 fun resetReferences() {
+    is_tele_activated = false
+
     scout_name = ""
     scout_id = ""
     timestamp = 0

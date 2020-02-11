@@ -2,6 +2,7 @@ package com.example.match_collection
 
 import android.app.ActivityOptions
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.ToggleButton
@@ -15,7 +16,6 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
     private var actionOneValue = 0
     private var actionTwoValue = 0
     private var isTimerRunning = false
-    private var isTeleActivated = false
     var removedTimelineActions: ArrayList<HashMap<String, String>> = ArrayList()
 
     // Function that returns stage to be displayed on timer.
@@ -173,7 +173,7 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         btn_action_two.isEnabled = enable
 
         for (action in actions) {
-            if (!isTeleActivated) {
+            if (!is_tele_activated) {
                 action.isEnabled = enable
                 btn_action_one.isEnabled = !enable
                 btn_action_two.isEnabled = !enable
@@ -193,9 +193,9 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
 
     // Function to add to timeline depending on whether Tele is activated.
     private fun timelineAddWithStage(action_type: Constants.ACTION_TYPE) {
-        if (!isTeleActivated && parseInt(match_time) < 135) {
+        if (!is_tele_activated && parseInt(match_time) < 135) {
             timelineAdd(getString(R.string.final_auto_time), action_type)
-        } else if (isTeleActivated && parseInt(match_time) > 135) {
+        } else if (is_tele_activated && parseInt(match_time) > 135) {
             timelineAdd(getString(R.string.initial_tele_time), action_type)
         } else {
             timelineAdd(match_time, action_type)
@@ -210,7 +210,7 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
     private fun initOnClicks() {
         btn_timer.setOnClickListener(View.OnClickListener {
             if (!isTimerRunning) {
-                TimerUtility.MatchTimerThread().initTimer(btn_timer, btn_proceed_qr_generate)
+                TimerUtility.MatchTimerThread().initTimer(btn_timer, btn_proceed_qr_generate, objective_match_collection_layout)
                 isTimerRunning = true
                 tb_action_three.isEnabled = true
                 enableButtons(
@@ -225,25 +225,27 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         })
 
         btn_timer.setOnLongClickListener(View.OnLongClickListener {
-            if (isTimerRunning && !isTeleActivated) {
+            if (isTimerRunning && !is_tele_activated) {
                 timerReset()
                 timeline = ArrayList()
                 isTimerRunning = false
-                isTeleActivated = false
+                is_tele_activated = false
                 tb_action_three.isEnabled = false
                 btn_proceed_qr_generate.isEnabled = false
                 btn_proceed_qr_generate.text = getString(R.string.btn_to_teleop)
+                objective_match_collection_layout.setBackgroundColor(Color.WHITE)
             }
             return@OnLongClickListener true
         })
 
 
         btn_proceed_qr_generate.setOnClickListener (View.OnClickListener {
-            if (!isTeleActivated) {
-                isTeleActivated = true
+            if (!is_tele_activated) {
+                is_tele_activated = true
                 enableButtons(tb_action_one, tb_action_two, tb_action_three, tb_action_four, enable = true)
                 btn_proceed_qr_generate.setText("${getString(R.string.btn_proceed)}")
                 btn_proceed_qr_generate.isEnabled = false
+                objective_match_collection_layout.setBackgroundColor(Color.WHITE)
             } else {
                 endAction()
                 val intent = Intent(this, QRGenerateActivity::class.java)
