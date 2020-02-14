@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.widget.ToggleButton
 import kotlinx.android.synthetic.main.objective_match_collection.*
 import java.lang.Integer.parseInt
 
@@ -61,6 +60,7 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         removedTimelineActions.clear()
 
         // Enable the undo button because an action has been added to the timeline.
+        enableButtons()
         btn_undo.isEnabled = true
         btn_redo.isEnabled = false
         btn_timer.isEnabled = false
@@ -70,6 +70,7 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
     private fun timelineRemove() {
         // Decrement action values and display on counters by one if removing a counter action from the timeline.
         // Reset the toggle buttons to their previous state if removing a toggled action from the timeline.
+
         when (timeline[timeline.size - 1]["action_type"].toString().toLowerCase()) {
             "score_ball_high" -> {
                 actionOneValue--
@@ -79,53 +80,23 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
                 actionTwoValue--
                 btn_action_two.text = ("${getString(R.string.btn_action_two)} - $actionTwoValue")
             }
-            "control_panel_rotation" -> {
-                tb_action_one.isChecked = false
-                tb_action_one.isEnabled = true
-            }
-            "control_panel_position" -> {
-                tb_action_two.isChecked = false
-                tb_action_two.isEnabled = true
-                if (!tb_action_one.isEnabled){
-                    tb_action_one.isEnabled = true
-                }
-            }
-            "start_incap" -> {
-                tb_action_three.isChecked = false
-                enableButtons(tb_action_one, tb_action_two, tb_action_four, enable = true)
-                tb_action_four.isEnabled = true
-            }
-            "end_incap" -> {
-                tb_action_three.isChecked = true
-                enableButtons(tb_action_one, tb_action_two, tb_action_four, enable = false)
-                tb_action_four.isEnabled = false
-            }
-            "start_climb" -> {
-                tb_action_four.isChecked = false
-                enableButtons(tb_action_one, tb_action_two, tb_action_four, enable = true)
-                tb_action_three.isEnabled = true
-            }
-            "end_climb" -> {
-                tb_action_four.isChecked = true
-                enableButtons(tb_action_one, tb_action_two, tb_action_four, enable = false)
-                tb_action_three.isEnabled = false
-            }
         }
 
         removedTimelineActions.add(timeline.get(timeline.size - 1)) //value of index timeline.size - 1
 
         // Remove most recent timeline entry.
         timeline.removeAt(timeline.size - 1)
+
+        enableButtons()
     }
 
     // Redo timeline actions after undo.
     private fun timelineReplace() {
         timeline.add(removedTimelineActions[removedTimelineActions.size - 1])
-
         btn_undo.isEnabled = true
 
         when (removedTimelineActions[removedTimelineActions.size - 1]["action_type"].toString().toLowerCase()) {
-            "score_ball_high" -> {
+           "score_ball_high" -> {
                 actionOneValue++
                 btn_action_one.text = ("${getString(R.string.btn_action_one)} - $actionOneValue")
             }
@@ -133,56 +104,48 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
                 actionTwoValue++
                 btn_action_two.text = ("${getString(R.string.btn_action_two)} - $actionTwoValue")
             }
-            "control_panel_rotation" -> {
-                tb_action_one.isChecked = true
-                tb_action_one.isEnabled = false
-            }
-            "control_panel_position" -> {
-                tb_action_two.isChecked = true
-                tb_action_two.isEnabled = false
-            }
-            "start_incap" -> {
-                tb_action_three.isChecked = true
-                enableButtons(tb_action_one, tb_action_two, tb_action_four, enable = false)
-                tb_action_four.isEnabled = false
-            }
-            "end_incap" -> {
-                tb_action_three.isChecked = false
-                enableButtons(tb_action_one, tb_action_two, tb_action_four, enable = true)
-                tb_action_four.isEnabled = true
-            }
-            "start_climb" -> {
-                tb_action_four.isChecked = true
-                enableButtons(tb_action_one, tb_action_two, tb_action_four, enable = false)
-                tb_action_three.isEnabled = false
-            }
-            "end_climb" -> {
-                tb_action_four.isChecked = false
-                enableButtons(tb_action_one, tb_action_two, tb_action_four, enable = true)
-                tb_action_three.isEnabled = true
-            }
         }
 
         removedTimelineActions.removeAt(removedTimelineActions.size - 1)
+
+        enableButtons()
     }
 
-    // Function to enable/disable buttons
-    // To enable, pass through "true," to disable, pass through "false."
-    private fun enableButtons(vararg actions: ToggleButton, enable: Boolean) {
-        btn_action_one.isEnabled = enable
-        btn_action_two.isEnabled = enable
+    // Disables buttons when one of the condition booleans are true
+    private fun enableButtons() {
+        var isIncap = false
+        var hasClimbed = false
+        var isClimbing = false
+        var positionActivated = false
+        var rotationActivated = false
 
-        for (action in actions) {
-            if (!is_tele_activated) {
-                action.isEnabled = enable
-                btn_action_one.isEnabled = !enable
-                btn_action_two.isEnabled = !enable
-            }
-
-            if (!action.isChecked) {
-                action.isEnabled = enable
-            }
+        // If timeline has data assigns condition booleans.
+        if (timeline.size > 0) {
+            isIncap = timeline[timeline.size - 1].containsValue(Constants.ACTION_TYPE.START_INCAP.toString())
+            hasClimbed = timeline.toString().contains(Constants.ACTION_TYPE.END_CLIMB.toString())
+            isClimbing = timeline[timeline.size - 1].containsValue(Constants.ACTION_TYPE.START_CLIMB.toString())
+            positionActivated = timeline.toString().contains(Constants.ACTION_TYPE.CONTROL_PANEL_POSITION.toString())
+            rotationActivated = timeline.toString().contains(Constants.ACTION_TYPE.CONTROL_PANEL_ROTATION.toString())
         }
+
+        btn_action_one.isEnabled = !(isClimbing or isIncap)
+        btn_action_two.isEnabled = !(isClimbing or isIncap)
+
+        tb_action_one.isEnabled = !(!isTeleActivated or isClimbing or isIncap or positionActivated or rotationActivated)
+        tb_action_one.isChecked = (rotationActivated)
+
+        tb_action_two.isEnabled = !(!isTeleActivated or isClimbing or isIncap or positionActivated)
+        tb_action_two.isChecked = (positionActivated)
+
+        tb_action_three.isEnabled = !(!isTeleActivated or isClimbing)
+        tb_action_three.isChecked = (isIncap)
+
+        tb_action_four.isEnabled = !(!isTeleActivated or isIncap or hasClimbed)
+        tb_action_four.isChecked = (isClimbing)
+        if(hasClimbed) {
+            tb_action_four.setText("${getString(R.string.tb_action_bool_four_disabled)}")
+        }
+
     }
 
     // Function to set texts of high and low goal counters.
@@ -212,25 +175,20 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
             if (!isTimerRunning) {
                 TimerUtility.MatchTimerThread().initTimer(btn_timer, btn_proceed_qr_generate, objective_match_collection_layout)
                 isTimerRunning = true
-                tb_action_three.isEnabled = true
-                enableButtons(
-                    tb_action_one,
-                    tb_action_two,
-                    tb_action_three,
-                    tb_action_four,
-                    enable = false
-                )
+                enableButtons()
                 btn_proceed_qr_generate.isEnabled = true
             }
         })
 
         btn_timer.setOnLongClickListener(View.OnLongClickListener {
-            if (isTimerRunning && !is_tele_activated) {
+
+
+            if (isTimerRunning && !isTeleActivated) {
                 timerReset()
                 timeline = ArrayList()
                 isTimerRunning = false
-                is_tele_activated = false
-                tb_action_three.isEnabled = false
+                isTeleActivated = false
+                enableButtons()
                 btn_proceed_qr_generate.isEnabled = false
                 btn_proceed_qr_generate.text = getString(R.string.btn_to_teleop)
                 objective_match_collection_layout.setBackgroundColor(Color.WHITE)
@@ -238,14 +196,13 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
             return@OnLongClickListener true
         })
 
-
         btn_proceed_qr_generate.setOnClickListener (View.OnClickListener {
-            if (!is_tele_activated) {
-                is_tele_activated = true
-                enableButtons(tb_action_one, tb_action_two, tb_action_three, tb_action_four, enable = true)
+            if (!isTeleActivated) {
+                isTeleActivated = true
+                enableButtons()
                 btn_proceed_qr_generate.setText("${getString(R.string.btn_proceed)}")
                 btn_proceed_qr_generate.isEnabled = false
-                objective_match_collection_layout.setBackgroundColor(Color.WHITE)
+                btn_timer.isEnabled = false
             } else {
                 endAction()
                 val intent = Intent(this, QRGenerateActivity::class.java)
@@ -276,9 +233,6 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
 
         tb_action_two.setOnClickListener(View.OnClickListener {
             timelineAdd(match_time, Constants.ACTION_TYPE.CONTROL_PANEL_POSITION)
-            enableButtons(tb_action_one, enable = false)
-            btn_action_one.isEnabled = true
-            btn_action_two.isEnabled = true
         })
 
         tb_action_three.setOnClickListener(View.OnClickListener {
@@ -286,20 +240,16 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
             // checked/unchecked, as incap robots cannot perform actions.
             if (tb_action_three.isChecked) {
                 timelineAdd(match_time, Constants.ACTION_TYPE.START_INCAP)
-                enableButtons(tb_action_four, tb_action_one, tb_action_two,  enable = false)
             } else {
                 timelineAdd(match_time, Constants.ACTION_TYPE.END_INCAP)
-                enableButtons(tb_action_four, tb_action_one, tb_action_two,  enable = true)
             }
         })
 
         tb_action_four.setOnClickListener(View.OnClickListener {
             if (tb_action_four.isChecked) {
                 timelineAdd(match_time, Constants.ACTION_TYPE.START_CLIMB)
-                enableButtons(tb_action_three, tb_action_one, tb_action_two,  enable = false)
             } else {
                 timelineAdd(match_time, Constants.ACTION_TYPE.END_CLIMB)
-                enableButtons(tb_action_three, tb_action_one, tb_action_two,  enable = true)
             }
         })
 
