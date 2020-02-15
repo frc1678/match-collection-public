@@ -157,12 +157,9 @@ class MatchInformationInputActivity : AppCompatActivity() {
         if (assign_mode == Constants.ASSIGN_MODE.AUTOMATIC_ASSIGNMENT) {
             when (collection_mode) {
                 Constants.MODE_SELECTION.OBJECTIVE -> {
-                    if ((scout_id.isEmpty()) or (scout_id == (Constants.NONE_VALUE))) {
-                        createErrorMessage(getString(R.string.scout_id_error),
-                            linear_layout_panels_two)
-                        return
+                    if ((scout_id.isNotEmpty()) && !(scout_id == (Constants.NONE_VALUE))) {
+                        assignTeamByScoutIdObjective(et_team_one, (scout_id.toInt() % 6) + 1, et_match_number.text.toString())
                     }
-                    assignTeamByScoutIdObjective(et_team_one, (scout_id.toInt() % 6) + 1, et_match_number.text.toString())
                 }
                 Constants.MODE_SELECTION.SUBJECTIVE -> {
                     var iterationNumber = 0
