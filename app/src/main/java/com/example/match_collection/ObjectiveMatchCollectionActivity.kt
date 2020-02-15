@@ -203,6 +203,7 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
                 btn_proceed_qr_generate.setText("${getString(R.string.btn_proceed)}")
                 btn_proceed_qr_generate.isEnabled = false
                 btn_timer.isEnabled = false
+                objective_match_collection_layout.setBackgroundColor(Color.WHITE)
             } else {
                 endAction()
                 val intent = Intent(this, QRGenerateActivity::class.java)
