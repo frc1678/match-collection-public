@@ -131,16 +131,16 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         btn_action_one.isEnabled = !(isClimbing or isIncap)
         btn_action_two.isEnabled = !(isClimbing or isIncap)
 
-        tb_action_one.isEnabled = !(!isTeleActivated or isClimbing or isIncap or positionActivated or rotationActivated)
+        tb_action_one.isEnabled = !(!is_tele_activated or isClimbing or isIncap or positionActivated or rotationActivated)
         tb_action_one.isChecked = (rotationActivated)
 
-        tb_action_two.isEnabled = !(!isTeleActivated or isClimbing or isIncap or positionActivated)
+        tb_action_two.isEnabled = !(!is_tele_activated or isClimbing or isIncap or positionActivated)
         tb_action_two.isChecked = (positionActivated)
 
-        tb_action_three.isEnabled = !(!isTeleActivated or isClimbing)
+        tb_action_three.isEnabled = !(!is_tele_activated or isClimbing)
         tb_action_three.isChecked = (isIncap)
 
-        tb_action_four.isEnabled = !(!isTeleActivated or isIncap or hasClimbed)
+        tb_action_four.isEnabled = !(!is_tele_activated or isIncap or hasClimbed)
         tb_action_four.isChecked = (isClimbing)
         if(hasClimbed) {
             tb_action_four.setText("${getString(R.string.tb_action_bool_four_disabled)}")
@@ -183,11 +183,11 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         btn_timer.setOnLongClickListener(View.OnLongClickListener {
 
 
-            if (isTimerRunning && !isTeleActivated) {
+            if (isTimerRunning && !is_tele_activated) {
                 timerReset()
                 timeline = ArrayList()
                 isTimerRunning = false
-                isTeleActivated = false
+                is_tele_activated = false
                 enableButtons()
                 btn_proceed_qr_generate.isEnabled = false
                 btn_proceed_qr_generate.text = getString(R.string.btn_to_teleop)
@@ -197,8 +197,8 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         })
 
         btn_proceed_qr_generate.setOnClickListener (View.OnClickListener {
-            if (!isTeleActivated) {
-                isTeleActivated = true
+            if (!is_tele_activated) {
+                is_tele_activated = true
                 enableButtons()
                 btn_proceed_qr_generate.setText("${getString(R.string.btn_proceed)}")
                 btn_proceed_qr_generate.isEnabled = false
