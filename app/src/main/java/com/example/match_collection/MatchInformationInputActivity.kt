@@ -14,18 +14,19 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import kotlinx.android.synthetic.main.dialog_scout_id.*
 import kotlinx.android.synthetic.main.match_information_input_activity.*
 import java.lang.Integer.parseInt
 
-
 /* Class used to input the information of the match before the match's beginning.
 * Information such as: teams in alliances, match number, and other. */
-class MatchInformationInputActivity : CollectionActivity() {
+class MatchInformationInputActivity : AppCompatActivity() {
     var leftToggleButtonColor: Int = 0
     var rightToggleButtonColor: Int = 0
     var leftToggleButtonColorDark: Int = 0
@@ -384,6 +385,18 @@ class MatchInformationInputActivity : CollectionActivity() {
     //Prevents user from pressing the back button unless it's a long click.
     override fun onBackPressed() {
         AlertDialog.Builder(this).setMessage(R.string.error_back_click).show()
+    }
+
+    override fun onKeyLongPress(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            AlertDialog.Builder(this).setMessage("Do you want to reset everything?")
+                .setPositiveButton("Yes") { _, _ ->
+                    this.getSharedPreferences("PREFS", 0).edit().remove("collection_mode").apply()
+                    startActivity(Intent(this, ModeCollectionSelectActivity::class.java))
+                }
+                .show()
+        }
+        return super.onKeyLongPress(keyCode, event)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

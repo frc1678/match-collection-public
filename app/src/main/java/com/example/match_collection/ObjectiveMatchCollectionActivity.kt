@@ -8,7 +8,6 @@ import android.view.View
 import kotlinx.android.synthetic.main.objective_match_collection.*
 import java.lang.Integer.parseInt
 
-
 // Determines the functions for UI elements (ie Buttons, ToggleButtons) in the Objective Match Data Screen.
 class ObjectiveMatchCollectionActivity : CollectionActivity() {
     // Define all variables.
@@ -154,6 +153,10 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         btn_action_two.setText("${getString(R.string.btn_action_two)} - 0")
     }
 
+    // Prevents user from going back to previous screen unless it is a long click.
+    override fun onBackPressed() {
+    }
+
     // Function to add to timeline depending on whether Tele is activated.
     private fun timelineAddWithStage(action_type: Constants.ACTION_TYPE) {
         if (!is_tele_activated && parseInt(match_time) < 135) {
@@ -163,10 +166,6 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
         } else {
             timelineAdd(match_time, action_type)
         }
-    }
-
-    // Prevents user from going back to previous screen unless it is a long click.
-    override fun onBackPressed() {
     }
 
     // Initialize onClickListeners for timer, proceed button, and robot actions (which add to timeline).

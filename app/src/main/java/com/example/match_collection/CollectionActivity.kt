@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.KeyEvent
 
 //Super class of all activity based classes for this project.
-//Used to implement class mechanisms that all activities should comprise of.
+//Used to implement class mechanisms that all activities should comprise.
 open class CollectionActivity : AppCompatActivity() {
 
     //When the back press is held down, this function will confirm the long click and then 'restart'
@@ -24,18 +24,17 @@ open class CollectionActivity : AppCompatActivity() {
     override fun onKeyLongPress(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             AlertDialog.Builder(this).setMessage("Do you want to reset everything?")
-                .setPositiveButton("Yes", { _, _ -> intentToModeCollection(this) })
-                .setNegativeButton("No", { _, _ -> finish() })
+                .setPositiveButton("Yes") { _, _ -> intentToMatchInput(this) }
                 .show()
         }
         return super.onKeyLongPress(keyCode, event)
     }
 
     //Begins the intent to the mode collection activity when the long back press is clicked.
-    private fun intentToModeCollection(context: Context) {
+    private fun intentToMatchInput(context: Context) {
         context.getSharedPreferences("PREFS", 0).edit().remove("collection_mode").apply()
         startActivity(
-            Intent(this, ModeCollectionSelectActivity::class.java),
+            Intent(this, MatchInformationInputActivity::class.java),
             ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
     }
 }

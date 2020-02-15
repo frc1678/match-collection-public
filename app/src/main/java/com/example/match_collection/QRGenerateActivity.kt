@@ -11,8 +11,6 @@ package com.example.match_collection
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.qr_generate.*
 import java.util.regex.Pattern
 import kotlin.text.Regex.Companion.escape
@@ -25,7 +23,7 @@ class QRGenerateActivity: CollectionActivity() {
     private fun initProceedButton() {
         btn_proceed_new_match.setOnClickListener {
             putIntoStorage(this, "match_number", match_number + 1)
-            val intent = Intent(this, ModeCollectionSelectActivity::class.java)
+            val intent = Intent(this, MatchInformationInputActivity::class.java)
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this,
                 btn_proceed_new_match, "proceed_button").toBundle())
         }
