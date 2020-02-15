@@ -30,8 +30,8 @@ var scout_id: String = ""
 var timeline: ArrayList<HashMap<String, String>> = ArrayList()
 
 // Subjective relative data collection variables.
-var speed_rankings: List<String> = emptyList()
-var agility_rankings: List<String> = emptyList()
+var speed_rankings: ArrayList<String> = ArrayList()
+var agility_rankings: ArrayList<String> = ArrayList()
 
 // Function to reset References.kt variables for new match.
 fun resetReferences() {
@@ -44,6 +44,6 @@ fun resetReferences() {
     team_number = ""
     timeline = ArrayList()
 
-    speed_rankings = emptyList()
-    agility_rankings = emptyList()
+    speed_rankings = ArrayList()
+    agility_rankings = ArrayList()
 }

@@ -85,14 +85,6 @@ class MatchInformationInputActivity : AppCompatActivity() {
         }
     }
 
-    //Check if the given text inputs are not empty.
-    private fun checkInputNotEmpty(vararg views: EditText): Boolean {
-        for (view in views) {
-            if (view.text.isEmpty()) return false
-        }
-        return true
-    }
-
     //Used to transition into the next activity and define timestamp for specific match.
     private fun startMatchActivity() {
         match_number = parseInt(et_match_number.text.toString())
@@ -208,24 +200,6 @@ class MatchInformationInputActivity : AppCompatActivity() {
         }
     }
 
-    //Initialize the adapter and onItemSelectedListener for the scout name input.
-    private fun initScoutSpinner() {
-        spinner_scout_name.adapter = StandardSpinnerAdapter(this, populateScoutNameSpinner())
-        if (this.getSharedPreferences("PREFS", 0).contains("scout_name")) {
-            spinner_scout_name.setSelection(populateScoutNameSpinner()
-                    .indexOf(retrieveFromStorage(this, "scout_name")))
-        }
-        spinner_scout_name.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                scout_name = populateScoutNameSpinner()[position]
-                putIntoStorage(this@MatchInformationInputActivity, "scout_name", scout_name)
-            }
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                scout_name = ""
-            }
-        }
-    }
-
     //Assigns the team number for objective.
     private fun assignTeamByScoutIdObjective(teamInput: EditText, scoutId: Int, matchNumber: String) {
         teamInput.setText(removeTeamPrefix(getTeamOfGivenMatch(getMatchInfo(matchNumber), scoutId)))
@@ -328,21 +302,6 @@ class MatchInformationInputActivity : AppCompatActivity() {
         toggleButton.background = backgroundDrawable
     }
 
-    //Makes scouts.txt into a readable List
-    private fun populateScoutNameSpinner(): ArrayList<String> {
-        var scoutNameList: ArrayList<String> = ArrayList()
-        val bufferedReader =  this.resources.openRawResource(R.raw.scouts).bufferedReader()
-        var currentLine = bufferedReader.readLine()
-
-        while (currentLine != null) {
-            scoutNameList.add(currentLine)
-            currentLine = bufferedReader.readLine()
-        }
-
-        bufferedReader.close()
-        return scoutNameList
-    }
-
     //Return a list of the contents of the scout id collection.
     private fun scoutIdContentsList(noneValueText: String, idMin: Int, idMax: Int): ArrayList<Any> {
         var scoutIdContents = ArrayList<Any>()
@@ -408,7 +367,7 @@ class MatchInformationInputActivity : AppCompatActivity() {
         resetReferences()
 
         initializeToggleButtons()
-        initScoutSpinner()
+        initScoutSpinner(this, spinner_scout_name)
         initScoutIdLongClick(noneValueText = Constants.NONE_VALUE, idMin = 1, idMax = Constants.NUMBER_OF_ACTIVE_SCOUTS)
         checkCollectionMode()
         createMatchNumberTextChangeListener()

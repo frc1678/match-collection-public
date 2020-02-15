@@ -104,7 +104,7 @@
         </TextView>
 
         <Button style="@style/btn_proceed"
-            android:id="@+id/btn_proceed_qr_generate"
+            android:id="@+id/btn_proceed_edit"
             android:text="@string/btn_to_teleop"
             android:enabled="false">
         </Button>

@@ -172,10 +172,10 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
     private fun initOnClicks() {
         btn_timer.setOnClickListener(View.OnClickListener {
             if (!isTimerRunning) {
-                TimerUtility.MatchTimerThread().initTimer(btn_timer, btn_proceed_qr_generate, objective_match_collection_layout)
+                TimerUtility.MatchTimerThread().initTimer(btn_timer, btn_proceed_edit, objective_match_collection_layout)
                 isTimerRunning = true
                 enableButtons()
-                btn_proceed_qr_generate.isEnabled = true
+                btn_proceed_edit.isEnabled = true
             }
         })
 
@@ -188,28 +188,28 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
                 isTimerRunning = false
                 is_tele_activated = false
                 enableButtons()
-                btn_proceed_qr_generate.isEnabled = false
-                btn_proceed_qr_generate.text = getString(R.string.btn_to_teleop)
+                btn_proceed_edit.isEnabled = false
+                btn_proceed_edit.text = getString(R.string.btn_to_teleop)
                 objective_match_collection_layout.setBackgroundColor(Color.WHITE)
             }
             return@OnLongClickListener true
         })
 
-        btn_proceed_qr_generate.setOnClickListener (View.OnClickListener {
+        btn_proceed_edit.setOnClickListener (View.OnClickListener {
             if (!is_tele_activated) {
                 is_tele_activated = true
                 enableButtons()
-                btn_proceed_qr_generate.setText("${getString(R.string.btn_proceed)}")
-                btn_proceed_qr_generate.isEnabled = false
+                btn_proceed_edit.setText("${getString(R.string.btn_proceed)}")
+                btn_proceed_edit.isEnabled = false
                 btn_timer.isEnabled = false
                 objective_match_collection_layout.setBackgroundColor(Color.WHITE)
             } else {
                 endAction()
-                val intent = Intent(this, QRGenerateActivity::class.java)
+                val intent = Intent(this, EditMatchInformationActivity::class.java)
                 startActivity(
                     intent, ActivityOptions.makeSceneTransitionAnimation(
                         this,
-                        btn_proceed_qr_generate, "proceed_button"
+                        btn_proceed_edit, "proceed_button"
                     ).toBundle()
                 )
             }

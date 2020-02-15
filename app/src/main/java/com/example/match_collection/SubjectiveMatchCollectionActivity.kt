@@ -12,7 +12,6 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.view.Window
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.subjective_match_collection.*
 
 // Activity for subjective match collection of the three teams on a single alliance.
@@ -21,13 +20,13 @@ class SubjectiveMatchCollectionActivity : CollectionActivity() {
     lateinit var panelTwo: CounterPanel
     lateinit var panelThree: CounterPanel
 
-    lateinit var teamNumberOne: String
-    lateinit var teamNumberTwo: String
-    lateinit var teamNumberThree: String
+    private lateinit var teamNumberOne: String
+    private lateinit var teamNumberTwo: String
+    private lateinit var teamNumberThree: String
 
     // Get intent extras from MatchInformationInputActivity.kt to retrieve team numbers
     // to be displayed on counter panels and used for recording data on specific attributes.
-    fun getExtras() {
+    private fun getExtras() {
         teamNumberOne = intent.getExtras()?.getString("team_one").toString()
         teamNumberTwo = intent.getExtras()?.getString("team_two").toString()
         teamNumberThree = intent.getExtras()?.getString("team_three").toString()
@@ -47,7 +46,7 @@ class SubjectiveMatchCollectionActivity : CollectionActivity() {
     // Initialize proceed button to record ranking data and proceed to QRGenerateActivity.kt when
     // proceed button is pressed.
     private fun initProceedButton() {
-        btn_proceed_qr_generate.setOnClickListener { view ->
+        btn_proceed_edit.setOnClickListener { view ->
             speed_rankings = recordRankingData("Speed")
             agility_rankings = recordRankingData("Agility")
 
@@ -55,9 +54,13 @@ class SubjectiveMatchCollectionActivity : CollectionActivity() {
                 createErrorMessage("Please input different ranking values!", view)
             }
             else {
-                val intent = Intent(this, QRGenerateActivity::class.java)
+                val intent = Intent(this, EditMatchInformationActivity::class.java)
+                // Add alliance teams to the intent to be used in the SubjectiveMatchCollectionActivity.kt.
+                intent.putExtra("team_one", teamNumberOne)
+                    .putExtra("team_two", teamNumberTwo)
+                    .putExtra("team_three", teamNumberThree)
                 startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this,
-                    btn_proceed_qr_generate, "proceed_button").toBundle())
+                    btn_proceed_edit, "proceed_button").toBundle())
             }
         }
     }
