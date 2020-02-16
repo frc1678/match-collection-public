@@ -127,8 +127,8 @@ class ObjectiveMatchCollectionActivity : CollectionActivity() {
             rotationActivated = timeline.toString().contains(Constants.ACTION_TYPE.CONTROL_PANEL_ROTATION.toString())
         }
 
-        btn_action_one.isEnabled = !(isClimbing or isIncap)
-        btn_action_two.isEnabled = !(isClimbing or isIncap)
+        btn_action_one.isEnabled = !(!isTimerRunning or isClimbing or isIncap)
+        btn_action_two.isEnabled = !(!isTimerRunning or isClimbing or isIncap)
 
         tb_action_one.isEnabled = !(!is_tele_activated or isClimbing or isIncap or positionActivated or rotationActivated)
         tb_action_one.isChecked = (rotationActivated)
