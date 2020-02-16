@@ -258,15 +258,35 @@ class MatchInformationInputActivity : AppCompatActivity() {
             autoAssignTeamInputsGivenMatch()
         }
 
-        leftToggleButton.setOnClickListener { view ->
-            alliance_color = Constants.ALLIANCE_COLOR.BLUE
-            autoAssignTeamInputsGivenMatch()
-            switchBorderToLeftToggle()
+        leftToggleButton.setOnClickListener {
+            if (collection_mode == Constants.MODE_SELECTION.OBJECTIVE) {
+                alliance_color = Constants.ALLIANCE_COLOR.BLUE
+                autoAssignTeamInputsGivenMatch()
+                switchBorderToLeftToggle()
+            }
         }
-        rightToggleButton.setOnClickListener { view ->
-            alliance_color = Constants.ALLIANCE_COLOR.RED
-            autoAssignTeamInputsGivenMatch()
-            switchBorderToRightToggle()
+        rightToggleButton.setOnClickListener {
+            if (collection_mode == Constants.MODE_SELECTION.OBJECTIVE) {
+                alliance_color = Constants.ALLIANCE_COLOR.RED
+                autoAssignTeamInputsGivenMatch()
+                switchBorderToRightToggle()
+            }
+        }
+        leftToggleButton.setOnLongClickListener {
+            if (collection_mode == Constants.MODE_SELECTION.SUBJECTIVE) {
+                alliance_color = Constants.ALLIANCE_COLOR.BLUE
+                autoAssignTeamInputsGivenMatch()
+                switchBorderToLeftToggle()
+            }
+            return@setOnLongClickListener true
+        }
+        rightToggleButton.setOnLongClickListener {
+            if (collection_mode == Constants.MODE_SELECTION.SUBJECTIVE) {
+                alliance_color = Constants.ALLIANCE_COLOR.RED
+                autoAssignTeamInputsGivenMatch()
+                switchBorderToRightToggle()
+            }
+            return@setOnLongClickListener true
         }
     }
 
