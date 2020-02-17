@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.match_collection">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.frc1678.match_collection">
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -7,30 +9,41 @@
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="@null"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".ModeCollectionSelectActivity"
-            android:screenOrientation="portrait" >
+            android:name="com.frc1678.match_collection.ModeCollectionSelectActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".QRGenerateActivity"
+        <activity
+            android:name="com.frc1678.match_collection.QRGenerateActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ObjectiveMatchCollectionActivity"
+        <activity
+            android:name="com.frc1678.match_collection.CollectionObjectiveActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".MatchInformationInputActivity"
+        <activity
+            android:name="com.frc1678.match_collection.MatchInformationInputActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".SubjectiveMatchCollectionActivity"
+        <activity
+            android:name="com.frc1678.match_collection.CollectionSubjectiveActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".CollectionActivity"
+        <activity
+            android:name="com.frc1678.match_collection.MatchInformationEditActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".EditMatchInformationActivity"
+        <activity
+            android:name="com.frc1678.match_collection.CollectionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.frc1678.match_collection.MatchInformationActivity"
             android:screenOrientation="portrait" />
     </application>
 

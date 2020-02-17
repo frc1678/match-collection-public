@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_team_number"
+        style="@style/tv_standard"
+        android:paddingTop="@dimen/small"
+        android:textSize="@dimen/medium_text" />
+
+    <com.frc1678.match_collection.SubjectiveRankingCounter
+        android:id="@+id/counter_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_team_number"
+        android:layout_marginEnd="@dimen/small"
+        custom:dataName="Speed" />
+
+    <com.frc1678.match_collection.SubjectiveRankingCounter
+        android:id="@+id/counter_agility"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_team_number"
+        android:layout_marginStart="@dimen/small"
+        android:layout_toEndOf="@+id/counter_speed"
+        custom:dataName="Agility" />
+</RelativeLayout>

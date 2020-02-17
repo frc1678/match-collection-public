@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:keepScreenOn="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linear_layout_panels"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:keepScreenOn="true"
+        android:orientation="vertical"
+        android:padding="@dimen/small">
+
+        <fragment
+            android:id="@+id/robotOne"
+            android:name="com.frc1678.match_collection.SubjectiveRankingCounterPanel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:paddingTop="@dimen/small" />
+
+        <fragment
+            android:id="@+id/robotTwo"
+            android:name="com.frc1678.match_collection.SubjectiveRankingCounterPanel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:paddingTop="@dimen/small" />
+
+        <fragment
+            android:id="@+id/robotThree"
+            android:name="com.frc1678.match_collection.SubjectiveRankingCounterPanel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:paddingTop="30dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_proceed_edit"
+        style="@style/btn_white"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/btn_proceed" />
+</LinearLayout>

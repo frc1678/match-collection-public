@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid
-        android:color="@color/proceed_blue"
-        />
+    <solid android:color="@color/proceed_blue" />
 
-    <corners android:radius="3dp"/>
-    <stroke android:width="5px" android:color="@color/proceed_blue_border"/>
+    <corners android:radius="3dp" />
+    <stroke
+        android:width="5px"
+        android:color="@color/proceed_blue_border" />
 </shape>

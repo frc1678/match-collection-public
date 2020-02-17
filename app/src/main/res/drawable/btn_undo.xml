@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid
-        android:color="@color/undo_orange"
-        />
+    <solid android:color="@color/undo_orange" />
 
-    <corners android:radius="3dp"/>
-    <stroke android:width="5px" android:color="@color/undo_orange_pressed"/>
+    <corners android:radius="3dp" />
+    <stroke
+        android:width="5px"
+        android:color="@color/undo_orange_pressed" />
 </shape>

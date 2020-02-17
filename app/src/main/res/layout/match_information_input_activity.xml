@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -18,24 +17,27 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <Button style="?android:attr/borderlessButtonStyle"
+            <Button
                 android:id="@+id/left_toggle_button"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"/>
+                android:layout_margin="@dimen/very_small"
+                android:layout_weight="1" />
 
-            <Button style="?android:attr/borderlessButtonStyle"
+            <Button
                 android:id="@+id/right_toggle_button"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"/>
+                android:layout_margin="@dimen/very_small"
+                android:layout_weight="1" />
 
         </LinearLayout>
 
-        <View style="@style/view_separator_horizontal"
-            android:layout_height="10dp"/>
+        <View
+            style="@style/view_separator_horizontal"
+            android:layout_height="@dimen/very_small" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,30 +45,38 @@
             android:layout_weight="3"
             android:orientation="vertical">
 
-            <View style="@style/view_separator_horizontal"/>
+            <Spinner
+                android:id="@+id/spinner_assign_mode"
+                style="@style/btn_white" />
 
-            <Spinner style="@style/btn_white"
-                android:id="@+id/spinner_assign_mode"/>
-
-            <View style="@style/view_separator_horizontal"/>
-
-            <Spinner style="@style/btn_white"
-                android:id="@+id/spinner_scout_name" />
+            <Spinner
+                android:id="@+id/spinner_scout_name"
+                style="@style/btn_white" />
 
         </LinearLayout>
 
-        <View style="@style/view_separator_horizontal"
+        <View
             android:id="@+id/separator_name_id"
-            android:layout_height="10dp"/>
+            style="@style/view_separator_horizontal"
+            android:layout_height="@dimen/very_small" />
 
-        <Button style="@style/btn_white"
+        <Button
             android:id="@+id/btn_scout_id"
-            android:text="@string/btn_id_default"/>
+            style="@style/btn_white"
+            android:layout_weight="0.5"
+            android:text="@string/btn_id_default" />
+
+        <TextView
+            android:id="@+id/tv_version_number"
+            style="@style/btn_white"
+            android:layout_weight="0.5"
+            android:text="@string/tv_version_num" />
 
     </LinearLayout>
 
-    <View style="@style/view_separator_vertical"
-        android:layout_width="10dp"/>
+    <View
+        style="@style/view_separator_vertical"
+        android:layout_width="@dimen/very_small" />
 
     <LinearLayout
         android:id="@+id/linear_layout_panels_two"
@@ -81,19 +91,22 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView style="@style/tv_standard_linear_layout"
-                android:text="@string/tv_match_number_input"
-                android:gravity="center"/>
+            <TextView
+                style="@style/tv_standard_linear_layout"
+                android:gravity="center"
+                android:text="@string/tv_match_number_input" />
 
-            <EditText style="@style/et_standard_linear_layout_number"
+            <EditText
                 android:id="@+id/et_match_number"
+                style="@style/et_standard_linear_layout_number"
                 android:maxLength="3"
-                android:text=""/>
+                android:text="" />
 
         </LinearLayout>
 
-        <View style="@style/view_separator_horizontal"
-            android:layout_height="10dp"/>
+        <View
+            style="@style/view_separator_horizontal"
+            android:layout_height="@dimen/very_small" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -101,13 +114,15 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView style="@style/tv_standard_linear_layout"
+            <TextView
                 android:id="@+id/tv_hint_team_one"
-                android:text="@string/tv_team_number_input_one"/>
+                style="@style/tv_standard_linear_layout"
+                android:text="@string/tv_team_number_input_one" />
 
-            <EditText style="@style/et_standard_linear_layout_number"
+            <EditText
                 android:id="@+id/et_team_one"
-                android:maxLength="4"/>
+                style="@style/et_standard_linear_layout_number"
+                android:maxLength="4" />
 
         </LinearLayout>
 
@@ -117,19 +132,22 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <View style="@style/view_separator_horizontal"
+            <View
                 android:id="@+id/separator_team_one_two"
+                style="@style/view_separator_horizontal"
                 android:visibility="invisible" />
 
-            <TextView style="@style/tv_standard_linear_layout"
+            <TextView
                 android:id="@+id/tv_hint_team_two"
-                android:visibility="invisible"
-                android:text="@string/tv_team_number_input_two"/>
+                style="@style/tv_standard_linear_layout"
+                android:text="@string/tv_team_number_input_two"
+                android:visibility="invisible" />
 
-            <EditText style="@style/et_standard_linear_layout_number"
+            <EditText
                 android:id="@+id/et_team_two"
+                style="@style/et_standard_linear_layout_number"
                 android:maxLength="4"
-                android:visibility="invisible"/>
+                android:visibility="invisible" />
 
         </LinearLayout>
 
@@ -139,28 +157,33 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <View style="@style/view_separator_horizontal"
+            <View
                 android:id="@+id/separator_team_two_three"
+                style="@style/view_separator_horizontal"
                 android:visibility="invisible" />
 
-            <TextView style="@style/tv_standard_linear_layout"
+            <TextView
                 android:id="@+id/tv_hint_team_three"
-                android:visibility="invisible"
-                android:text="@string/tv_team_number_input_three"/>
+                style="@style/tv_standard_linear_layout"
+                android:text="@string/tv_team_number_input_three"
+                android:visibility="invisible" />
 
-            <EditText style="@style/et_standard_linear_layout_number"
+            <EditText
                 android:id="@+id/et_team_three"
+                style="@style/et_standard_linear_layout_number"
                 android:maxLength="4"
-                android:visibility="invisible"/>
+                android:visibility="invisible" />
 
         </LinearLayout>
 
-        <View style="@style/view_separator_horizontal"
-            android:layout_height="10dp"/>
+        <View
+            style="@style/view_separator_horizontal"
+            android:layout_height="@dimen/very_small" />
 
-        <Button style="@style/btn_white"
+        <Button
             android:id="@+id/btn_proceed_match_start"
-            android:text="@string/btn_proceed"/>
+            style="@style/btn_white"
+            android:text="@string/btn_proceed" />
 
     </LinearLayout>
 </LinearLayout>

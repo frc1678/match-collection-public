@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/counter"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_data_name"
+        style="@style/tv_standard"
+        android:paddingBottom="@dimen/very_small" />
+
+    <Button
+        android:id="@+id/btn_minus"
+        style="@style/btn_minus"
+        android:layout_below="@+id/tv_data_name" />
+
+    <TextView
+        android:id="@+id/tv_score_counter"
+        style="@style/tv_standard"
+        android:layout_below="@+id/tv_data_name"
+        android:layout_toEndOf="@+id/btn_minus"
+        android:paddingLeft="@dimen/small"
+        android:paddingTop="@dimen/very_small"
+        android:paddingRight="@dimen/small" />
+
+    <Button
+        android:id="@+id/btn_plus"
+        style="@style/btn_plus"
+        android:layout_below="@+id/tv_data_name"
+        android:layout_toEndOf="@+id/tv_score_counter" />
+</RelativeLayout>

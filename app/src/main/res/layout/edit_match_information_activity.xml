@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/tv_standard_linear_layout"
+            android:text="@string/tv_match_number_input" />
+
+        <EditText
+            android:id="@+id/et_match_number"
+            style="@style/et_standard_linear_layout_number"
+            android:maxLength="3" />
+
+    </LinearLayout>
+
+    <View style="@style/view_separator_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/tv_standard_linear_layout"
+            android:text="@string/tv_team_number_input_one" />
+
+        <EditText
+            android:id="@+id/et_team_one"
+            style="@style/et_standard_linear_layout_number"
+            android:maxLength="4" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/separator_team_one_two"
+            style="@style/view_separator_horizontal"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/tv_hint_team_two"
+            style="@style/tv_standard_linear_layout"
+            android:text="@string/tv_team_number_input_two"
+            android:visibility="invisible" />
+
+        <EditText
+            android:id="@+id/et_team_two"
+            style="@style/et_standard_linear_layout_number"
+            android:maxLength="4"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/separator_team_two_three"
+            style="@style/view_separator_horizontal"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/tv_hint_team_three"
+            style="@style/tv_standard_linear_layout"
+            android:text="@string/tv_team_number_input_three"
+            android:visibility="invisible" />
+
+        <EditText
+            android:id="@+id/et_team_three"
+            style="@style/et_standard_linear_layout_number"
+            android:maxLength="4"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/separator_team_num_spinner"
+        style="@style/view_separator_horizontal" />
+
+    <Spinner
+        android:id="@+id/spinner_scout_name"
+        style="@style/btn_white" />
+
+    <View style="@style/view_separator_horizontal" />
+
+    <Button
+        android:id="@+id/btn_proceed_qr_generate"
+        style="@style/btn_white"
+        android:text="@string/btn_proceed" />
+</LinearLayout>
