@@ -162,28 +162,36 @@ class MatchInformationInputActivity : MatchInformationActivity() {
 
     // Automatically assign team number(s) based on collection mode.
     private fun autoAssignTeamInputsGivenMatch() {
-        if (assign_mode == Constants.AssignmentMode.AUTOMATIC_ASSIGNMENT) {
-            // For objective collection, assign three scouts per robot based on scout ID.
-            if (collection_mode == Constants.ModeSelection.OBJECTIVE) {
-                if (scout_id.isNotEmpty() and (scout_id != (Constants.NONE_VALUE))) {
-                    assignTeamByScoutIdObjective(
-                        teamInput = et_team_one,
-                        scoutId = (scout_id.toInt() % 6) + 1,
-                        matchNumber = et_match_number.text.toString()
-                    )
-                }
-            } else {
-                var iterationNumber = 0
-                listOf<EditText>(et_team_one, et_team_two, et_team_three).forEach {
-                    assignTeamByScoutIdSubjective(
-                        teamInput = it,
-                        allianceColor = alliance_color,
-                        matchNumber = et_match_number.text.toString(),
-                        iterationNumber = iterationNumber
-                    )
-                    iterationNumber++
+        if (File("/storage/emulated/0/${Environment.DIRECTORY_DOWNLOADS}/match_schedule.csv").exists()) {
+            if (assign_mode == Constants.AssignmentMode.AUTOMATIC_ASSIGNMENT) {
+                // For objective collection, assign three scouts per robot based on scout ID.
+                if (collection_mode == Constants.ModeSelection.OBJECTIVE) {
+                    if (scout_id.isNotEmpty() and (scout_id != (Constants.NONE_VALUE))) {
+                        assignTeamByScoutIdObjective(
+                            teamInput = et_team_one,
+                            scoutId = (scout_id.toInt() % 6) + 1,
+                            matchNumber = et_match_number.text.toString()
+                        )
+                    }
+                } else {
+                    var iterationNumber = 0
+                    listOf<EditText>(et_team_one, et_team_two, et_team_three).forEach {
+                        assignTeamByScoutIdSubjective(
+                            teamInput = it,
+                            allianceColor = alliance_color,
+                            matchNumber = et_match_number.text.toString(),
+                            iterationNumber = iterationNumber
+                        )
+                        iterationNumber++
+                    }
                 }
             }
+        } else {
+            et_team_one.setText("")
+            et_team_two.setText("")
+            et_team_three.setText("")
+
+            AlertDialog.Builder(this).setMessage(R.string.error_csv).show()
         }
     }
 

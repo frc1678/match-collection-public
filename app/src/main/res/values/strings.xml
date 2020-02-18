@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">match-collection</string>
-    <string name="btn_qr_generate">Generate QR</string>
     <string name="btn_objective_collection_select">Objective Collection</string>
     <string name="btn_subjective_collection_select">Subjective Collection</string>
     <string name="btn_timer_start">Start Match</string>
@@ -19,12 +18,10 @@
     <string name="btn_redo">Redo</string>
     <string name="btn_plus">+</string>
     <string name="btn_minus">-</string>
-    <string name="tv_counter_starting_value">2</string>
     <string name="btn_proceed">Proceed</string>
     <string name="btn_to_teleop">To Teleop</string>
     <string name="btn_assignment">Automatic Assignment</string>
     <string name="btn_override">Override</string>
-    <string name="btn_resend">Resend</string>
     <string name="tv_team_number_input_one">Team One</string>
     <string name="tv_team_number_input_two">Team Two</string>
     <string name="tv_team_number_input_three">Team Three</string>
@@ -37,10 +34,10 @@
     <string name="initial_teleop_time">134</string>
     <string name="final_time">0</string>
     <string name="error_back_reset">Do you want to reset everything?</string>
-    <string name="error_scout_id">PLEASE INPUT A SCOUT ID!</string>
     <string name="error_missing_information">PLEASE INPUT ALL INFORMATION!</string>
     <string name="error_same_rankings">PLEASE INPUT DIFFERENT RANKING VALUES!</string>
     <string name="error_same_teams">PLEASE ENSURE ALL TEAMS ARE DIFFERENT!</string>
     <string name="error_serial_num">NO SERIAL NUMBER - PLEASE ENABLE PHONE PERMISSIONS</string>
     <string name="error_qr">INVALID QR!</string>
+    <string name="error_csv">NO MATCH SCHEDULE FILE!</string>
 </resources>

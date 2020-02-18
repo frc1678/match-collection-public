@@ -101,7 +101,7 @@ class QRGenerateActivity : CollectionActivity() {
         if (regex.matcher(qrContents).matches()) {
             displayQR(contents = qrContents)
         } else {
-            createErrorMessage(message = getString(R.string.error_qr), view = iv_display_qr)
+            AlertDialog.Builder(this).setMessage(R.string.error_qr).show()
         }
 
         // Write compressed QR string to file.
