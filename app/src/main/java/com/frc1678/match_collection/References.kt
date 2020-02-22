@@ -15,7 +15,7 @@ var serial_number: String? = ""
 var match_number: Int = 0
 var alliance_color: Constants.AllianceColor = Constants.AllianceColor.NONE
 var timestamp: Long = 0
-var match_collection_version_number: String = "1.0.0"
+var match_collection_version_number: String = "1.0.1"
 
 // Data specific to objective match collection QR.
 var team_number: String = ""

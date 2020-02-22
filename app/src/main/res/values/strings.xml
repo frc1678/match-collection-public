@@ -11,9 +11,9 @@
     <string name="tb_action_bool_two_on">Position Activated</string>
     <string name="tb_action_bool_three_off">Start Incap</string>
     <string name="tb_action_bool_three_on">End Incap</string>
-    <string name="tb_action_bool_four_off">Start Climb</string>
-    <string name="tb_action_bool_four_on">End Climb</string>
-    <string name="tb_action_bool_four_disabled">Climbed</string>
+    <string name="tb_action_bool_four_off">Start Climb Attempt</string>
+    <string name="tb_action_bool_four_on">End Climb Attempt</string>
+    <string name="tb_action_bool_four_disabled">Climb Attempted</string>
     <string name="btn_undo">Undo</string>
     <string name="btn_redo">Redo</string>
     <string name="btn_plus">+</string>
