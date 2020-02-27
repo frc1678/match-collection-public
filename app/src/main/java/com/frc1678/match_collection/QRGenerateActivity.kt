@@ -109,7 +109,7 @@ class QRGenerateActivity : CollectionActivity() {
         val fileName = if (collection_mode == Constants.ModeSelection.OBJECTIVE) {
             "${match_number}_${team_number}_${getSerialNum(context = this)}_$timestamp"
         } else {
-            "${match_number}_$timestamp"
+            "${match_number}_${getSerialNum(context = this)}_$timestamp"
         }
         writeToFile(fileName = fileName, message = qrContents)
     }
