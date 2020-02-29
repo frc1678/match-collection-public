@@ -18,6 +18,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 1 # Latest commit only
+        ref: ${{ github.ref }} 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build release APK with Gradle
