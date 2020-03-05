@@ -168,7 +168,6 @@ class CollectionObjectiveActivity : CollectionActivity() {
 
     // Initialize button and toggle button onClickListeners.
     private fun initOnClicks() {
-
         // Go to teleop, enable buttons, and activate teleop if teleop is not yet activated.
         // Otherwise, proceed to QRGenerateActivity.kt.
         btn_proceed_edit.setOnClickListener {

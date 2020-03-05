@@ -59,8 +59,9 @@ class TimerUtility {
                     btn_timer.isEnabled = false
                     btn_proceed.text = context.getString(R.string.btn_proceed)
                     btn_proceed.isEnabled = true
+                    is_teleop_activated = true
                 }
-                // Starts the thread
+                // Start the thread
             }.start()
         }
 
