@@ -33,7 +33,7 @@ class MatchInformationEditActivity : MatchInformationActivity() {
             getExtras()
 
             makeViewVisible(et_team_two, et_team_three, tv_hint_team_two, tv_hint_team_three)
-            makeViewInvisible(separator_team_num_spinner, spinner_scout_name)
+            makeViewInvisible(separator_team_num_spinner)
 
             et_team_one.setText(teamNumberOne)
             et_team_two.setText(teamNumberTwo)

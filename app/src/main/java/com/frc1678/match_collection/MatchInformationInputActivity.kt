@@ -484,7 +484,7 @@ class MatchInformationInputActivity : MatchInformationActivity() {
                 et_team_two, et_team_three, tv_hint_team_two, tv_hint_team_three,
                 separator_team_one_two, separator_team_two_three
             )
-            makeViewInvisible(spinner_scout_name, separator_name_id, btn_scout_id)
+            makeViewInvisible(separator_name_id, btn_scout_id)
         }
     }
 

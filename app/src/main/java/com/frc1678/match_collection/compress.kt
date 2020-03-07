@@ -28,13 +28,13 @@ fun compress(
     val compressTimestamp = genericData.getValue("timestamp").toString().split(",")[0]
     val compressVersionNum =
         genericData.getValue("match_collection_version_number").toString().split(",")[0]
+    val compressScoutName = genericData.getValue("scout_name").toString().split(",")[0]
 
     // Define compression characters for objective separators.
     val objectiveStartCharacter = objectiveData.getValue("_start_character").toString()
     val objectiveSeparator = objectiveData.getValue("_separator").toString()
     // Define compression characters for objective data.
     val compressTeamNumber = objectiveData.getValue("team_number").toString().split(",")[0]
-    val compressScoutName = objectiveData.getValue("scout_name").toString().split(",")[0]
     val compressScoutId = objectiveData.getValue("scout_id").toString().split(",")[0]
     val compressTimeline = objectiveData.getValue("timeline").toString().split(",")[0]
 
@@ -53,7 +53,8 @@ fun compress(
                 compressSerialNumber + serial_number + genericSeparator +
                 compressMatchNumber + match_number + genericSeparator +
                 compressTimestamp + timestamp + genericSeparator +
-                compressVersionNum + match_collection_version_number +
+                compressVersionNum + match_collection_version_number + genericSeparator +
+                compressScoutName + scout_name.toUpperCase(Locale.US) +
                 genericSectionSeparator
 
     // Compress and add data specific to objective match collection.
@@ -75,7 +76,6 @@ fun compress(
         // timeline actions.
         compressedMatchInformation = objectiveStartCharacter + compressedMatchInformation +
                 compressTeamNumber + team_number + objectiveSeparator +
-                compressScoutName + scout_name.toUpperCase(Locale.US) + objectiveSeparator +
                 compressScoutId + scout_id + objectiveSeparator +
                 compressTimeline + compressTimelineActions
     }

@@ -5,7 +5,7 @@
 schema_file:
   # Version of schema file
   # Incremented every merged schema change
-  version: 16
+  version: 17
 
 # Each decompressed variable name corresponds to a length 2 or 3 list
 # First item is the compressed variable name
@@ -22,13 +22,13 @@ generic_data:
   match_number: [C, int]
   timestamp: [D, int]
   match_collection_version_number: [E, str]
+  scout_name: [F, str]
 
 # Data specific to objective match collection QR
 objective_tim:
   _start_character: '+' # First character in QR used to identify QR type
   _separator: '$' # Separates key:value pairs
   team_number: [Z, int] # int properties not needed but int is more intuitive
-  scout_name: [Y, str]
   scout_id: [X, int] # Used to determine which tablets have not submitted
   timeline: [W, list, dict] # List of dictionaries
 
