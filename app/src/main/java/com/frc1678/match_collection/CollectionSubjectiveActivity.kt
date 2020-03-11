@@ -9,7 +9,7 @@ import android.view.KeyEvent
 import kotlinx.android.synthetic.main.collection_subjective_activity.*
 
 // Activity for subjective match collection to rank the three teams on a single alliance
-// relative to one another, based on subjective traits (i.e. speed, agility).
+// relative to one another, based on subjective traits (i.e. rendezvous agility, agility).
 class CollectionSubjectiveActivity : CollectionActivity() {
     private lateinit var panelOne: SubjectiveRankingCounterPanel
     private lateinit var panelTwo: SubjectiveRankingCounterPanel
@@ -27,7 +27,8 @@ class CollectionSubjectiveActivity : CollectionActivity() {
         teamNumberThree = intent.extras?.getString("team_three").toString()
     }
 
-    // Create list of teams from best to worst of specific robot gameplay characteristic (i.e. speed, agility).
+    // Create list of teams from best to worst of specific robot gameplay characteristic
+    // (i.e. rendezvous agility, agility).
     private fun recordRankingData(dataName: String): ArrayList<String> {
         val tempRankingList: ArrayList<String> = arrayListOf("rankOne", "rankTwo", "rankThree")
 
@@ -60,11 +61,11 @@ class CollectionSubjectiveActivity : CollectionActivity() {
     // when proceed button is pressed.
     private fun initProceedButton() {
         btn_proceed_edit.setOnClickListener { view ->
-            speed_rankings = recordRankingData(dataName = "Speed")
+            rendezvous_agility_rankings = recordRankingData(dataName = "Rendezvous")
             agility_rankings = recordRankingData(dataName = "Agility")
 
-            // If no robots share the same speed and agility rankings, continue to MatchInformationEditActivity.kt.
-            if (speed_rankings.toString().contains("rank") or agility_rankings.toString().contains("rank")) {
+            // If no robots share the same rendezvous agility and agility rankings, continue to MatchInformationEditActivity.kt.
+            if (rendezvous_agility_rankings.toString().contains("rank") or agility_rankings.toString().contains("rank")) {
                 createErrorMessage(message = getString(R.string.error_same_rankings), view = view)
             } else {
                 // Add alliance teams to the intent to be used in MatchInformationEditActivity.kt.

@@ -5,7 +5,7 @@
 schema_file:
   # Version of schema file
   # Incremented every merged schema change
-  version: 17
+  version: 18
 
 # Each decompressed variable name corresponds to a length 2 or 3 list
 # First item is the compressed variable name
@@ -46,7 +46,7 @@ subjective_aim:
   _start_character: '*' # First character in QR used to identify QR type
   _separator: '$' # Separates each key:value pair
   _separator_internal: ':' # Separates each ranking list item
-  speed_rankings: [A, list, int] # List of team numbers (ints)
+  rendezvous_agility_rankings: [A, list, int] # List of team numbers (ints)
   agility_rankings: [B, list, int] # List of team numbers (ints)
 
 

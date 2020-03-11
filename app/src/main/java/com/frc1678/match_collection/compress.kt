@@ -43,7 +43,7 @@ fun compress(
     val subjectiveSeparator = subjectiveData.getValue("_separator").toString()
     val subjectiveSeparatorInternal = subjectiveData.getValue("_separator_internal").toString()
     // Define compression characters for subjective data.
-    val compressSpeedRankings = subjectiveData.getValue("speed_rankings").toString().split(",")[0]
+    val compressRendezvousAgilityRankings = subjectiveData.getValue("rendezvous_agility_rankings").toString().split(",")[0]
     val compressAgilityRankings =
         subjectiveData.getValue("agility_rankings").toString().split(",")[0]
 
@@ -81,18 +81,18 @@ fun compress(
     }
     // Compress and add subjective relative data collection.
     else if (collection_mode == Constants.ModeSelection.SUBJECTIVE) {
-        // Compress speed and agility rankings.
-        val compressSpeedRankingsValues = speed_rankings[0] + subjectiveSeparatorInternal +
-                speed_rankings[1] + subjectiveSeparatorInternal +
-                speed_rankings[2]
+        // Compress rendezvous agility and agility rankings.
+        val compressRendezvousAgilityValues = rendezvous_agility_rankings[0] + subjectiveSeparatorInternal +
+                rendezvous_agility_rankings[1] + subjectiveSeparatorInternal +
+                rendezvous_agility_rankings[2]
         val compressAgilityRankingsValues = agility_rankings[0] + subjectiveSeparatorInternal +
                 agility_rankings[1] + subjectiveSeparatorInternal +
                 agility_rankings[2]
 
         // Compress and add all subjective match collection data, including previously compressed
-        // speed and agility rankings.
+        // rendezvous agility and agility rankings.
         compressedMatchInformation = subjectiveStartCharacter + compressedMatchInformation +
-                compressSpeedRankings + compressSpeedRankingsValues + subjectiveSeparator +
+                compressRendezvousAgilityRankings + compressRendezvousAgilityValues + subjectiveSeparator +
                 compressAgilityRankings + compressAgilityRankingsValues
     }
 
